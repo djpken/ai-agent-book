@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Strip in-figure titles from manually-created SVGs and crop top whitespace.
 
-按学术规范：图本身不包含标题（标题写在正文）。本脚本仅处理"手工 SVG"——
-对于生成器产出的 SVG，应在 svg_lib.py 设置 OMIT_TITLE=True 来处理。
+按學術規範：圖本身不包含標題（標題寫在正文）。本腳本僅處理"手工 SVG"——
+對於生成器產出的 SVG，應在 svg_lib.py 設置 OMIT_TITLE=True 來處理。
 
-判定规则（保守）：
-- 第一处出现的 <text> 元素，若同时满足：font-size>=20 且 y<60 且 text-anchor=middle，
-  则视为图标题——删除该元素，并将 viewBox 上沿和 height 各下移/缩小 CROP_PX。
-- 否则该文件不做任何修改。
+判定規則（保守）：
+- 第一處出現的 <text> 元素，若同時滿足：font-size>=20 且 y<60 且 text-anchor=middle，
+  則視為圖標題——刪除該元素，並將 viewBox 上沿和 height 各下移/縮小 CROP_PX。
+- 否則該文件不做任何修改。
 
 用法：python3 strip_titles.py [--dry-run]
 """
@@ -37,7 +37,7 @@ def process_file(path, dry_run=False):
     with open(path, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    # 找第一个 <text>
+    # 找第一個 <text>
     m = TEXT_RE.search(content)
     if not m:
         return 'no-text'
@@ -48,10 +48,10 @@ def process_file(path, dry_run=False):
     if not (fs >= 20 and y < 60 and anchor == 'middle'):
         return 'no-title'
 
-    # 删除该 <text> 元素
+    # 刪除該 <text> 元素
     new_content = content[: m.start()] + content[m.end():]
 
-    # 调整 viewBox 与 height
+    # 調整 viewBox 與 height
     svg_m = SVG_TAG_RE.search(new_content)
     if not svg_m:
         return 'no-svg-tag'

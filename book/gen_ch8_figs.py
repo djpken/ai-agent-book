@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Chapter 8 figures — Agent 的自我进化.
+"""Chapter 8 figures — Agent 的自我進化.
 
 NOTE: this generator was previously a stray copy of chapter 9's figures, which
 left fig8-1..fig8-7 showing chapter-9 content. It has been rewritten so each
@@ -40,73 +40,73 @@ def _pipeline(stages, fname, W=880, feedback=None):
     s.save(os.path.join(OUT, fname + '.svg'))
 
 
-def fig8_1():  # 外部化学习循环
-    _pipeline([("完成任务", "产生原始经验"), ("提炼经验", "总结·压缩·结构化"),
-               ("存入外部系统", "知识库/工具，可检索"), ("检索复用", "下次任务调用")],
-              'fig8-1', feedback="经验持续沉淀，跨会话复用")
+def fig8_1():  # 外部化學習循環
+    _pipeline([("完成任務", "產生原始經驗"), ("提煉經驗", "總結·壓縮·結構化"),
+               ("存入外部系統", "知識庫/工具，可檢索"), ("檢索複用", "下次任務調用")],
+              'fig8-1', feedback="經驗持續沉澱，跨會話複用")
 
 
-def fig8_2():  # GAIA 经验学习系统
-    _pipeline([("成功轨迹", "完成任务的过程"), ("策略总结", "提炼为知识摘要"),
-               ("知识摘要库", "建立语义索引"), ("检索注入", "Agent 决策时取用")],
-              'fig8-2', feedback="相似任务复用历史经验")
+def fig8_2():  # GAIA 經驗學習系統
+    _pipeline([("成功軌跡", "完成任務的過程"), ("策略總結", "提煉為知識摘要"),
+               ("知識摘要庫", "建立語義索引"), ("檢索注入", "Agent 決策時取用")],
+              'fig8-2', feedback="相似任務複用歷史經驗")
 
 
-def fig8_3():  # 层次化工具匹配（服务器级→工具级）
+def fig8_3():  # 層次化工具匹配（服務器級→工具級）
     W, H = 620, 354
     s = SVG(W, H)
     cx = W / 2
-    s.box(cx - 150, 46, 300, 52, "用户查询", sublabel="“Debug 这个文件”", bold=True, fill='light')
+    s.box(cx - 150, 46, 300, 52, "用戶查詢", sublabel="“Debug 這個文件”", bold=True, fill='light')
     s.arrow(cx, 100, cx, 120)
-    s.box(cx - 220, 122, 440, 62, "第一层：服务器级语义搜索",
-          sublabel="数百个 MCP 服务器 → 召回 Top-K 相关服务器", bold=True, fill='light')
+    s.box(cx - 220, 122, 440, 62, "第一層：服務器級語義搜索",
+          sublabel="數百個 MCP 服務器 → 召回 Top-K 相關服務器", bold=True, fill='light')
     s.arrow(cx, 186, cx, 208)
-    s.box(cx - 220, 210, 440, 62, "第二层：工具级语义搜索",
-          sublabel="仅在 Top-K 服务器的工具内匹配 → Top-N 工具", bold=True, fill='light')
+    s.box(cx - 220, 210, 440, 62, "第二層：工具級語義搜索",
+          sublabel="僅在 Top-K 服務器的工具內匹配 → Top-N 工具", bold=True, fill='light')
     s.arrow(cx, 274, cx, 296)
-    s.box(cx - 150, 298, 300, 46, "选定工具",
-          sublabel="大幅缩小候选范围，降低选择成本", bold=True, fill='light')
+    s.box(cx - 150, 298, 300, 46, "選定工具",
+          sublabel="大幅縮小候選範圍，降低選擇成本", bold=True, fill='light')
     s.save(os.path.join(OUT, 'fig8-3.svg'))
 
 
-def fig8_4():  # 工具动态加载的 KV Cache 优化（朴素 vs 优化）
+def fig8_4():  # 工具動態加載的 KV Cache 優化（樸素 vs 優化）
     W, H = 860, 244
     s = SVG(W, H)
-    s.text(220, 46, "朴素做法：工具定义混入系统提示", size=FS_SMALL, bold=True, fill='darker')
+    s.text(220, 46, "樸素做法：工具定義混入系統提示", size=FS_SMALL, bold=True, fill='darker')
     s.rect(30, 62, 380, 70, fill='#f0d8d8')
-    s.text(220, 84, "系统提示 + 全部工具定义", size=FS_SMALL, bold=True)
-    s.text(220, 108, "工具增删 → 前缀改变 → KV Cache 全部失效", size=FS_TINY, fill='text_light')
+    s.text(220, 84, "系統提示 + 全部工具定義", size=FS_SMALL, bold=True)
+    s.text(220, 108, "工具增刪 → 前綴改變 → KV Cache 全部失效", size=FS_TINY, fill='text_light')
     s.rect(30, 140, 380, 46, fill='light')
-    s.text(220, 163, "每轮重算，成本高", size=FS_SMALL)
+    s.text(220, 163, "每輪重算，成本高", size=FS_SMALL)
 
-    s.text(640, 46, "优化做法：工具定义动态加载", size=FS_SMALL, bold=True, fill='darker')
+    s.text(640, 46, "優化做法：工具定義動態加載", size=FS_SMALL, bold=True, fill='darker')
     s.rect(450, 62, 380, 40, fill='#d8e8d8')
-    s.text(640, 82, "稳定系统提示（缓存命中前缀）", size=FS_SMALL, bold=True)
+    s.text(640, 82, "穩定系統提示（緩存命中前綴）", size=FS_SMALL, bold=True)
     s.rect(450, 106, 380, 40, fill='light')
-    s.text(640, 126, "按需追加的工具定义（变化部分）", size=FS_SMALL)
+    s.text(640, 126, "按需追加的工具定義（變化部分）", size=FS_SMALL)
     s.rect(450, 150, 380, 40, fill='light')
-    s.text(640, 170, "对话轨迹", size=FS_SMALL)
-    s.text(640, 206, "稳定前缀不变 → KV Cache 持续复用", size=FS_TINY, fill='text_light')
+    s.text(640, 170, "對話軌跡", size=FS_SMALL)
+    s.text(640, 206, "穩定前綴不變 → KV Cache 持續複用", size=FS_TINY, fill='text_light')
     s.line(430, 54, 430, 220, dash=True)
     s.save(os.path.join(OUT, 'fig8-4.svg'))
 
 
-def fig8_5():  # Agent 自我进化流水线（需求识别→工具搜索→代码封装→工具注册）
-    _pipeline([("① 需求识别", "现有工具不足"), ("② 工具搜索", "开放世界查找"),
-               ("③ 代码封装", "生成并封装"), ("④ 工具注册", "纳入库可复用")],
-              'fig8-5', feedback="新工具注册后可被后续任务复用，持续扩展能力边界")
+def fig8_5():  # Agent 自我進化流水線（需求識別→工具搜索→代碼封裝→工具註冊）
+    _pipeline([("① 需求識別", "現有工具不足"), ("② 工具搜索", "開放世界查找"),
+               ("③ 代碼封裝", "生成並封裝"), ("④ 工具註冊", "納入庫可複用")],
+              'fig8-5', feedback="新工具註冊後可被後續任務複用，持續擴展能力邊界")
 
 
-def fig8_6():  # Voyager 持续学习架构（课程生成器 + 技能库 + 迭代提示）
-    _pipeline([("课程生成器", "提出渐进式新任务"), ("迭代提示机制", "生成并调试技能代码"),
-               ("技能库", "存储可复用技能")],
-              'fig8-6', W=760, feedback="技能积累后解锁更难的任务（开放世界探索）")
+def fig8_6():  # Voyager 持續學習架構（課程生成器 + 技能庫 + 迭代提示）
+    _pipeline([("課程生成器", "提出漸進式新任務"), ("迭代提示機制", "生成並調試技能代碼"),
+               ("技能庫", "存儲可複用技能")],
+              'fig8-6', W=760, feedback="技能積累後解鎖更難的任務（開放世界探索）")
 
 
-def fig8_7():  # 实验 8-5 自我进化流水线（搜索→评估→测试→封装→复用）
-    _pipeline([("① 搜索", "开放网络找工具"), ("② 评估", "判断是否合适"), ("③ 测试", "验证可用性"),
-               ("④ 封装", "包成标准工具"), ("⑤ 复用", "纳入工具库")],
-              'fig8-7', W=940, feedback="新工具沉淀后供后续任务复用")
+def fig8_7():  # 實驗 8-5 自我進化流水線（搜索→評估→測試→封裝→複用）
+    _pipeline([("① 搜索", "開放網絡找工具"), ("② 評估", "判斷是否合適"), ("③ 測試", "驗證可用性"),
+               ("④ 封裝", "包成標準工具"), ("⑤ 複用", "納入工具庫")],
+              'fig8-7', W=940, feedback="新工具沉澱後供後續任務複用")
 
 
 if __name__ == '__main__':

@@ -38,13 +38,13 @@ FS_SMALL = 16
 FS_TINY = 14
 FS_LABEL = 16
 
-# 按学术规范：图本身不包含标题，标题写在正文里。
-# 当 OMIT_TITLE=True 时，任何 font_size==FS_TITLE 的“标题型”文本（短符号如
-# VS/→/+ 除外）都视为图标题，不予渲染——无论它位于图的顶部还是中部（多面板
-# 图的分节标题同样剔除）。短符号通过 TITLE_MIN_LEN 长度阈值保留。
+# 按學術規範：圖本身不包含標題，標題寫在正文裡。
+# 當 OMIT_TITLE=True 時，任何 font_size==FS_TITLE 的“標題型”文本（短符號如
+# VS/→/+ 除外）都視為圖標題，不予渲染——無論它位於圖的頂部還是中部（多面板
+# 圖的分節標題同樣剔除）。短符號通過 TITLE_MIN_LEN 長度閾值保留。
 OMIT_TITLE = True
-TITLE_Y_THRESHOLD = 60   # 兼容旧逻辑保留，当前不再单独依赖
-TITLE_MIN_LEN = 4        # 长度 >= 此值的 FS_TITLE 文本才视为标题并剔除
+TITLE_Y_THRESHOLD = 60   # 兼容舊邏輯保留，當前不再單獨依賴
+TITLE_MIN_LEN = 4        # 長度 >= 此值的 FS_TITLE 文本才視為標題並剔除
 TITLE_CROP_PX = 40
 
 

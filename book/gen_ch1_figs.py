@@ -7,16 +7,16 @@ OUT = os.path.join(os.path.dirname(__file__), 'images')
 
 
 def fig1_4():
-    """Kimi K2 / GPT-5 native agent architecture — caption 图 1-4"""
+    """Kimi K2 / GPT-5 native agent architecture — caption 圖 1-4"""
     s = SVG(820, 520)
 
     # Title
-    s.text(410, 30, '"模型即 Agent" 架构：原生工具调用', size=FS_TITLE, bold=True)
+    s.text(410, 30, '"模型即 Agent" 架構：原生工具調用', size=FS_TITLE, bold=True)
 
     # Central model box
     s.rect(260, 70, 300, 100, fill='medium')
     s.text(410, 100, 'LLM（Kimi K2 / GPT-5）', size=FS_BODY, bold=True)
-    s.text(410, 130, 'RL 训练后的原生 Agent 能力', size=FS_SMALL, fill='text_light')
+    s.text(410, 130, 'RL 訓練後的原生 Agent 能力', size=FS_SMALL, fill='text_light')
 
     # Built-in tools on the right
     s.group_box(620, 70, 180, 210, '原生工具')
@@ -28,70 +28,70 @@ def fig1_4():
     s.arrow(633, 195, 560, 145)
 
     # ReAct loop below
-    s.group_box(100, 210, 460, 280, 'ReAct 循环（模型内部自主执行）')
+    s.group_box(100, 210, 460, 280, 'ReAct 循環（模型內部自主執行）')
 
     # Step 1: User input
-    s.box(120, 250, 200, 55, '用户：搜索最近一个月\n的比特币走势', fill='light', font_size=FS_SMALL)
+    s.box(120, 250, 200, 55, '用戶：搜索最近一個月\n的比特幣走勢', fill='light', font_size=FS_SMALL)
 
     # Step 2: Think
-    s.box(120, 325, 200, 55, '思考：需要搜索实时\n数据，再用代码分析', fill='#e8e8e8', font_size=FS_SMALL)
+    s.box(120, 325, 200, 55, '思考：需要搜索實時\n數據，再用代碼分析', fill='#e8e8e8', font_size=FS_SMALL)
     s.arrow(220, 307, 220, 323)
 
     # Step 3: Tool call
-    s.box(340, 250, 200, 55, '调用 $web_search\n"BTC price last month"', fill='light', font_size=FS_SMALL)
+    s.box(340, 250, 200, 55, '調用 $web_search\n"BTC price last month"', fill='light', font_size=FS_SMALL)
     s.arrow(322, 277, 338, 277)
 
     # Step 4: Tool result
-    s.box(340, 325, 200, 55, '结果：[价格数据]\n$67,230 → $71,450', fill='#e8e8e8', font_size=FS_SMALL)
+    s.box(340, 325, 200, 55, '結果：[價格數據]\n$67,230 → $71,450', fill='#e8e8e8', font_size=FS_SMALL)
     s.arrow(440, 307, 440, 323)
 
     # Step 5: Code
-    s.box(120, 400, 200, 55, '调用 code_interpreter\nRSI, MACD 计算代码', fill='light', font_size=FS_SMALL)
+    s.box(120, 400, 200, 55, '調用 code_interpreter\nRSI, MACD 計算代碼', fill='light', font_size=FS_SMALL)
     s.arrow(340, 377, 220, 398, color='dark')
 
     # Step 6: Final
-    s.box(340, 400, 200, 55, '最终输出：技术分析\n报告 + 可视化图表', fill='medium', font_size=FS_SMALL)
+    s.box(340, 400, 200, 55, '最終輸出：技術分析\n報告 + 可視化圖表', fill='medium', font_size=FS_SMALL)
     s.arrow(322, 427, 338, 427)
 
-    # RL training signal — 走右侧 ReAct/工具 间的空隙，避免遮挡内部内容
+    # RL training signal — 走右側 ReAct/工具 間的空隙，避免遮擋內部內容
     s.arrow_curved(565, 480, 410, 172, curve=40, dash=True, color='dark')
-    s.text(605, 330, 'RL 训练信号', size=FS_TINY, fill='text_light', bold=True, anchor='start')
+    s.text(605, 330, 'RL 訓練信號', size=FS_TINY, fill='text_light', bold=True, anchor='start')
 
     # Left side: what's different from traditional
-    s.group_box(15, 70, 230, 120, '与传统框架的区别')
-    s.text(130, 110, '✗ 无需外部编排代码', size=FS_SMALL, anchor='middle')
-    s.text(130, 135, '✗ 无需手写 ReAct 循环', size=FS_SMALL, anchor='middle')
-    s.text(130, 160, '✓ 模型自主决策全流程', size=FS_SMALL, anchor='middle')
+    s.group_box(15, 70, 230, 120, '與傳統框架的區別')
+    s.text(130, 110, '✗ 無需外部編排代碼', size=FS_SMALL, anchor='middle')
+    s.text(130, 135, '✗ 無需手寫 ReAct 循環', size=FS_SMALL, anchor='middle')
+    s.text(130, 160, '✓ 模型自主決策全流程', size=FS_SMALL, anchor='middle')
 
-    s.save(f'{OUT}/fig1-3.svg')  # ReAct 执行过程 → 图1-3
+    s.save(f'{OUT}/fig1-3.svg')  # ReAct 執行過程 → 圖1-3
 
 
 def fig1_1():
-    """Three learning paradigms — caption 图 1-1."""
+    """Three learning paradigms — caption 圖 1-1."""
     s = SVG(820, 480)
 
-    s.text(410, 30, 'Agent 的三种学习范式', size=FS_TITLE, bold=True)
+    s.text(410, 30, 'Agent 的三種學習範式', size=FS_TITLE, bold=True)
 
     col_w = 240
     gap = 20
     x_start = (820 - 3 * col_w - 2 * gap) / 2
 
     for i, (title, subtitle, time_label, items, example) in enumerate([
-        ('后训练', 'Post-training', '训练时', [
-            '修改模型权重',
+        ('後訓練', 'Post-training', '訓練時', [
+            '修改模型權重',
             '永久性 · 通用性',
             '成本高 · 更新慢',
-        ], '例：学会"何时调用工具"'),
-        ('上下文学习', 'In-Context Learning', '推理时', [
-            '注意力机制软更新',
-            '临时性 · 即时适应',
-            '受限于窗口大小',
-        ], '例：从 3 个示例学会新格式'),
-        ('外部化学习', 'Externalized Learning', '运行时', [
-            '知识库 + 工具生成',
+        ], '例：學會"何時調用工具"'),
+        ('上下文學習', 'In-Context Learning', '推理時', [
+            '注意力機制軟更新',
+            '臨時性 · 即時適應',
+            '受限於窗口大小',
+        ], '例：從 3 個示例學會新格式'),
+        ('外部化學習', 'Externalized Learning', '運行時', [
+            '知識庫 + 工具生成',
             '持久性 · 可更新',
-            '高可靠 · 可验证',
-        ], '例：将流程固化为代码工具'),
+            '高可靠 · 可驗證',
+        ], '例：將流程固化為代碼工具'),
     ]):
         x = x_start + i * (col_w + gap)
 
@@ -112,43 +112,43 @@ def fig1_1():
 
     # Timeline arrow at bottom
     s.arrow(60, 430, 760, 430, color='dark')
-    s.text(60, 455, '慢（数周）', size=FS_SMALL, fill='text_light', anchor='start')
-    s.text(410, 455, '学习速度', size=FS_SMALL, fill='text_light')
+    s.text(60, 455, '慢（數週）', size=FS_SMALL, fill='text_light', anchor='start')
+    s.text(410, 455, '學習速度', size=FS_SMALL, fill='text_light')
     s.text(760, 455, '快（毫秒）', size=FS_SMALL, fill='text_light', anchor='end')
 
-    s.save(f'{OUT}/fig1-4.svg')  # 三种学习范式 → 图1-4
+    s.save(f'{OUT}/fig1-4.svg')  # 三種學習範式 → 圖1-4
 
 
 def fig1_2():
-    """Context ablation experiment design — caption 图 1-2."""
+    """Context ablation experiment design — caption 圖 1-2."""
     W = 980
     s = SVG(W, 500)
 
-    s.text(W / 2, 30, '上下文消融实验设计', size=FS_TITLE, bold=True)
+    s.text(W / 2, 30, '上下文消融實驗設計', size=FS_TITLE, bold=True)
 
-    # Column headers（顺序与正文实验 1-1 移除顺序一致）
-    components = ['系统提示词', '工具定义', '工具执行结果', '思考过程', '历史消息']
+    # Column headers（順序與正文實驗 1-1 移除順序一致）
+    components = ['系統提示詞', '工具定義', '工具執行結果', '思考過程', '歷史消息']
     comp_w = 105
     comp_gap = 10
     total_comp = len(components) * comp_w + (len(components) - 1) * comp_gap
-    # 左侧给行标签留 110，右侧给结果列留 170
+    # 左側給行標籤留 110，右側給結果列留 170
     comp_x = 130
 
     for i, comp in enumerate(components):
         x = comp_x + i * (comp_w + comp_gap)
         s.text(x + comp_w / 2, 65, comp, size=FS_SMALL, bold=True)
 
-    # 结果列表头
+    # 結果列表頭
     result_x = comp_x + len(components) * (comp_w + comp_gap) + 10  # = 705
-    s.text(result_x + 80, 65, '结果', size=FS_SMALL, bold=True)
+    s.text(result_x + 80, 65, '結果', size=FS_SMALL, bold=True)
 
     # Experiment rows
     conditions = [
-        ('完整基线', [True, True, True, True, True], '✓ 正常工作'),
-        ('无工具定义', [True, False, True, True, True], '✗ 无法调用工具'),
-        ('无工具执行结果', [True, True, False, True, True], '✗ 盲目循环'),
-        ('无思考过程', [True, True, True, False, True], '△ 决策不连贯'),
-        ('无历史消息', [True, True, True, True, False], '△ 重复操作'),
+        ('完整基線', [True, True, True, True, True], '✓ 正常工作'),
+        ('無工具定義', [True, False, True, True, True], '✗ 無法調用工具'),
+        ('無工具執行結果', [True, True, False, True, True], '✗ 盲目循環'),
+        ('無思考過程', [True, True, True, False, True], '△ 決策不連貫'),
+        ('無歷史消息', [True, True, True, True, False], '△ 重複操作'),
     ]
 
     for j, (label, flags, result) in enumerate(conditions):
@@ -171,14 +171,14 @@ def fig1_2():
         s.text(result_x + 80, y + 28, result, size=FS_SMALL,
                fill='text' if '✓' in result else ('text_light' if '△' in result else 'dark'))
 
-    s.save(f'{OUT}/fig1-1.svg')  # 上下文消融实验 → 图1-1
+    s.save(f'{OUT}/fig1-1.svg')  # 上下文消融實驗 → 圖1-1
 
 
 def fig1_3():
-    """Agent trajectory — caption 图 1-3."""
+    """Agent trajectory — caption 圖 1-3."""
     s = SVG(820, 680)
 
-    s.text(410, 30, 'Agent 轨迹：多币种汇总任务的 ReAct 循环', size=FS_TITLE, bold=True)
+    s.text(410, 30, 'Agent 軌跡：多幣種彙總任務的 ReAct 循環', size=FS_TITLE, bold=True)
 
     lx = 40  # left margin
     rw = 480  # box width
@@ -187,19 +187,19 @@ def fig1_3():
     y = 60
 
     # Round 1
-    s.badge(lx, y, 80, 26, '第 1 轮', fill='darker')
+    s.badge(lx, y, 80, 26, '第 1 輪', fill='darker')
     y += 36
 
     # User message
     s.rect(lx, y, rw, 50, fill='light')
     s.text(lx + 10, y + 16, 'user', size=FS_SMALL, bold=True, anchor='start')
-    s.text(lx + 10, y + 38, '"计算年度总收入：Q1 $2.5M, Q2 €2.1M, Q3 £1.8M"', size=FS_TINY, anchor='start')
+    s.text(lx + 10, y + 38, '"計算年度總收入：Q1 $2.5M, Q2 €2.1M, Q3 £1.8M"', size=FS_TINY, anchor='start')
     y += 60
 
     # Assistant reasoning
     s.rect(lx, y, rw, 45, fill='#e8e8e8')
     s.text(lx + 10, y + 14, 'assistant.reasoning', size=FS_SMALL, bold=True, anchor='start', fill='darker')
-    s.text(lx + 10, y + 34, '"需要将 EUR 和 GBP 转换为 USD，再汇总计算"', size=FS_TINY, anchor='start')
+    s.text(lx + 10, y + 34, '"需要將 EUR 和 GBP 轉換為 USD，再彙總計算"', size=FS_TINY, anchor='start')
     y += 55
 
     # Tool calls
@@ -211,19 +211,19 @@ def fig1_3():
 
     # Tool results
     s.rect(lx, y, rw, 55, fill='light')
-    s.text(lx + 10, y + 14, 'tool (结果)', size=FS_SMALL, bold=True, anchor='start', fill='darker')
+    s.text(lx + 10, y + 14, 'tool (結果)', size=FS_SMALL, bold=True, anchor='start', fill='darker')
     s.mono(lx + 10, y + 36, 'EUR→USD: 2,282,608.70', size=FS_TINY)
     s.mono(lx + 250, y + 36, 'GBP→USD: 2,278,481.01', size=FS_TINY)
     y += 65
 
     # Round 2
-    s.badge(lx, y, 80, 26, '第 2 轮', fill='darker')
+    s.badge(lx, y, 80, 26, '第 2 輪', fill='darker')
     y += 36
 
     # Assistant reasoning 2
     s.rect(lx, y, rw, 45, fill='#e8e8e8')
     s.text(lx + 10, y + 14, 'assistant.reasoning', size=FS_SMALL, bold=True, anchor='start', fill='darker')
-    s.text(lx + 10, y + 34, '"已获得汇率，调用代码解释器汇总"', size=FS_TINY, anchor='start')
+    s.text(lx + 10, y + 34, '"已獲得匯率，調用代碼解釋器彙總"', size=FS_TINY, anchor='start')
     y += 55
 
     # Code interpreter call
@@ -233,47 +233,47 @@ def fig1_3():
     y += 60
 
     # Round 3
-    s.badge(lx, y, 80, 26, '第 3 轮', fill='darker')
+    s.badge(lx, y, 80, 26, '第 3 輪', fill='darker')
     y += 36
 
     # Final answer
     s.rect(lx, y, rw, 45, fill='medium')
-    s.text(lx + 10, y + 14, 'assistant.content（最终回答）', size=FS_SMALL, bold=True, anchor='start')
-    s.text(lx + 10, y + 36, '"年度总收入 $7,061,089.71，季度均值 $2,353,696.57"', size=FS_TINY, anchor='start')
+    s.text(lx + 10, y + 14, 'assistant.content（最終回答）', size=FS_SMALL, bold=True, anchor='start')
+    s.text(lx + 10, y + 36, '"年度總收入 $7,061,089.71，季度均值 $2,353,696.57"', size=FS_TINY, anchor='start')
     y += 55
 
     # Right side: brace + annotation
     bx = 540
     s.brace_right(bx, 60, y - 10, '')
-    s.text(600, 250, '轨迹', size=FS_BODY, bold=True, anchor='start')
+    s.text(600, 250, '軌跡', size=FS_BODY, bold=True, anchor='start')
     s.text(600, 280, '=', size=FS_BODY, anchor='start')
     s.text(600, 310, 'LLM 每次', size=FS_BODY, anchor='start')
-    s.text(600, 340, '调用时看到', size=FS_BODY, anchor='start')
-    s.text(600, 370, '的完整输入', size=FS_BODY, anchor='start')
+    s.text(600, 340, '調用時看到', size=FS_BODY, anchor='start')
+    s.text(600, 370, '的完整輸入', size=FS_BODY, anchor='start')
 
     # Key insight box on right
-    s.group_box(570, 410, 230, 140, '关键特性')
-    s.text(685, 445, '上下文累积', size=FS_SMALL, bold=True)
-    s.text(685, 470, '每轮都看到全部历史', size=FS_TINY, fill='text_light')
-    s.text(685, 500, '结构化轨迹', size=FS_SMALL, bold=True)
+    s.group_box(570, 410, 230, 140, '關鍵特性')
+    s.text(685, 445, '上下文累積', size=FS_SMALL, bold=True)
+    s.text(685, 470, '每輪都看到全部歷史', size=FS_TINY, fill='text_light')
+    s.text(685, 500, '結構化軌跡', size=FS_SMALL, bold=True)
     s.text(685, 525, 'user / assistant / tool', size=FS_TINY, fill='text_light')
 
-    s.save(f'{OUT}/fig1-2.svg')  # Agent 轨迹 → 图1-2
+    s.save(f'{OUT}/fig1-2.svg')  # Agent 軌跡 → 圖1-2
 
 
 def fig1_wf_chaining():
-    """Prompt chaining — workflow pattern (ch1 编排模式节)."""
+    """Prompt chaining — workflow pattern (ch1 編排模式節)."""
     s = SVG(820, 300)
 
-    s.text(410, 28, '提示链模式：多步骤内容创作', size=FS_TITLE, bold=True)
+    s.text(410, 28, '提示鏈模式：多步驟內容創作', size=FS_TITLE, bold=True)
 
     # Nodes with concrete descriptions
     nodes = [
-        ('需求文档', 'light', FS_SMALL),
-        ('LLM: 生成大纲', '#e8e8e8', FS_SMALL),
-        ('LLM: 撰写正文', '#e8e8e8', FS_SMALL),
-        ('LLM: 翻译', '#e8e8e8', FS_SMALL),
-        ('多语言文档', 'medium', FS_SMALL),
+        ('需求文檔', 'light', FS_SMALL),
+        ('LLM: 生成大綱', '#e8e8e8', FS_SMALL),
+        ('LLM: 撰寫正文', '#e8e8e8', FS_SMALL),
+        ('LLM: 翻譯', '#e8e8e8', FS_SMALL),
+        ('多語言文檔', 'medium', FS_SMALL),
     ]
 
     node_w = 130
@@ -294,15 +294,15 @@ def fig1_wf_chaining():
     gate_y = y + node_h + 15
     for i in [1, 2]:
         gx = x_start + i * (node_w + gap) + node_w / 2
-        s.diamond(gx, gate_y + 22, 60, 40, fill='white', label='门控', font_size=FS_TINY)
+        s.diamond(gx, gate_y + 22, 60, 40, fill='white', label='門控', font_size=FS_TINY)
         s.line(gx, y + node_h, gx, gate_y + 2, dash=True, color='dark')
 
     # Example content snippets below
     snippet_y = gate_y + 60
     snippets = [
-        (x_start + 15, '"产品发布说明"'),
-        (x_start + node_w + gap + 15, '→ 5节大纲'),
-        (x_start + 2 * (node_w + gap) + 15, '→ 3000字文档'),
+        (x_start + 15, '"產品發佈說明"'),
+        (x_start + node_w + gap + 15, '→ 5節大綱'),
+        (x_start + 2 * (node_w + gap) + 15, '→ 3000字文檔'),
         (x_start + 3 * (node_w + gap) + 15, '→ EN / JP / KR'),
     ]
     for sx, txt in snippets:
@@ -312,23 +312,23 @@ def fig1_wf_chaining():
 
 
 def fig1_wf_routing():
-    """Routing — workflow pattern (ch1 编排模式节)."""
+    """Routing — workflow pattern (ch1 編排模式節)."""
     s = SVG(820, 440)
 
-    s.text(410, 28, '路由模式：客户服务分类', size=FS_TITLE, bold=True)
+    s.text(410, 28, '路由模式：客戶服務分類', size=FS_TITLE, bold=True)
 
     # Input
-    s.box(30, 130, 150, 55, '用户查询', fill='medium', font_size=FS_BODY)
+    s.box(30, 130, 150, 55, '用戶查詢', fill='medium', font_size=FS_BODY)
 
     # Router
-    s.diamond(300, 157, 140, 80, fill='#e8e8e8', label='分类器', font_size=FS_SMALL)
+    s.diamond(300, 157, 140, 80, fill='#e8e8e8', label='分類器', font_size=FS_SMALL)
     s.arrow(182, 157, 230, 157)
 
     # Branches
     branches = [
-        (55, '退款请求', '退款策略 Prompt\n+ 订单 API', 'light'),
-        (155, '技术支持', '诊断 Prompt\n+ 日志工具', 'light'),
-        (255, '常见问题', 'FAQ Prompt\n+ 知识库', 'light'),
+        (55, '退款請求', '退款策略 Prompt\n+ 訂單 API', 'light'),
+        (155, '技術支持', '診斷 Prompt\n+ 日誌工具', 'light'),
+        (255, '常見問題', 'FAQ Prompt\n+ 知識庫', 'light'),
         (355, '其他', 'Haiku（低成本）\n+ 通用 Prompt', 'white'),
     ]
 
@@ -341,28 +341,28 @@ def fig1_wf_routing():
         s.arrow(370, 157, bx - 2, by + 25)
 
     # Annotation
-    s.text(410, 425, '关键：分类可由 LLM 或传统分类器完成，简单/常见问题路由到小模型', size=FS_SMALL, fill='text_light')
+    s.text(410, 425, '關鍵：分類可由 LLM 或傳統分類器完成，簡單/常見問題路由到小模型', size=FS_SMALL, fill='text_light')
 
     s.save(f'{OUT}/fig1-6.svg')
 
 
 def fig1_wf_parallel():
-    """Parallelization — workflow pattern (ch1 编排模式节)."""
+    """Parallelization — workflow pattern (ch1 編排模式節)."""
     s = SVG(820, 360)
 
-    s.text(410, 28, '并行化模式：多视角代码审查', size=FS_TITLE, bold=True)
+    s.text(410, 28, '並行化模式：多視角代碼審查', size=FS_TITLE, bold=True)
 
     # Input
-    s.box(30, 130, 150, 55, '代码提交\nPull Request', fill='medium', font_size=FS_SMALL)
+    s.box(30, 130, 150, 55, '代碼提交\nPull Request', fill='medium', font_size=FS_SMALL)
 
     # Split
     s.text(220, 157, '分段', size=FS_SMALL, bold=True)
 
     # Parallel workers
     workers = [
-        (70, '安全审查 LLM₁', 'SQL注入\nXSS\n权限泄露'),
-        (155, '风格审查 LLM₂', '命名规范\n代码重复\n复杂度'),
-        (240, '逻辑审查 LLM₃', '边界条件\n空指针\n并发问题'),
+        (70, '安全審查 LLM₁', 'SQL注入\nXSS\n權限洩露'),
+        (155, '風格審查 LLM₂', '命名規範\n代碼重複\n複雜度'),
+        (240, '邏輯審查 LLM₃', '邊界條件\n空指針\n併發問題'),
     ]
 
     wx = 290
@@ -373,7 +373,7 @@ def fig1_wf_parallel():
         s.arrow(180, 157, wx - 2, wy + 28)
 
     # Aggregate
-    s.box(640, 130, 150, 55, '聚合结果\n综合审查报告', fill='medium', font_size=FS_SMALL)
+    s.box(640, 130, 150, 55, '聚合結果\n綜合審查報告', fill='medium', font_size=FS_SMALL)
     for i, (wy, _, _) in enumerate(workers):
         s.arrow(wx + ww + 135 + 2, wy + 28, 638, 157)
 
@@ -381,22 +381,22 @@ def fig1_wf_parallel():
 
 
 def fig1_wf_orchestrator():
-    """Orchestrator-workers — workflow pattern (ch1 编排模式节)."""
+    """Orchestrator-workers — workflow pattern (ch1 編排模式節)."""
     s = SVG(820, 440)
 
-    s.text(410, 28, '编排器-工作器模式：多文件代码修改', size=FS_TITLE, bold=True)
+    s.text(410, 28, '編排器-工作器模式：多文件代碼修改', size=FS_TITLE, bold=True)
 
-    # Orchestrator at top: 标题 + 内部子描述纵向分开排布
+    # Orchestrator at top: 標題 + 內部子描述縱向分開排布
     s.rect(260, 60, 300, 95, fill='medium')
-    s.text(410, 82, '编排器 LLM', size=FS_BODY, bold=True)
+    s.text(410, 82, '編排器 LLM', size=FS_BODY, bold=True)
     s.rect(270, 105, 280, 38, fill='#e8e8e8', rx=4)
-    s.text(410, 124, '"分析 Issue → 定位文件 → 分配子任务"', size=FS_TINY)
+    s.text(410, 124, '"分析 Issue → 定位文件 → 分配子任務"', size=FS_TINY)
 
     # Workers
     workers = [
-        (40, 'Worker 1', '修改 auth.py\n添加 OAuth2 支持', '读取/编辑\n文件工具'),
-        (290, 'Worker 2', '修改 api.py\n添加新端点', '读取/编辑\n文件工具'),
-        (540, 'Worker 3', '编写 test_auth.py\n测试用例', '执行测试\n工具'),
+        (40, 'Worker 1', '修改 auth.py\n添加 OAuth2 支持', '讀取/編輯\n文件工具'),
+        (290, 'Worker 2', '修改 api.py\n添加新端點', '讀取/編輯\n文件工具'),
+        (540, 'Worker 3', '編寫 test_auth.py\n測試用例', '執行測試\n工具'),
     ]
 
     wy = 220
@@ -408,7 +408,7 @@ def fig1_wf_orchestrator():
         s.arrow(410, 157, wx + ww / 2, wy - 2)
 
     # Synthesize
-    s.box(260, 370, 300, 55, '编排器：合并结果 → 验证一致性', fill='medium', font_size=FS_SMALL)
+    s.box(260, 370, 300, 55, '編排器：合併結果 → 驗證一致性', fill='medium', font_size=FS_SMALL)
     for wx, _, _, _ in workers:
         s.arrow(wx + ww / 2, wy + wh + 52, 410, 368)
 
@@ -416,96 +416,96 @@ def fig1_wf_orchestrator():
 
 
 def fig1_wf_evaluator():
-    """Evaluator-optimizer — workflow pattern (ch1 编排模式节)."""
+    """Evaluator-optimizer — workflow pattern (ch1 編排模式節)."""
     s = SVG(820, 380)
 
-    s.text(410, 28, '评估器-优化器模式：文学翻译迭代', size=FS_TITLE, bold=True)
+    s.text(410, 28, '評估器-優化器模式：文學翻譯迭代', size=FS_TITLE, bold=True)
 
     # Generator
-    s.box(50, 100, 200, 65, '生成器 LLM\n生成初始翻译', fill='light', font_size=FS_SMALL)
+    s.box(50, 100, 200, 65, '生成器 LLM\n生成初始翻譯', fill='light', font_size=FS_SMALL)
 
     # Output
     s.rect(50, 185, 200, 45, fill='code_bg', stroke='dark', rx=4)
-    s.text(150, 208, '"春眠不觉晓" → v1 译文', size=FS_TINY)
+    s.text(150, 208, '"春眠不覺曉" → v1 譯文', size=FS_TINY)
     s.arrow(150, 167, 150, 183)
 
     # Evaluator
-    s.box(330, 100, 200, 65, '评估器 LLM\n多维度评分', fill='#e8e8e8', font_size=FS_SMALL)
+    s.box(330, 100, 200, 65, '評估器 LLM\n多維度評分', fill='#e8e8e8', font_size=FS_SMALL)
     s.arrow(252, 207, 330, 160)
 
     # Evaluation criteria
     s.rect(330, 185, 200, 80, fill='code_bg', stroke='dark', rx=4)
-    s.text(340, 205, '准确性: 4/5', size=FS_TINY, anchor='start')
-    s.text(340, 225, '流畅性: 3/5 ←需改进', size=FS_TINY, anchor='start')
-    s.text(340, 245, '文化适应: 4/5', size=FS_TINY, anchor='start')
+    s.text(340, 205, '準確性: 4/5', size=FS_TINY, anchor='start')
+    s.text(340, 225, '流暢性: 3/5 ←需改進', size=FS_TINY, anchor='start')
+    s.text(340, 245, '文化適應: 4/5', size=FS_TINY, anchor='start')
     s.arrow(430, 167, 430, 183)
 
-    # Feedback loop — 标签放在弧顶上方避免遮挡评估器内容
+    # Feedback loop — 標籤放在弧頂上方避免遮擋評估器內容
     s.arrow_curved(430, 267, 150, 98, curve=80, dash=True, color='dark')
-    s.text(290, 90, '反馈 + 改进建议', size=FS_TINY, fill='text_light', bold=True)
+    s.text(290, 90, '反饋 + 改進建議', size=FS_TINY, fill='text_light', bold=True)
 
     # Iteration indicator
-    s.box(610, 100, 170, 55, '迭代次数: n', fill='white', font_size=FS_SMALL)
-    s.text(695, 170, '退出条件：', size=FS_SMALL, bold=True, anchor='start')
-    s.text(695, 195, '① 所有维度 ≥ 4/5', size=FS_TINY, anchor='start', fill='text_light')
-    s.text(695, 218, '② 达到最大轮次', size=FS_TINY, anchor='start', fill='text_light')
+    s.box(610, 100, 170, 55, '迭代次數: n', fill='white', font_size=FS_SMALL)
+    s.text(695, 170, '退出條件：', size=FS_SMALL, bold=True, anchor='start')
+    s.text(695, 195, '① 所有維度 ≥ 4/5', size=FS_TINY, anchor='start', fill='text_light')
+    s.text(695, 218, '② 達到最大輪次', size=FS_TINY, anchor='start', fill='text_light')
 
     # Final output
-    s.box(220, 310, 380, 55, '最终输出：经过 3 轮迭代的高质量翻译', fill='medium', font_size=FS_SMALL)
+    s.box(220, 310, 380, 55, '最終輸出：經過 3 輪迭代的高質量翻譯', fill='medium', font_size=FS_SMALL)
 
     s.save(f'{OUT}/fig1-9.svg')
 
 
 def fig1_5():
-    """Autonomous Agent loop — caption 图 1-5."""
+    """Autonomous Agent loop — caption 圖 1-5."""
     s = SVG(820, 500)
 
-    s.text(410, 28, '自主 Agent 的执行循环', size=FS_TITLE, bold=True)
+    s.text(410, 28, '自主 Agent 的執行循環', size=FS_TITLE, bold=True)
 
     # While loop structure
     s.rect(80, 60, 500, 380, fill='white', stroke='border', rx=8, dash=True)
     s.text(330, 82, 'while not done:', size=FS_BODY, bold=True)
 
-    # Step 1: Think — 标题在框上方，代码在框内
+    # Step 1: Think — 標題在框上方，代碼在框內
     s.rect(120, 100, 420, 60, fill='#e8e8e8')
     s.text(130, 115, '① 思考（Reasoning）', size=FS_SMALL, bold=True, anchor='start')
     s.rect(130, 125, 400, 28, fill='code_bg', rx=4)
-    s.mono(140, 140, '"分析搜索结果...信息不足,需要进一步搜索"', size=FS_TINY)
+    s.mono(140, 140, '"分析搜索結果...信息不足,需要進一步搜索"', size=FS_TINY)
 
     # Step 2: Act
     s.rect(120, 175, 420, 60, fill='light')
-    s.text(130, 190, '② 行动（Acting）', size=FS_SMALL, bold=True, anchor='start')
+    s.text(130, 190, '② 行動（Acting）', size=FS_SMALL, bold=True, anchor='start')
     s.rect(130, 200, 400, 28, fill='code_bg', rx=4)
     s.mono(140, 215, 'web_search("Agent RL training techniques 2025")', size=FS_TINY)
     s.arrow(330, 162, 330, 173)
 
     # Step 3: Observe
     s.rect(120, 250, 420, 60, fill='light')
-    s.text(130, 265, '③ 观察（Observing）', size=FS_SMALL, bold=True, anchor='start')
+    s.text(130, 265, '③ 觀察（Observing）', size=FS_SMALL, bold=True, anchor='start')
     s.rect(130, 275, 400, 28, fill='code_bg', rx=4)
     s.mono(140, 290, 'tool_result: "Found 3 relevant papers..."', size=FS_TINY)
     s.arrow(330, 237, 330, 248)
 
     # Loop back arrow
-    s.arrow_curved(540, 280, 540, 120, curve=-40, label='继续循环', color='dark')
+    s.arrow_curved(540, 280, 540, 120, curve=-40, label='繼續循環', color='dark')
 
     # Exit conditions on the right
-    s.group_box(610, 60, 190, 190, '退出条件')
+    s.group_box(610, 60, 190, 190, '退出條件')
     exits = [
-        '① 任务完成',
-        '② 调用 final_answer',
-        '③ 无工具调用返回',
-        '④ 达到最大轮次',
-        '⑤ 错误次数超限',
+        '① 任務完成',
+        '② 調用 final_answer',
+        '③ 無工具調用返回',
+        '④ 達到最大輪次',
+        '⑤ 錯誤次數超限',
     ]
     for i, ex in enumerate(exits):
         s.text(620, 100 + i * 32, ex, size=FS_SMALL, anchor='start')
 
     # Bottom: concrete iteration example
     s.rect(80, 360, 500, 70, fill='medium', rx=6)
-    s.text(330, 380, '实际执行示例：SWE-bench 代码修复', size=FS_SMALL, bold=True)
-    s.text(330, 405, '搜索代码 → 定位 Bug → 编辑文件 → 运行测试 → 修复失败 → 再次编辑 → 测试通过 → 完成', size=FS_TINY)
-    s.text(330, 425, '（5 轮迭代，12 次工具调用）', size=FS_TINY, fill='text_light')
+    s.text(330, 380, '實際執行示例：SWE-bench 代碼修復', size=FS_SMALL, bold=True)
+    s.text(330, 405, '搜索代碼 → 定位 Bug → 編輯文件 → 運行測試 → 修復失敗 → 再次編輯 → 測試通過 → 完成', size=FS_TINY)
+    s.text(330, 425, '（5 輪迭代，12 次工具調用）', size=FS_TINY, fill='text_light')
 
     # Done arrow
     s.arrow(330, 312, 330, 358, label='done = True')
@@ -515,7 +515,7 @@ def fig1_5():
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)
-    # In-chapter figures (referenced as 图 1-1 ~ 图 1-5)
+    # In-chapter figures (referenced as 圖 1-1 ~ 圖 1-5)
     fig1_1()
     fig1_2()
     fig1_3()

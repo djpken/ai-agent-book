@@ -1,6 +1,6 @@
 -- crossref.lua — internal cross-reference links for the book.
 --
--- Keeps the existing manual numbering (图N-M, 第N章) but turns every in-text
+-- Keeps the existing manual numbering (圖N-M, 第N章) but turns every in-text
 -- reference into a clickable internal link, and drops a \label anchor on each
 -- figure and chapter. Uses raw LaTeX \label / \hyperref so it does not depend
 -- on LaTeX counters (the displayed text is the manual number verbatim).
@@ -13,7 +13,7 @@ local chap = 0
 local function fig_label(n, m) return 'fig:' .. n .. '-' .. m end
 local function chap_label(n) return 'chap:' .. n end
 
--- Replace 图N-M / 第N章 occurrences inside a plain string with a list of
+-- Replace 圖N-M / 第N章 occurrences inside a plain string with a list of
 -- inlines (Str segments + RawInline hyperref links).
 local function linkify(text)
   local out = {}
@@ -21,7 +21,7 @@ local function linkify(text)
   local len = #text
   while i <= len do
     -- earliest of the two patterns from position i
-    local fs, fe, fn, fm = text:find('图(%d+)%-(%d+)', i)
+    local fs, fe, fn, fm = text:find('圖(%d+)%-(%d+)', i)
     local cs, ce, cn = text:find('第(%d+)章', i)
     -- choose the nearest match
     local pick
@@ -36,7 +36,7 @@ local function linkify(text)
     if ms > i then table.insert(out, pandoc.Str(text:sub(i, ms - 1))) end
     if pick == 'fig' then
       table.insert(out, pandoc.RawInline('latex',
-        '\\crossreflink{' .. fig_label(fn, fm) .. '}{图' .. fn .. '-' .. fm .. '}'))
+        '\\crossreflink{' .. fig_label(fn, fm) .. '}{圖' .. fn .. '-' .. fm .. '}'))
     else
       table.insert(out, pandoc.RawInline('latex',
         '\\crossreflink{' .. chap_label(cn) .. '}{第' .. cn .. '章}'))
@@ -61,7 +61,7 @@ return {
     -- pandoc 3.x: a standalone image is a Figure block carrying the caption.
     Figure = function(el)
       local cap = pandoc.utils.stringify(el.caption.long)
-      local n, m = cap:match('图%s*(%d+)%-(%d+)')
+      local n, m = cap:match('圖%s*(%d+)%-(%d+)')
       if n and m then
         el.identifier = fig_label(n, m)  -- LaTeX writer emits \label{fig:N-M}
       end
@@ -71,7 +71,7 @@ return {
     -- Fallback for any inline image that still carries its own caption.
     Image = function(el)
       local cap = pandoc.utils.stringify(el.caption)
-      local n, m = cap:match('图%s*(%d+)%-(%d+)')
+      local n, m = cap:match('圖%s*(%d+)%-(%d+)')
       if n and m and el.identifier == '' then
         el.identifier = fig_label(n, m)
       end
@@ -79,7 +79,7 @@ return {
     end,
 
     Str = function(el)
-      if el.text:find('图%d') or el.text:find('第%d+章') then
+      if el.text:find('圖%d') or el.text:find('第%d+章') then
         return linkify(el.text)
       end
     end,
