@@ -51,7 +51,7 @@ pandoc "${CHAPTERS[@]}" \
     -V classoption=cyan \
     -V classoption=device=normal \
     -V author="李博杰" \
-    --metadata title-meta="深入理解 AI Agent：设计原理与工程实践" \
+    --metadata title-meta="深入理解 AI Agent：設計原理與工程實踐" \
     --metadata author-meta="李博杰" \
     -H preamble.tex \
     --include-before-body=cover.tex \
