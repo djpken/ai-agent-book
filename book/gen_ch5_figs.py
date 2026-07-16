@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate all SVG illustrations for Chapter 5 (代码生成).
+"""Generate all SVG illustrations for Chapter 5 (代碼生成).
 
 Figures (11 total):
   fig5-1:  OpenClaw architecture — Coding Agent as core of general Agent
@@ -36,14 +36,14 @@ def _pill(svg, x, y, w, h, label, fill='light', font_size=FS_SMALL, bold=False):
 # ──────────────────────── fig5-1 (NEW: OpenClaw arch) ──────
 
 def fig5_1():
-    """OpenClaw 架构：以 Coding Agent 为核心的通用 Agent"""
+    """OpenClaw 架構：以 Coding Agent 為核心的通用 Agent"""
     w, h = 980, 600
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "OpenClaw 架构：以 Coding Agent 为核心的通用 Agent", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "OpenClaw 架構：以 Coding Agent 為核心的通用 Agent", size=FS_TITLE, bold=True)
 
     # Top: multi-platform messaging gateway
     gw_y, gw_h = 58, 66
-    svg.group_box(60, gw_y, w - 120, gw_h, "多平台消息网关（用户交互层）")
+    svg.group_box(60, gw_y, w - 120, gw_h, "多平臺消息網關（用戶交互層）")
     channels = ["WhatsApp", "Telegram", "iMessage", "Slack", "CLI"]
     pill_w, pill_h = 130, 32
     total_pw = len(channels) * pill_w + (len(channels) - 1) * 18
@@ -54,19 +54,19 @@ def fig5_1():
         svg.text(px + pill_w / 2, gw_y + 26 + pill_h / 2, ch, size=FS_SMALL)
 
     svg.arrow(w / 2, gw_y + gw_h + 2, w / 2, 158)
-    svg.text(w / 2 + 12, 134, "自然语言请求", size=FS_LABEL, fill='text_light', anchor='start')
+    svg.text(w / 2 + 12, 134, "自然語言請求", size=FS_LABEL, fill='text_light', anchor='start')
 
     # Center: Coding Agent runtime — widened to fit 4 tools comfortably
     ca_x, ca_y, ca_w, ca_h = 200, 160, 580, 210
     svg.rect(ca_x, ca_y, ca_w, ca_h, fill='light')
     svg.rect(ca_x, ca_y, ca_w, 40, fill='darker', rx=6)
     svg.text(ca_x + ca_w / 2, ca_y + 20,
-             "Coding Agent 运行时（推理 + 执行核心）", size=FS_BODY, bold=True, fill='white')
+             "Coding Agent 運行時（推理 + 執行核心）", size=FS_BODY, bold=True, fill='white')
 
     tools = [
-        ("Code Interpreter", "代码执行"), ("Bash Shell", "系统命令"),
-        ("Read File", "读取文件"), ("Write File", "写入文件"),
-        ("Edit File", "编辑文件"), ("Glob", "文件搜索"), ("Grep", "内容搜索"),
+        ("Code Interpreter", "代碼執行"), ("Bash Shell", "系統命令"),
+        ("Read File", "讀取文件"), ("Write File", "寫入文件"),
+        ("Edit File", "編輯文件"), ("Glob", "文件搜索"), ("Grep", "內容搜索"),
     ]
     tw, th, tgap = 132, 60, 12
     for ri, row in enumerate([tools[:4], tools[4:]]):
@@ -82,15 +82,15 @@ def fig5_1():
     # Left: Deep Research
     dr_x, dr_y, dr_w, dr_h = 22, 198, 158, 86
     svg.rect(dr_x, dr_y, dr_w, dr_h, fill='medium')
-    svg.text(dr_x + dr_w / 2, dr_y + 22, "网络搜索模块", size=FS_SMALL, bold=True)
+    svg.text(dr_x + dr_w / 2, dr_y + 22, "網絡搜索模塊", size=FS_SMALL, bold=True)
     svg.text(dr_x + dr_w / 2, dr_y + 44, "Deep Research", size=FS_TINY, fill='text_light')
-    svg.text(dr_x + dr_w / 2, dr_y + 66, "Web 请求 · 解析", size=FS_TINY, fill='text_light')
+    svg.text(dr_x + dr_w / 2, dr_y + 66, "Web 請求 · 解析", size=FS_TINY, fill='text_light')
     svg.arrow(dr_x + dr_w + 2, dr_y + dr_h / 2, ca_x - 2, ca_y + ca_h / 2)
 
     # Right: Computer Use
     cu_x, cu_y, cu_w, cu_h = 800, 198, 158, 86
     svg.rect(cu_x, cu_y, cu_w, cu_h, fill='medium')
-    svg.text(cu_x + cu_w / 2, cu_y + 22, "浏览器自动化", size=FS_SMALL, bold=True)
+    svg.text(cu_x + cu_w / 2, cu_y + 22, "瀏覽器自動化", size=FS_SMALL, bold=True)
     svg.text(cu_x + cu_w / 2, cu_y + 44, "Computer Use", size=FS_TINY, fill='text_light')
     svg.text(cu_x + cu_w / 2, cu_y + 66, "Playwright DOM", size=FS_TINY, fill='text_light')
     svg.arrow(ca_x + ca_w + 2, ca_y + ca_h / 2, cu_x - 2, cu_y + cu_h / 2)
@@ -98,15 +98,15 @@ def fig5_1():
     # Bottom: file system layer
     fs_y, fs_h = 410, 140
     svg.arrow(w / 2, ca_y + ca_h + 2, w / 2, fs_y - 2)
-    svg.text(w / 2 + 12, 390, "读 / 写文件", size=FS_LABEL, fill='text_light', anchor='start')
-    svg.group_box(60, fs_y, w - 120, fs_h, "文件系统（记忆 · 知识 · 能力中枢）")
+    svg.text(w / 2 + 12, 390, "讀 / 寫文件", size=FS_LABEL, fill='text_light', anchor='start')
+    svg.group_box(60, fs_y, w - 120, fs_h, "文件系統（記憶 · 知識 · 能力中樞）")
 
     mem_items = [
-        ("MEMORY.md", "高层级事实 / 用户偏好"),
-        ("daily/YYYY-MM-DD.md", "按日归档 / 交互日志"),
-        ("SOUL.md", "Agent 身份与行为规则"),
-        ("知识库文件", "任务经验 / 自我进化"),
-        ("Git 版本控制", "记忆回滚 / 历史审计"),
+        ("MEMORY.md", "高層級事實 / 用戶偏好"),
+        ("daily/YYYY-MM-DD.md", "按日歸檔 / 交互日誌"),
+        ("SOUL.md", "Agent 身份與行為規則"),
+        ("知識庫文件", "任務經驗 / 自我進化"),
+        ("Git 版本控制", "記憶回滾 / 歷史審計"),
     ]
     item_w, item_h, item_gap = 162, 76, 16
     total_iw = len(mem_items) * item_w + (len(mem_items) - 1) * item_gap
@@ -122,7 +122,7 @@ def fig5_1():
     os_y = fs_y + fs_h + 16
     svg.rect(60, os_y, w - 120, 38, fill='darker', rx=6)
     svg.text(w / 2, os_y + 19,
-             "大模型 = 新操作系统：屏蔽智能复杂性，提供统一抽象", size=FS_SMALL, bold=True, fill='white')
+             "大模型 = 新操作系統：屏蔽智能複雜性，提供統一抽象", size=FS_SMALL, bold=True, fill='white')
 
     svg.save(os.path.join(OUT, 'fig5-1.svg'))
 
@@ -130,35 +130,35 @@ def fig5_1():
 # ──────────────────────── fig5-2 (was fig5-1) ────────────────────────
 
 def fig5_2():
-    """Coding Agent 多阶段工作流程（具体工具调用）"""
+    """Coding Agent 多階段工作流程（具體工具調用）"""
     w, h = 880, 580
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "Coding Agent 分层工作流程", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "Coding Agent 分層工作流程", size=FS_TITLE, bold=True)
 
     phases = [
-        ("① 项目文档化", 'medium', [
+        ("① 項目文檔化", 'medium', [
             ("read_file", "README.md, ARCHITECTURE.md"),
             ("glob", "**/*.py, **/*.ts"),
-            ("write_file", "→ 生成 CLAUDE.md 项目指南"),
+            ("write_file", "→ 生成 CLAUDE.md 項目指南"),
         ]),
         ("② 需求理解", 'light', [
-            ("ask_user", "\"优化目标是延迟还是吞吐？\""),
+            ("ask_user", "\"優化目標是延遲還是吞吐？\""),
             ("grep", "\"latency|throughput\" src/"),
-            ("read_file", "src/config.py (当前参数)"),
+            ("read_file", "src/config.py (當前參數)"),
         ]),
-        ("③ 设计文档", 'light', [
-            ("write_file", "design.md (方案对比)"),
-            ("ask_user", "提交设计 → 等待审批"),
-            ("—", "人类审查后 → 继续"),
+        ("③ 設計文檔", 'light', [
+            ("write_file", "design.md (方案對比)"),
+            ("ask_user", "提交設計 → 等待審批"),
+            ("—", "人類審查後 → 繼續"),
         ]),
-        ("④ 编码与测试", 'medium', [
-            ("edit_file", "old_str→new_str 修改代码"),
+        ("④ 編碼與測試", 'medium', [
+            ("edit_file", "old_str→new_str 修改代碼"),
             ("bash", "pytest tests/ -v"),
-            ("edit_file", "修复失败测试 → 重跑"),
+            ("edit_file", "修復失敗測試 → 重跑"),
         ]),
-        ("⑤ 审查与交付", 'light', [
+        ("⑤ 審查與交付", 'light', [
             ("bash", "ruff check src/ (lint)"),
-            ("read_file", "自审: 可读性/安全/性能"),
+            ("read_file", "自審: 可讀性/安全/性能"),
             ("edit_file", "更新 ARCHITECTURE.md"),
         ]),
     ]
@@ -188,12 +188,12 @@ def fig5_2():
 
     # Bottom: feedback loops
     svg.line(30, 320, w - 30, 320, color='dark', dash=True)
-    svg.text(w / 2, 340, "闭环反馈机制", size=FS_BODY, bold=True)
+    svg.text(w / 2, 340, "閉環反饋機制", size=FS_BODY, bold=True)
 
     loops = [
-        ("测试失败 → 修改代码 → 重新测试", "④内循环: 平均 2-3 轮收敛"),
-        ("Lint 错误 → 即时修复 → 再检查", "⑤内循环: 编辑后自动触发"),
-        ("审查发现问题 → 回到④修改", "⑤→④回退: 保证交付质量"),
+        ("測試失敗 → 修改代碼 → 重新測試", "④內循環: 平均 2-3 輪收斂"),
+        ("Lint 錯誤 → 即時修復 → 再檢查", "⑤內循環: 編輯後自動觸發"),
+        ("審查發現問題 → 回到④修改", "⑤→④回退: 保證交付質量"),
     ]
     ly = 365
     for label, note in loops:
@@ -204,16 +204,16 @@ def fig5_2():
 
     # Annotations on the right
     annots = [
-        "Agent 状态栏: cwd, git branch",
-        "Agent 状态栏: 未暂存变更",
-        "工具输出: 头尾截断",
-        "持久化终端会话",
+        "Agent 狀態欄: cwd, git branch",
+        "Agent 狀態欄: 未暫存變更",
+        "工具輸出: 頭尾截斷",
+        "持久化終端會話",
     ]
     for i, ann in enumerate(annots):
         svg.rect(610, 365 + i * 50, 250, 38, fill='code_bg', stroke='dark', rx=4)
         svg.text(735, 384 + i * 50, ann, size=FS_TINY, fill='text_light')
 
-    svg.text(w / 2, 565, "计划先于行动 · 验证贯穿始终 · 文档与代码共同演化", size=FS_BODY, bold=True, fill='darker')
+    svg.text(w / 2, 565, "計劃先於行動 · 驗證貫穿始終 · 文檔與代碼共同演化", size=FS_BODY, bold=True, fill='darker')
 
     svg.save(os.path.join(OUT, 'fig5-2.svg'))
 
@@ -221,37 +221,37 @@ def fig5_2():
 # ──────────────────────── fig5-3 ────────────────────────
 
 def fig5_3():
-    """搜索工具对比（四种工具 + 实际查询示例）"""
+    """搜索工具對比（四種工具 + 實際查詢示例）"""
     w, h = 880, 560
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "四种搜索工具对比", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "四種搜索工具對比", size=FS_TITLE, bold=True)
 
     tools = [
-        ("正则内容匹配 (grep)", 'medium',
+        ("正則內容匹配 (grep)", 'medium',
          "rg \"def handle_.*\" --type py",
          ["src/api.py:42:  def handle_request(..)",
           "src/api.py:89:  def handle_timeout(..)",
           "src/ws.py:15:   def handle_connect(..)"],
-         "精确文本 → 所有出现位置"),
+         "精確文本 → 所有出現位置"),
         ("文件名匹配 (glob)", 'light',
          "glob: **/test_*.py",
          ["tests/test_api.py",
           "tests/test_auth.py",
           "tests/unit/test_parser.py"],
-         "路径模式 → 不读取文件内容"),
-        ("语义代码搜索", 'light',
-         "\"处理用户输入验证\"",
+         "路徑模式 → 不讀取文件內容"),
+        ("語義代碼搜索", 'light',
+         "\"處理用戶輸入驗證\"",
          ["[0.91] src/validators.py:validate_input()",
           "[0.87] src/forms.py:sanitize_fields()",
           "[0.82] src/api.py:check_params()"],
-         "自然语言 → 向量+BM25混合"),
-        ("符号定义/引用", 'medium',
+         "自然語言 → 向量+BM25混合"),
+        ("符號定義/引用", 'medium',
          "find_references: UserService",
-         ["定义: src/services/user.py:12",
+         ["定義: src/services/user.py:12",
           "引用: src/api/routes.py:34 (import)",
-          "引用: src/api/routes.py:56 (调用)",
-          "引用: tests/test_user.py:8 (测试)"],
-         "AST级 → 消除同名歧义"),
+          "引用: src/api/routes.py:56 (調用)",
+          "引用: tests/test_user.py:8 (測試)"],
+         "AST級 → 消除同名歧義"),
     ]
 
     col_w = (w - 60) // 2
@@ -268,11 +268,11 @@ def fig5_3():
         tc = 'white' if fill in ('dark', 'darker') else 'text'
         svg.text(x + col_w / 2, y + 18, title, size=FS_SMALL, bold=True, fill=tc)
 
-        svg.text(x + 12, y + 54, "查询:", size=FS_TINY, bold=True, anchor='start', fill='text_light')
+        svg.text(x + 12, y + 54, "查詢:", size=FS_TINY, bold=True, anchor='start', fill='text_light')
         svg.rect(x + 8, y + 64, col_w - 16, 24, fill='code_bg', stroke='dark', rx=3)
         svg.mono(x + 14, y + 76, query, size=11)
 
-        svg.text(x + 12, y + 102, "结果:", size=FS_TINY, bold=True, anchor='start', fill='text_light')
+        svg.text(x + 12, y + 102, "結果:", size=FS_TINY, bold=True, anchor='start', fill='text_light')
         rh = len(results) * 20 + 12
         svg.rect(x + 8, y + 112, col_w - 16, rh, fill='code_bg', stroke='dark', rx=3)
         for j, r in enumerate(results):
@@ -286,53 +286,53 @@ def fig5_3():
 # ──────────────────────── fig5-3 ────────────────────────
 
 def fig5_4():
-    """文件编辑方案对比（五种方式 + 代码示例）"""
+    """文件編輯方案對比（五種方式 + 代碼示例）"""
     w, h = 900, 700
     svg = SVG(w, h)
-    svg.text(w / 2, 28, "五种文件编辑方案对比", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 28, "五種文件編輯方案對比", size=FS_TITLE, bold=True)
 
     approaches = [
         ("Diff + Apply Model", "dark",
-         ["LLM 输出 diff 描述:",
+         ["LLM 輸出 diff 描述:",
           "- def foo(x):",
           "    return x",
           "+ def foo(x, y=0):",
           "+   return x + y",
-          "→ 小模型定位并应用"],
-         "优势: 关注点分离",
-         "劣势: 微小偏差致错位"),
+          "→ 小模型定位並應用"],
+         "優勢: 關注點分離",
+         "劣勢: 微小偏差致錯位"),
         ("Old String → New String", "medium",
          ['old: "def foo(x):\\n',
           '       return x"',
           'new: "def foo(x, y=0):\\n',
           '       return x + y"',
-          "→ 字符串精确匹配替换"],
-         "优势: 可预测、无歧义",
-         "劣势: 大段删除需全输出"),
-        ("行号定位", "light",
-         ["删除行 42-43，插入:",
+          "→ 字符串精確匹配替換"],
+         "優勢: 可預測、無歧義",
+         "劣勢: 大段刪除需全輸出"),
+        ("行號定位", "light",
+         ["刪除行 42-43，插入:",
           "  def foo(x, y=0):",
           "    return x + y",
           "",
-          "→ 行号精确指定范围"],
-         "优势: 大段操作高效",
-         "劣势: 长文件行号易错"),
-        ("类 Vim 命令", "light",
-         ["42G  (跳转42行)",
-          "cw   (替换单词)",
-          "dd   (删除行)",
-          "yy/p (复制/粘贴)",
-          "→ 丰富的编辑语义"],
-         "优势: 移动/重组高效",
-         "劣势: 弱模型出错多"),
+          "→ 行號精確指定範圍"],
+         "優勢: 大段操作高效",
+         "劣勢: 長文件行號易錯"),
+        ("類 Vim 命令", "light",
+         ["42G  (跳轉42行)",
+          "cw   (替換單詞)",
+          "dd   (刪除行)",
+          "yy/p (複製/粘貼)",
+          "→ 豐富的編輯語義"],
+         "優勢: 移動/重組高效",
+         "劣勢: 弱模型出錯多"),
         ("首尾匹配", "medium",
          ['start: "def foo(x):"',
           'end:   "    return x"',
           'new: "def foo(x, y=0):',
           '       return x + y"',
-          "→ 只需边界即可定位"],
-         "优势: 大段删除免全输出",
-         "劣势: 需边界组合唯一"),
+          "→ 只需邊界即可定位"],
+         "優勢: 大段刪除免全輸出",
+         "劣勢: 需邊界組合唯一"),
     ]
 
     col_w = 168
@@ -360,14 +360,14 @@ def fig5_4():
     # Adoption bar chart at bottom
     chart_y = 320
     svg.line(30, chart_y, w - 30, chart_y, color='dark', dash=True)
-    svg.text(w / 2, chart_y + 24, "实际采用情况", size=FS_BODY, bold=True)
+    svg.text(w / 2, chart_y + 24, "實際採用情況", size=FS_BODY, bold=True)
 
     adoptions = [
         ("Old→New", "Claude Code", 0.85, 'dark'),
-        ("行号定位", "IDE 深度集成场景", 0.50, 'medium'),
+        ("行號定位", "IDE 深度集成場景", 0.50, 'medium'),
         ("Diff + Apply", "Cursor", 0.40, 'light'),
-        ("首尾匹配", "部分定制方案", 0.30, 'light'),
-        ("Vim 命令", "实验性方案", 0.15, 'code_bg'),
+        ("首尾匹配", "部分定製方案", 0.30, 'light'),
+        ("Vim 命令", "實驗性方案", 0.15, 'code_bg'),
     ]
     bar_x, bar_w_max = 250, 480
     by = chart_y + 48
@@ -385,28 +385,28 @@ def fig5_4():
 # ──────────────────────── fig5-4 ────────────────────────
 
 def fig5_5():
-    """PPT 生成流水线（Proposer-Reviewer 协作 + Slidev 代码）"""
+    """PPT 生成流水線（Proposer-Reviewer 協作 + Slidev 代碼）"""
     w, h = 880, 560
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "PPT 生成：Proposer-Reviewer 协作机制", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "PPT 生成：Proposer-Reviewer 協作機制", size=FS_TITLE, bold=True)
 
     # Proposer Agent (left)
     svg.rect(20, 60, 350, 280, fill='white', stroke='border', dash=True)
     svg.text(195, 82, "Proposer Agent", size=FS_BODY, bold=True)
 
-    svg.text(40, 110, "输入: 论文/资料内容", size=FS_SMALL, anchor='start', bold=True)
+    svg.text(40, 110, "輸入: 論文/資料內容", size=FS_SMALL, anchor='start', bold=True)
     svg.rect(30, 125, 330, 24, fill='code_bg', stroke='dark', rx=3)
-    svg.mono(38, 137, "paper.pdf → 提取章节/论点/图表", size=11)
+    svg.mono(38, 137, "paper.pdf → 提取章節/論點/圖表", size=11)
 
-    svg.text(40, 168, "输出: Slidev Markdown", size=FS_SMALL, anchor='start', bold=True)
+    svg.text(40, 168, "輸出: Slidev Markdown", size=FS_SMALL, anchor='start', bold=True)
     code_lines = [
         "---",
         "layout: two-cols",
         "---",
-        "# Transformer 架构",
+        "# Transformer 架構",
         "::left::",
-        "- 自注意力机制",
-        "- 多头注意力",
+        "- 自注意力機制",
+        "- 多頭注意力",
         "::right::",
         "<img src=\"fig3.png\" />",
     ]
@@ -416,47 +416,47 @@ def fig5_5():
     svg.rect(510, 60, 350, 280, fill='white', stroke='border', dash=True)
     svg.text(685, 82, "Reviewer Agent", size=FS_BODY, bold=True)
 
-    svg.text(520, 110, "步骤1: 渲染截图", size=FS_SMALL, anchor='start', bold=True)
+    svg.text(520, 110, "步驟1: 渲染截圖", size=FS_SMALL, anchor='start', bold=True)
     svg.rect(520, 125, 330, 50, fill='light')
     svg.text(685, 142, "slidev export --per-slide", size=FS_TINY, fill='text_light')
     svg.text(685, 160, "→ slide-01.png, slide-02.png ...", size=FS_TINY, fill='text_light')
 
-    svg.text(520, 192, "步骤2: Vision LLM 审查", size=FS_SMALL, anchor='start', bold=True)
+    svg.text(520, 192, "步驟2: Vision LLM 審查", size=FS_SMALL, anchor='start', bold=True)
     critique_lines = [
-        "审查维度:",
-        "  ✓ 文字是否溢出边界",
-        "  ✓ 布局是否拥挤",
-        "  ✓ 图片尺寸是否合适",
-        "  ✗ Slide 3: 文字溢出右栏",
-        "  ✗ Slide 7: 内容过于密集",
+        "審查維度:",
+        "  ✓ 文字是否溢出邊界",
+        "  ✓ 佈局是否擁擠",
+        "  ✓ 圖片尺寸是否合適",
+        "  ✗ Slide 3: 文字溢出右欄",
+        "  ✗ Slide 7: 內容過於密集",
     ]
     svg.rect(520, 208, 330, len(critique_lines) * 16 + 12, fill='code_bg', stroke='dark', rx=3)
     for j, line in enumerate(critique_lines):
         svg.mono(528, 222 + j * 16, line, size=10)
 
     # Arrows: Proposer → Reviewer → Proposer (loop)
-    svg.arrow(370, 200, 508, 150, label="Slidev 代码")
-    svg.arrow(508, 300, 370, 260, label="修改建议", dash=True)
+    svg.arrow(370, 200, 508, 150, label="Slidev 代碼")
+    svg.arrow(508, 300, 370, 260, label="修改建議", dash=True)
 
     # Iteration badge
-    _pill(svg, 395, 220, 100, 24, "迭代 2-3 轮", fill='dark', font_size=11, bold=True)
+    _pill(svg, 395, 220, 100, 24, "迭代 2-3 輪", fill='dark', font_size=11, bold=True)
 
     # Bottom: why separate agents
     svg.line(30, 365, w - 30, 365, color='dark', dash=True)
-    svg.text(w / 2, 388, "为什么分离 Proposer 和 Reviewer？", size=FS_BODY, bold=True)
+    svg.text(w / 2, 388, "為什麼分離 Proposer 和 Reviewer？", size=FS_BODY, bold=True)
 
     reasons = [
-        ("单 Agent 问题", [
-            "数十页渲染截图 → 上下文膨胀",
-            "代码 + 截图混合 → 注意力分散",
+        ("單 Agent 問題", [
+            "數十頁渲染截圖 → 上下文膨脹",
+            "代碼 + 截圖混合 → 注意力分散",
         ]),
-        ("分离的优势", [
-            "Reviewer 独立上下文 → 只看截图+代码",
-            "Proposer 专注代码 → 只收修改建议",
+        ("分離的優勢", [
+            "Reviewer 獨立上下文 → 只看截圖+代碼",
+            "Proposer 專注代碼 → 只收修改建議",
         ]),
-        ("实际效果", [
-            "显著减少上下文占用",
-            "修复准确率提升显著",
+        ("實際效果", [
+            "顯著減少上下文佔用",
+            "修復準確率提升顯著",
         ]),
     ]
     rx = 30
@@ -473,37 +473,37 @@ def fig5_5():
 # ──────────────────────── fig5-5 ────────────────────────
 
 def fig5_6():
-    """实验 5.6+5.7：论文→PPT→视频 端到端流水线"""
+    """實驗 5.6+5.7：論文→PPT→視頻 端到端流水線"""
     w, h = 880, 520
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "实验 5.6+5.7：论文 → PPT → 讲解视频", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "實驗 5.6+5.7：論文 → PPT → 講解視頻", size=FS_TITLE, bold=True)
 
     # Top pipeline: paper → PPT
     stages_top = [
-        ("PDF 输入", 'medium', [
+        ("PDF 輸入", 'medium', [
             "paper.pdf",
-            "解析章节结构",
-            "提取图表引用",
+            "解析章節結構",
+            "提取圖表引用",
         ]),
-        ("内容规划", 'light', [
-            "10-20 页结构",
-            "核心论点提取",
-            "图表分配到页",
+        ("內容規劃", 'light', [
+            "10-20 頁結構",
+            "核心論點提取",
+            "圖表分配到頁",
         ]),
         ("Slidev 生成", 'light', [
-            "逐页生成代码",
+            "逐頁生成代碼",
             "layout: two-cols",
-            "代码+图片混排",
+            "代碼+圖片混排",
         ]),
-        ("渲染检查", 'medium', [
+        ("渲染檢查", 'medium', [
             "export --per-slide",
-            "Vision LLM 审查",
-            "溢出/拥挤检测",
+            "Vision LLM 審查",
+            "溢出/擁擠檢測",
         ]),
-        ("迭代修复", 'light', [
+        ("迭代修復", 'light', [
             "Reviewer→Proposer",
-            "修改 Slidev 代码",
-            "重新渲染验证",
+            "修改 Slidev 代碼",
+            "重新渲染驗證",
         ]),
     ]
 
@@ -512,7 +512,7 @@ def fig5_6():
     total = len(stages_top) * sw + (len(stages_top) - 1) * sgap
     sx = (w - total) / 2
 
-    svg.text(w / 2, 60, "阶段一：PPT 生成 (Proposer-Reviewer)", size=FS_SMALL, bold=True, fill='text_light')
+    svg.text(w / 2, 60, "階段一：PPT 生成 (Proposer-Reviewer)", size=FS_SMALL, bold=True, fill='text_light')
     for i, (title, fill, details) in enumerate(stages_top):
         x = sx + i * (sw + sgap)
         svg.rect(x, 72, sw, 130, fill=fill)
@@ -528,33 +528,33 @@ def fig5_6():
     svg.text(w / 2 + 60, 222, "PPT 完成", size=FS_SMALL, fill='text_light')
 
     # Bottom pipeline: PPT → Video
-    svg.text(w / 2, 255, "阶段二：视频合成", size=FS_SMALL, bold=True, fill='text_light')
+    svg.text(w / 2, 255, "階段二：視頻合成", size=FS_SMALL, bold=True, fill='text_light')
 
     stages_bot = [
-        ("逐页截图", 'medium', [
+        ("逐頁截圖", 'medium', [
             "slide-01.png",
             "slide-02.png",
             "...",
         ]),
-        ("讲解稿生成", 'light', [
-            "LLM 生成口语化",
-            "讲解文字(每页)",
-            "引导性叙述",
+        ("講解稿生成", 'light', [
+            "LLM 生成口語化",
+            "講解文字(每頁)",
+            "引導性敘述",
         ]),
         ("TTS 合成", 'light', [
-            "文字 → 语音",
+            "文字 → 語音",
             "speech-01.mp3",
             "speech-02.mp3",
         ]),
-        ("音画同步", 'medium', [
+        ("音畫同步", 'medium', [
             "ffmpeg 合成",
-            "截图时长=音频时长",
-            "转场效果",
+            "截圖時長=音頻時長",
+            "轉場效果",
         ]),
-        ("最终视频", 'dark', [
+        ("最終視頻", 'dark', [
             "output.mp4",
-            "5-15 分钟",
-            "视觉+听觉双通道",
+            "5-15 分鐘",
+            "視覺+聽覺雙通道",
         ]),
     ]
 
@@ -572,12 +572,12 @@ def fig5_6():
 
     # Bottom: key metrics
     svg.line(30, 420, w - 30, 420, color='dark', dash=True)
-    svg.text(w / 2, 440, "验收标准", size=FS_BODY, bold=True)
+    svg.text(w / 2, 440, "驗收標準", size=FS_BODY, bold=True)
 
     criteria = [
-        ("PPT", "10-20 页 · 覆盖主要贡献 · ≥3 原图表"),
-        ("渲染", "零文字溢出 · 布局合理 · 图文匹配"),
-        ("视频", "5-15 分钟 · 音画同步 · 叙述连贯"),
+        ("PPT", "10-20 頁 · 覆蓋主要貢獻 · ≥3 原圖表"),
+        ("渲染", "零文字溢出 · 佈局合理 · 圖文匹配"),
+        ("視頻", "5-15 分鐘 · 音畫同步 · 敘述連貫"),
     ]
     cx = 60
     for label, desc in criteria:
@@ -591,29 +591,29 @@ def fig5_6():
 # ──────────────────────── fig5-7 ────────────────────────
 
 def fig5_8():
-    """动态表单生成流程（LLM→HTML→JSON→继续）"""
+    """動態表單生成流程（LLM→HTML→JSON→繼續）"""
     w, h = 880, 560
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "动态表单生成：结构化意图澄清", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "動態表單生成：結構化意圖澄清", size=FS_TITLE, bold=True)
 
     # Step 1: User input
     svg.rect(20, 60, 200, 60, fill='medium')
-    svg.text(120, 82, "用户输入", size=FS_SMALL, bold=True)
-    svg.text(120, 100, "\"我想订去北京的机票\"", size=FS_TINY, fill='text_light')
+    svg.text(120, 82, "用戶輸入", size=FS_SMALL, bold=True)
+    svg.text(120, 100, "\"我想訂去北京的機票\"", size=FS_TINY, fill='text_light')
 
     svg.arrow(220, 90, 260, 90)
 
     # Step 2: LLM analyzes and generates form
     svg.rect(260, 55, 260, 140, fill='white', stroke='border', dash=True)
-    svg.text(390, 75, "LLM 分析 → 生成表单代码", size=FS_SMALL, bold=True)
+    svg.text(390, 75, "LLM 分析 → 生成表單代碼", size=FS_SMALL, bold=True)
     form_code = [
         '<form id="clarify">',
         ' <input type="text"',
-        '  name="from" label="出发城市"/>',
+        '  name="from" label="出發城市"/>',
         ' <input type="date"',
-        '  name="depart" label="出发日"/>',
+        '  name="depart" label="出發日"/>',
         ' <select name="type">',
-        '  <option>单程</option>',
+        '  <option>單程</option>',
         '  <option>往返</option>',
         ' </select>',
         '</form>',
@@ -626,12 +626,12 @@ def fig5_8():
 
     # Step 3: Rendered form (visual representation)
     svg.rect(560, 55, 300, 200, fill='white', stroke='border')
-    svg.text(710, 75, "渲染后的表单界面", size=FS_SMALL, bold=True)
+    svg.text(710, 75, "渲染後的表單界面", size=FS_SMALL, bold=True)
 
     fields = [
-        ("出发城市", "上海", 95),
-        ("出发日期", "2025-08-15", 135),
-        ("旅行类型", "往返 ▾", 175),
+        ("出發城市", "上海", 95),
+        ("出發日期", "2025-08-15", 135),
+        ("旅行類型", "往返 ▾", 175),
         ("返程日期", "2025-08-22", 215),
     ]
     for label, value, fy in fields:
@@ -644,7 +644,7 @@ def fig5_8():
     # Step 4: JSON result
     svg.arrow(710, 268, 710, 300)
     svg.rect(560, 300, 300, 110, fill='white', stroke='border', dash=True)
-    svg.text(710, 318, "结构化 JSON 返回", size=FS_SMALL, bold=True)
+    svg.text(710, 318, "結構化 JSON 返回", size=FS_SMALL, bold=True)
     json_lines = [
         '{"from": "上海",',
         ' "depart": "2025-08-15",',
@@ -659,27 +659,27 @@ def fig5_8():
     svg.arrow(560, 390, 400, 440)
 
     svg.rect(100, 430, 500, 50, fill='medium')
-    svg.text(350, 448, "Agent 携带完整参数继续执行任务", size=FS_BODY, bold=True)
+    svg.text(350, 448, "Agent 攜帶完整參數繼續執行任務", size=FS_BODY, bold=True)
     svg.text(350, 468, "search_flights(from='上海', to='北京', depart='2025-08-15', ...)", size=FS_TINY, fill='text_light')
 
     # Comparison: text vs form
     svg.rect(20, 280, 250, 140, fill='light')
-    svg.text(145, 300, "对比: 纯文本 vs 表单", size=FS_SMALL, bold=True)
+    svg.text(145, 300, "對比: 純文本 vs 表單", size=FS_SMALL, bold=True)
     comp = [
-        "文本问答: 10 轮对话",
-        "  Q1: 从哪出发? A: 上海",
-        "  Q2: 几号? A: 8月15",
-        "  Q3: 单程还是往返? ...",
+        "文本問答: 10 輪對話",
+        "  Q1: 從哪出發? A: 上海",
+        "  Q2: 幾號? A: 8月15",
+        "  Q3: 單程還是往返? ...",
         "",
-        "动态表单: 1 次提交",
+        "動態表單: 1 次提交",
         "  所有信息一次收集完成",
-        "  级联逻辑自动处理",
+        "  級聯邏輯自動處理",
     ]
     for j, line in enumerate(comp):
         svg.mono(30, 318 + j * 13, line, size=10)
 
     # Bottom annotation
-    svg.text(w / 2, 510, "表单代码由 LLM 动态生成 → 级联逻辑: 选\"往返\"时自动显示返程日期", size=FS_SMALL, fill='darker')
+    svg.text(w / 2, 510, "表單代碼由 LLM 動態生成 → 級聯邏輯: 選\"往返\"時自動顯示返程日期", size=FS_SMALL, fill='darker')
 
     svg.save(os.path.join(OUT, 'fig5-8.svg'))
 
@@ -687,22 +687,22 @@ def fig5_8():
 # ──────────────────────── fig5-8 ────────────────────────
 
 def fig5_9():
-    """SQL 查询 Agent（artifact 模式 — 数据绕过 LLM）"""
+    """SQL 查詢 Agent（artifact 模式 — 數據繞過 LLM）"""
     w, h = 880, 580
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "SQL 查询 Agent：Artifact 模式 vs 传统模式", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "SQL 查詢 Agent：Artifact 模式 vs 傳統模式", size=FS_TITLE, bold=True)
 
     # Top: Traditional mode (data through LLM)
     svg.rect(20, 55, w - 40, 200, fill='white', stroke='border', dash=True)
-    svg.text(60, 78, "传统模式: 数据经过 LLM（低效）", size=FS_BODY, bold=True, anchor='start')
+    svg.text(60, 78, "傳統模式: 數據經過 LLM（低效）", size=FS_BODY, bold=True, anchor='start')
     _pill(svg, w - 110, 65, 80, 24, "✗ 低效", fill='dark', font_size=12, bold=True)
 
     trad_steps = [
-        ("用户", 'medium', "\"每部门\\n人数？\""),
+        ("用戶", 'medium', "\"每部門\\n人數？\""),
         ("LLM", 'light', "生成\\nSQL"),
-        ("DB", 'medium', "执行\\n查询"),
-        ("LLM", 'light', "阅读\\n5000行"),
-        ("用户", 'medium', "文字\\n描述"),
+        ("DB", 'medium', "執行\\n查詢"),
+        ("LLM", 'light', "閱讀\\n5000行"),
+        ("用戶", 'medium', "文字\\n描述"),
     ]
     tsx = 60
     for i, (name, fill, desc) in enumerate(trad_steps):
@@ -715,19 +715,19 @@ def fig5_9():
         tsx += 155
 
     svg.rect(60, 175, w - 120, 30, fill='code_bg', stroke='dark', rx=3)
-    svg.mono(70, 190, "问题: LLM 抄写数据易出错 · 消耗大量 token · 延迟高", size=12)
+    svg.mono(70, 190, "問題: LLM 抄寫數據易出錯 · 消耗大量 token · 延遲高", size=12)
 
     # Separator
     svg.line(30, 265, w - 30, 265, color='dark', dash=True)
 
     # Bottom: Artifact mode (data bypasses LLM)
     svg.rect(20, 275, w - 40, 280, fill='white', stroke='border', dash=True)
-    svg.text(60, 298, "Artifact 模式: 数据直达前端（高效）", size=FS_BODY, bold=True, anchor='start')
+    svg.text(60, 298, "Artifact 模式: 數據直達前端（高效）", size=FS_BODY, bold=True, anchor='start')
     _pill(svg, w - 110, 285, 80, 24, "✓ 高效", fill='medium', font_size=12, bold=True)
 
     # LLM generates code, not data
     svg.rect(40, 315, 250, 120, fill='light')
-    svg.text(165, 335, "LLM 只生成代码", size=FS_SMALL, bold=True)
+    svg.text(165, 335, "LLM 只生成代碼", size=FS_SMALL, bold=True)
     sql_code = [
         "build_artifact(",
         '  type="sql",',
@@ -744,14 +744,14 @@ def fig5_9():
 
     # Frontend executes directly
     svg.rect(340, 315, 250, 120, fill='medium')
-    svg.text(465, 335, "前端直接执行", size=FS_SMALL, bold=True)
+    svg.text(465, 335, "前端直接執行", size=FS_SMALL, bold=True)
     svg.rect(350, 348, 230, 75, fill='code_bg', stroke='dark', rx=3)
     table = [
         "┌────────┬──────┐",
         "│ dept   │ cnt  │",
         "├────────┼──────┤",
-        "│ 研发部 │  42  │",
-        "│ 市场部 │  28  │",
+        "│ 研發部 │  42  │",
+        "│ 市場部 │  28  │",
         "└────────┴──────┘",
     ]
     for j, line in enumerate(table):
@@ -761,8 +761,8 @@ def fig5_9():
 
     # Visualization artifact
     svg.rect(640, 315, 210, 120, fill='light')
-    svg.text(745, 335, "可视化 Artifact", size=FS_SMALL, bold=True)
-    svg.text(745, 355, "第二个 artifact:", size=FS_TINY, fill='text_light')
+    svg.text(745, 335, "可視化 Artifact", size=FS_SMALL, bold=True)
+    svg.text(745, 355, "第二個 artifact:", size=FS_TINY, fill='text_light')
     svg.rect(650, 365, 190, 60, fill='code_bg', stroke='dark', rx=3)
     svg.mono(658, 380, "build_artifact(", size=10)
     svg.mono(658, 394, '  type="chart",', size=10)
@@ -770,11 +770,11 @@ def fig5_9():
 
     # Data flow annotation
     svg.rect(180, 450, 520, 45, fill='dark')
-    svg.text(440, 465, "数据流: DB → 前端 → 可视化 （完全绕过 LLM）", size=FS_BODY, fill='white', bold=True)
-    svg.text(440, 483, "LLM 只负责生成代码，不参与数据传递", size=FS_TINY, fill='white')
+    svg.text(440, 465, "數據流: DB → 前端 → 可視化 （完全繞過 LLM）", size=FS_BODY, fill='white', bold=True)
+    svg.text(440, 483, "LLM 只負責生成代碼，不參與數據傳遞", size=FS_TINY, fill='white')
 
     # Data flow arrow (bypass)
-    svg.arrow_curved(465, 435, 745, 435, curve=25, label="SQL结果直传", dash=True, color='dark')
+    svg.arrow_curved(465, 435, 745, 435, curve=25, label="SQL結果直傳", dash=True, color='dark')
 
     svg.save(os.path.join(OUT, 'fig5-9.svg'))
 
@@ -782,24 +782,24 @@ def fig5_9():
 # ──────────────────────── fig5-6 ────────────────────────
 
 def fig5_7():
-    """实验 5.10：生产日志智能诊断流水线"""
+    """實驗 5.10：生產日誌智能診斷流水線"""
     w, h = 880, 560
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "实验 5.10：生产日志智能诊断", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "實驗 5.10：生產日誌智能診斷", size=FS_TITLE, bold=True)
 
     # Pipeline: left to right, then down
     # Row 1: ingestion → analysis
     svg.rect(20, 60, 250, 160, fill='white', stroke='border', dash=True)
-    svg.text(145, 82, "① 日志采集", size=FS_BODY, bold=True)
+    svg.text(145, 82, "① 日誌採集", size=FS_BODY, bold=True)
     log_lines = [
         "trajectory_001.json:",
         '  {"role":"user","content":',
-        '   "取消订单 #12345"}',
+        '   "取消訂單 #12345"}',
         '  {"role":"assistant",',
         '   "tool_call":"cancel_order"}',
         '  {"role":"tool","result":',
         '   "ERROR: no insurance"}',
-        '  → Agent 未告知用户原因',
+        '  → Agent 未告知用戶原因',
     ]
     svg.rect(30, 98, 230, len(log_lines) * 14 + 10, fill='code_bg', stroke='dark', rx=3)
     for j, line in enumerate(log_lines):
@@ -810,15 +810,15 @@ def fig5_7():
     svg.rect(310, 60, 260, 160, fill='white', stroke='border', dash=True)
     svg.text(440, 82, "② LLM 分析", size=FS_BODY, bold=True)
     analysis = [
-        "输入: 轨迹 + 架构文档 + PRD",
+        "輸入: 軌跡 + 架構文檔 + PRD",
         "",
-        "分析维度:",
-        "  - 执行流程是否符合预期",
-        "  - 工具调用是否正确",
-        "  - 错误处理是否得当",
-        "  - 用户体验是否满意",
+        "分析維度:",
+        "  - 執行流程是否符合預期",
+        "  - 工具調用是否正確",
+        "  - 錯誤處理是否得當",
+        "  - 用戶體驗是否滿意",
         "",
-        "→ 定位偏差环节和模块",
+        "→ 定位偏差環節和模塊",
     ]
     for j, line in enumerate(analysis):
         svg.mono(320, 100 + j * 14, line, size=10)
@@ -826,15 +826,15 @@ def fig5_7():
     svg.arrow(570, 140, 610, 140)
 
     svg.rect(610, 60, 250, 160, fill='white', stroke='border', dash=True)
-    svg.text(735, 82, "③ 结构化报告", size=FS_BODY, bold=True)
+    svg.text(735, 82, "③ 結構化報告", size=FS_BODY, bold=True)
     report = [
-        "问题报告:",
-        "  优先级: P1 (用户流失风险)",
-        "  模块: cancellation_handler",
-        "  描述: 取消失败后未向",
-        "    用户解释原因和替代方案",
-        "  建议: 添加失败原因说明",
-        "    和购买保险的引导",
+        "問題報告:",
+        "  優先級: P1 (用戶流失風險)",
+        "  模塊: cancellation_handler",
+        "  描述: 取消失敗後未向",
+        "    用戶解釋原因和替代方案",
+        "  建議: 添加失敗原因說明",
+        "    和購買保險的引導",
     ]
     svg.rect(620, 98, 230, len(report) * 14 + 10, fill='code_bg', stroke='dark', rx=3)
     for j, line in enumerate(report):
@@ -844,17 +844,17 @@ def fig5_7():
     svg.arrow(w / 2, 220, w / 2, 260)
 
     svg.rect(60, 260, 370, 160, fill='white', stroke='border', dash=True)
-    svg.text(245, 282, "④ 回归测试用例生成", size=FS_BODY, bold=True)
+    svg.text(245, 282, "④ 迴歸測試用例生成", size=FS_BODY, bold=True)
     test_code = [
         "def test_cancel_no_insurance():",
-        '  """轨迹 #001, 轮次 3-5"""',
-        "  # 重放: 用户请求取消经济舱",
+        '  """軌跡 #001, 輪次 3-5"""',
+        "  # 重放: 用戶請求取消經濟艙",
         "  resp = agent.run(",
-        '    "取消订单 #12345")',
-        "  # 验证: 应解释原因",
-        '  assert "保险" in resp.text',
+        '    "取消訂單 #12345")',
+        "  # 驗證: 應解釋原因",
+        '  assert "保險" in resp.text',
         '  assert "替代方案" in resp.text',
-        "  # 验证: 不应直接报错",
+        "  # 驗證: 不應直接報錯",
         '  assert "ERROR" not in resp.text',
     ]
     svg.rect(70, 298, 350, len(test_code) * 14 + 10, fill='code_bg', stroke='dark', rx=3)
@@ -864,16 +864,16 @@ def fig5_7():
     svg.arrow(430, 340, 470, 340)
 
     svg.rect(470, 260, 380, 160, fill='white', stroke='border', dash=True)
-    svg.text(660, 282, "⑤ GitHub Issue 自动创建", size=FS_BODY, bold=True)
+    svg.text(660, 282, "⑤ GitHub Issue 自動創建", size=FS_BODY, bold=True)
     issue = [
         "gh issue create \\",
-        '  --title "P1: 取消失败缺少',
-        '    用户引导" \\',
-        '  --body "**问题**: Agent 在',
-        '    cancel_order 失败后直接',
-        '    返回错误，未解释原因...',
-        '    **轨迹**: #001 轮次 3-5',
-        '    **测试**: test_cancel_..." \\',
+        '  --title "P1: 取消失敗缺少',
+        '    用戶引導" \\',
+        '  --body "**問題**: Agent 在',
+        '    cancel_order 失敗後直接',
+        '    返回錯誤，未解釋原因...',
+        '    **軌跡**: #001 輪次 3-5',
+        '    **測試**: test_cancel_..." \\',
         '  --assignee @backend-team',
     ]
     svg.rect(480, 298, 360, len(issue) * 14 + 10, fill='code_bg', stroke='dark', rx=3)
@@ -882,10 +882,10 @@ def fig5_7():
 
     # Bottom: full pipeline summary
     svg.rect(100, 445, w - 200, 44, fill='dark')
-    svg.text(w / 2, 460, "端到端自动化：日志 → 分析 → 报告 → 测试 → Issue", size=FS_BODY, fill='white', bold=True)
-    svg.text(w / 2, 480, "通过 MCP 对接 GitHub · 测试框架自动重放验证", size=FS_TINY, fill='white')
+    svg.text(w / 2, 460, "端到端自動化：日誌 → 分析 → 報告 → 測試 → Issue", size=FS_BODY, fill='white', bold=True)
+    svg.text(w / 2, 480, "通過 MCP 對接 GitHub · 測試框架自動重放驗證", size=FS_TINY, fill='white')
 
-    svg.text(w / 2, 530, "将人工诊断成本从小时级降低到分钟级", size=FS_SMALL, fill='darker', bold=True)
+    svg.text(w / 2, 530, "將人工診斷成本從小時級降低到分鐘級", size=FS_SMALL, fill='darker', bold=True)
 
     svg.save(os.path.join(OUT, 'fig5-7.svg'))
 
@@ -893,17 +893,17 @@ def fig5_7():
 # ──────────────────────── fig5-9 ────────────────────────
 
 def fig5_10():
-    """Agent 自举循环（自我复制与进化）"""
+    """Agent 自舉循環（自我複製與進化）"""
     w, h = 880, 555
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "Agent 自举：从代码到自我复制", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "Agent 自舉：從代碼到自我複製", size=FS_TITLE, bold=True)
 
     # Evolution timeline at top
     stages = [
-        ("尘埃→恒星", "物理定律"),
-        ("恒星→行星", "引力聚合"),
-        ("行星→生命", "DNA 自复制"),
-        ("生命→智能体", "代码自举"),
+        ("塵埃→恆星", "物理定律"),
+        ("恆星→行星", "引力聚合"),
+        ("行星→生命", "DNA 自複製"),
+        ("生命→智能體", "代碼自舉"),
     ]
     sx = 60
     for i, (stage, mechanism) in enumerate(stages):
@@ -920,60 +920,60 @@ def fig5_10():
     svg.line(30, 120, w - 30, 120, color='dark', dash=True)
 
     svg.rect(30, 135, 400, 70, fill='light')
-    svg.text(230, 155, "DNA 自复制: 随机变异 + 自然选择", size=FS_SMALL, bold=True)
-    svg.text(230, 177, "不理解自身 · 不能定向修改 · 37亿年盲目试错", size=FS_TINY, fill='text_light')
+    svg.text(230, 155, "DNA 自複製: 隨機變異 + 自然選擇", size=FS_SMALL, bold=True)
+    svg.text(230, 177, "不理解自身 · 不能定向修改 · 37億年盲目試錯", size=FS_TINY, fill='text_light')
 
     svg.rect(450, 135, 400, 70, fill='dark')
-    svg.text(650, 155, "Agent 自举: 理解代码 + 定向设计", size=FS_SMALL, bold=True, fill='white')
-    svg.text(650, 177, "理解自身机制 · 有目的地创造 · 继承最佳实践", size=FS_TINY, fill='white')
+    svg.text(650, 155, "Agent 自舉: 理解代碼 + 定向設計", size=FS_SMALL, bold=True, fill='white')
+    svg.text(650, 177, "理解自身機制 · 有目的地創造 · 繼承最佳實踐", size=FS_TINY, fill='white')
 
     # Bootstrap cycle (main diagram)
     svg.rect(20, 225, 390, 295, fill='white', stroke='border', dash=True)
-    svg.text(215, 248, "原始 Agent (自身代码)", size=FS_BODY, bold=True)
+    svg.text(215, 248, "原始 Agent (自身代碼)", size=FS_BODY, bold=True)
 
     svg.rect(30, 265, 175, 124, fill='light')
-    svg.text(118, 285, "系统提示词", size=FS_SMALL, bold=True)
-    svg.text(40, 308, "你是一个航空客服", size=12, anchor='start')
-    svg.text(40, 326, "取消规则: ...", size=12, anchor='start')
-    svg.text(40, 344, "转接规则: ...", size=12, anchor='start')
+    svg.text(118, 285, "系統提示詞", size=FS_SMALL, bold=True)
+    svg.text(40, 308, "你是一個航空客服", size=12, anchor='start')
+    svg.text(40, 326, "取消規則: ...", size=12, anchor='start')
+    svg.text(40, 344, "轉接規則: ...", size=12, anchor='start')
     svg.text(40, 362, "工具: cancel_order", size=12, anchor='start')
 
     svg.rect(215, 265, 185, 124, fill='light')
-    svg.text(308, 285, "Agent 框架代码", size=FS_SMALL, bold=True)
+    svg.text(308, 285, "Agent 框架代碼", size=FS_SMALL, bold=True)
     svg.mono(225, 308, "loop:", size=12)
     svg.mono(225, 326, "  msg = llm(ctx)", size=12)
     svg.mono(225, 344, "  if tool_call:", size=12)
     svg.mono(225, 362, "    exec(tool)", size=12)
 
     svg.rect(30, 400, 370, 54, fill='code_bg', stroke='dark', rx=4)
-    svg.text(215, 419, "工具定义 + MCP 集成 + 消息格式", size=FS_SMALL)
-    svg.text(215, 438, "经过验证的高质量实现", size=FS_TINY, fill='text_light')
+    svg.text(215, 419, "工具定義 + MCP 集成 + 消息格式", size=FS_SMALL)
+    svg.text(215, 438, "經過驗證的高質量實現", size=FS_TINY, fill='text_light')
 
     # Arrow: self-replication — label placed above dashed box headers
-    svg.text(440, 215, "复制 + 修改", size=FS_TINY, fill='text_light', bold=True)
+    svg.text(440, 215, "複製 + 修改", size=FS_TINY, fill='text_light', bold=True)
     svg.arrow(410, 375, 470, 375)
 
     # New Agent
     svg.rect(470, 225, 390, 295, fill='white', stroke='border', dash=True)
-    svg.text(665, 248, "新 Agent（定向修改后）", size=FS_BODY, bold=True)
+    svg.text(665, 248, "新 Agent（定向修改後）", size=FS_BODY, bold=True)
 
     svg.rect(480, 265, 180, 124, fill='medium')
-    svg.text(570, 285, "新系统提示词", size=FS_SMALL, bold=True)
-    svg.text(490, 308, "你是一个电商客服", size=12, anchor='start')
-    svg.text(490, 326, "退款规则: ...", size=12, anchor='start')
-    svg.text(490, 344, "物流查询: ...", size=12, anchor='start')
+    svg.text(570, 285, "新系統提示詞", size=FS_SMALL, bold=True)
+    svg.text(490, 308, "你是一個電商客服", size=12, anchor='start')
+    svg.text(490, 326, "退款規則: ...", size=12, anchor='start')
+    svg.text(490, 344, "物流查詢: ...", size=12, anchor='start')
     svg.text(490, 362, "工具: refund_order", size=12, anchor='start')
 
     svg.rect(670, 265, 180, 124, fill='light')
-    svg.text(760, 285, "继承框架代码", size=FS_SMALL, bold=True)
+    svg.text(760, 285, "繼承框架代碼", size=FS_SMALL, bold=True)
     svg.mono(680, 308, "loop:", size=12)
     svg.mono(680, 326, "  msg = llm(ctx)", size=12)
     svg.mono(680, 344, "  if tool_call:", size=12)
     svg.mono(680, 362, "    exec(tool)", size=12)
 
     svg.rect(480, 400, 370, 54, fill='code_bg', stroke='dark', rx=4)
-    svg.text(665, 419, "新工具 + 新业务逻辑", size=FS_SMALL)
-    svg.text(665, 438, "架构框架完全继承 → 质量有保障", size=FS_TINY, fill='text_light')
+    svg.text(665, 419, "新工具 + 新業務邏輯", size=FS_SMALL)
+    svg.text(665, 438, "架構框架完全繼承 → 質量有保障", size=FS_TINY, fill='text_light')
 
     svg.save(os.path.join(OUT, 'fig5-10.svg'))
 
@@ -981,15 +981,15 @@ def fig5_10():
 # ──────────────────────── fig5-10 ────────────────────────
 
 def fig5_11():
-    """实验 5.14：Meta-Agent 创建新 Agent 的流水线"""
+    """實驗 5.14：Meta-Agent 創建新 Agent 的流水線"""
     w, h = 880, 610
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "实验 5.14：能创造 Agent 的 Agent", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "實驗 5.14：能創造 Agent 的 Agent", size=FS_TITLE, bold=True)
 
     # Input: user request
     svg.rect(30, 60, 280, 55, fill='medium')
-    svg.text(170, 80, "用户需求", size=FS_SMALL, bold=True)
-    svg.text(170, 98, "\"创建一个电商退款客服 Agent\"", size=FS_TINY, fill='text_light')
+    svg.text(170, 80, "用戶需求", size=FS_SMALL, bold=True)
+    svg.text(170, 98, "\"創建一個電商退款客服 Agent\"", size=FS_TINY, fill='text_light')
 
     svg.arrow(170, 115, 170, 145)
 
@@ -999,24 +999,24 @@ def fig5_11():
 
     # Step 1: Read reference
     svg.rect(35, 185, 190, 170, fill='light')
-    svg.text(130, 205, "① 阅读参考代码", size=FS_SMALL, bold=True)
+    svg.text(130, 205, "① 閱讀參考代碼", size=FS_SMALL, bold=True)
     svg.mono(45, 228, "read_file:", size=12)
     svg.mono(45, 248, "  agent.py", size=12)
     svg.mono(45, 268, "  tools/*.py", size=12)
     svg.mono(45, 288, "  system_prompt.md", size=12)
     svg.mono(45, 308, "  config.yaml", size=12)
-    svg.text(45, 332, "→ 理解架构模式", size=12, anchor='start', fill='text_light')
+    svg.text(45, 332, "→ 理解架構模式", size=12, anchor='start', fill='text_light')
 
     svg.arrow(225, 270, 248, 270)
 
     # Step 2: Copy scaffold
     svg.rect(248, 185, 190, 170, fill='light')
-    svg.text(343, 205, "② 复制脚手架", size=FS_SMALL, bold=True)
+    svg.text(343, 205, "② 複製腳手架", size=FS_SMALL, bold=True)
     svg.mono(258, 228, "cp -r reference/", size=12)
     svg.mono(258, 248, "  → new_agent/", size=12)
     svg.text(258, 278, "保留：", size=12, anchor='start', fill='text_light')
-    svg.text(258, 298, "  Agent 循环框架", size=12, anchor='start', fill='text_light')
-    svg.text(258, 318, "  消息格式 / KV 优化", size=12, anchor='start', fill='text_light')
+    svg.text(258, 298, "  Agent 循環框架", size=12, anchor='start', fill='text_light')
+    svg.text(258, 318, "  消息格式 / KV 優化", size=12, anchor='start', fill='text_light')
 
     svg.arrow(438, 270, 461, 270)
 
@@ -1025,7 +1025,7 @@ def fig5_11():
     svg.text(556, 205, "③ 定向修改", size=FS_SMALL, bold=True)
     svg.mono(471, 228, "edit_file:", size=12)
     svg.mono(471, 248, "  system_prompt.md", size=12)
-    svg.text(471, 268, "  → 电商退款规则", size=12, anchor='start', fill='text_light')
+    svg.text(471, 268, "  → 電商退款規則", size=12, anchor='start', fill='text_light')
     svg.mono(471, 290, "  tools/refund.py", size=12)
     svg.text(471, 310, "  → 新增退款工具", size=12, anchor='start', fill='text_light')
     svg.mono(471, 332, "  config.yaml", size=12)
@@ -1034,13 +1034,13 @@ def fig5_11():
 
     # Step 4: Validate
     svg.rect(674, 185, 175, 170, fill='light')
-    svg.text(761, 205, "④ 验证测试", size=FS_SMALL, bold=True)
+    svg.text(761, 205, "④ 驗證測試", size=FS_SMALL, bold=True)
     svg.mono(684, 228, "bash:", size=12)
     svg.mono(684, 248, "  python agent.py", size=12)
-    svg.text(684, 270, "  → 启动新 Agent", size=12, anchor='start', fill='text_light')
-    svg.text(684, 290, "  → 发送测试消息", size=12, anchor='start', fill='text_light')
-    svg.text(684, 310, "  → 检查工具调用", size=12, anchor='start', fill='text_light')
-    svg.text(684, 330, "  → 验证对话流程", size=12, anchor='start', fill='text_light')
+    svg.text(684, 270, "  → 啟動新 Agent", size=12, anchor='start', fill='text_light')
+    svg.text(684, 290, "  → 發送測試消息", size=12, anchor='start', fill='text_light')
+    svg.text(684, 310, "  → 檢查工具調用", size=12, anchor='start', fill='text_light')
+    svg.text(684, 330, "  → 驗證對話流程", size=12, anchor='start', fill='text_light')
 
     # Output: new agent
     svg.arrow(w / 2, 375, w / 2, 410)
@@ -1049,10 +1049,10 @@ def fig5_11():
     svg.text(465, 432, "生成的新 Agent", size=FS_BODY, bold=True)
 
     outputs = [
-        ("system_prompt.md", "电商退款规则"),
-        ("tools/refund.py", "退款 / 查询工具"),
-        ("agent.py", "继承框架代码"),
-        ("config.yaml", "模型 / 参数配置"),
+        ("system_prompt.md", "電商退款規則"),
+        ("tools/refund.py", "退款 / 查詢工具"),
+        ("agent.py", "繼承框架代碼"),
+        ("config.yaml", "模型 / 參數配置"),
     ]
     ox = 135
     for fname, desc in outputs:
@@ -1064,12 +1064,12 @@ def fig5_11():
     # Bottom: comparison
     svg.line(30, 515, w - 30, 515, color='dark', dash=True)
     svg.rect(60, 530, 350, 54, fill='light')
-    svg.text(235, 549, "从零生成：缺乏最佳实践", size=FS_SMALL, bold=True)
-    svg.text(235, 571, "上下文管理随意 · 工具设计不规范 · API 过时", size=FS_TINY, fill='text_light')
+    svg.text(235, 549, "從零生成：缺乏最佳實踐", size=FS_SMALL, bold=True)
+    svg.text(235, 571, "上下文管理隨意 · 工具設計不規範 · API 過時", size=FS_TINY, fill='text_light')
 
     svg.rect(470, 530, 350, 54, fill='dark')
-    svg.text(645, 549, "基于范例修改：继承最佳实践", size=FS_SMALL, bold=True, fill='white')
-    svg.text(645, 571, "标准消息格式 · 规范工具设计 · 现代 API", size=FS_TINY, fill='white')
+    svg.text(645, 549, "基於範例修改：繼承最佳實踐", size=FS_SMALL, bold=True, fill='white')
+    svg.text(645, 571, "標準消息格式 · 規範工具設計 · 現代 API", size=FS_TINY, fill='white')
 
     svg.save(os.path.join(OUT, 'fig5-11.svg'))
 

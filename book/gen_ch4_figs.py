@@ -50,10 +50,10 @@ def _seq_msg(svg, x1, x2, y, label, note=None, dash=False, note_side='above'):
 # ──────────────────────── fig4-1 ────────────────────────
 
 def fig4_1():
-    """MCP 协议时序图（具体消息载荷）"""
+    """MCP 協議時序圖（具體消息載荷）"""
     w, h = 880, 620
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "MCP 协议交互时序", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "MCP 協議交互時序", size=FS_TITLE, bold=True)
 
     cl_x, sv_x = 200, 680
     svg.box(cl_x - 80, 50, 160, 44, "MCP Client", fill='medium', bold=True)
@@ -117,8 +117,8 @@ def fig4_1():
 
     # Phase labels on the left
     svg.text(50, 165, "① 握手", size=FS_SMALL, bold=True, fill='text_light')
-    svg.text(50, 310, "② 发现", size=FS_SMALL, bold=True, fill='text_light')
-    svg.text(50, 465, "③ 调用", size=FS_SMALL, bold=True, fill='text_light')
+    svg.text(50, 310, "② 發現", size=FS_SMALL, bold=True, fill='text_light')
+    svg.text(50, 465, "③ 調用", size=FS_SMALL, bold=True, fill='text_light')
 
     svg.save(os.path.join(OUT, 'fig4-1.svg'))
 
@@ -126,24 +126,24 @@ def fig4_1():
 # ──────────────────────── fig4-2 ────────────────────────
 
 def fig4_2():
-    """Sub-Agent 上下文准备（四策略对比）"""
+    """Sub-Agent 上下文準備（四策略對比）"""
     w, h = 880, 530
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "Sub-Agent 上下文传递策略", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "Sub-Agent 上下文傳遞策略", size=FS_TITLE, bold=True)
 
     strategies = [
-        ("最小化传递", "dark",
-         '"查询订单号 12345 的状态"',
-         "零上下文 → 隐私安全"),
-        ("手动筛选传递", "medium",
-         '"用户地区: 美国\\n摘要: 询问退款"',
-         "显式选择 → 可控"),
-        ("自动裁剪传递", "light",
-         '"用户信息 + 最近3轮\\n+ 相关工具结果"',
-         "规则驱动 → 平衡"),
+        ("最小化傳遞", "dark",
+         '"查詢訂單號 12345 的狀態"',
+         "零上下文 → 隱私安全"),
+        ("手動篩選傳遞", "medium",
+         '"用戶地區: 美國\\n摘要: 詢問退款"',
+         "顯式選擇 → 可控"),
+        ("自動裁剪傳遞", "light",
+         '"用戶信息 + 最近3輪\\n+ 相關工具結果"',
+         "規則驅動 → 平衡"),
         ("LLM 生成上下文", "code_bg",
-         '"LLM 分析轨迹\\n→ 结构化上下文对象"',
-         "最智能 → 额外1次调用"),
+         '"LLM 分析軌跡\\n→ 結構化上下文對象"',
+         "最智能 → 額外1次調用"),
     ]
 
     col_w = 190
@@ -152,7 +152,7 @@ def fig4_2():
 
     # Main Agent at top
     svg.box(w / 2 - 100, 55, 200, 44, "Main Agent", fill='medium', bold=True)
-    svg.text(w / 2, 118, "如何为 Sub-Agent 准备上下文？", size=FS_SMALL, fill='text_light')
+    svg.text(w / 2, 118, "如何為 Sub-Agent 準備上下文？", size=FS_SMALL, fill='text_light')
 
     for i, (title, fill, example, note) in enumerate(strategies):
         x = start_x + i * (col_w + gap)
@@ -174,12 +174,12 @@ def fig4_2():
 
     # Bottom: decision guide
     svg.line(30, 395, w - 30, 395, color='dark', dash=True)
-    svg.text(w / 2, 418, "选择指南", size=FS_BODY, bold=True)
+    svg.text(w / 2, 418, "選擇指南", size=FS_BODY, bold=True)
 
     guides = [
-        ("简单高频调用", "查天气、计算器", "→ 最小化"),
-        ("中等复杂度", "数据查询、文件处理", "→ 自动裁剪"),
-        ("复杂任务", "生成报告、客户服务", "→ LLM 生成"),
+        ("簡單高頻調用", "查天氣、計算器", "→ 最小化"),
+        ("中等複雜度", "數據查詢、文件處理", "→ 自動裁剪"),
+        ("複雜任務", "生成報告、客戶服務", "→ LLM 生成"),
     ]
     gx = 80
     for label, example, rec in guides:
@@ -195,17 +195,17 @@ def fig4_2():
 # ──────────────────────── fig4-3 ────────────────────────
 
 def fig4_3():
-    """事件驱动架构（具体事件源和载荷）"""
+    """事件驅動架構（具體事件源和載荷）"""
     w, h = 880, 540
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "事件驱动的异步 Agent 架构", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "事件驅動的異步 Agent 架構", size=FS_TITLE, bold=True)
 
     # Left: Event sources
     sources = [
-        ("Email", 'on_email_reply', '{"from":"alice@...",\n "subject":"Re:会议"}'),
+        ("Email", 'on_email_reply', '{"from":"alice@...",\n "subject":"Re:會議"}'),
         ("Timer", 'on_timer_expire', '{"task_id":"daily_report",\n "scheduled":"09:00"}'),
         ("Webhook", 'on_webhook', '{"repo":"agent-lib",\n "event":"pr_merged"}'),
-        ("User", 'on_user_message', '{"text":"帮我查下\n 明天的天气"}'),
+        ("User", 'on_user_message', '{"text":"幫我查下\n 明天的天氣"}'),
     ]
 
     src_x, src_w = 20, 155
@@ -219,14 +219,14 @@ def fig4_3():
 
     # Middle: Event queue
     q_x, q_w = 215, 190
-    svg.text(q_x + q_w / 2, 65, "事件队列", size=FS_BODY, bold=True)
+    svg.text(q_x + q_w / 2, 65, "事件隊列", size=FS_BODY, bold=True)
     svg.rect(q_x, 85, q_w, 390, fill='white', stroke='border', dash=True)
 
     queue_events = [
-        ("user.input", "优先级: 常规", 'light'),
-        ("email.reply", "优先级: 常规", 'light'),
-        ("user.interrupt", "优先级: 紧急!", 'dark'),
-        ("timer.trigger", "优先级: 常规", 'light'),
+        ("user.input", "優先級: 常規", 'light'),
+        ("email.reply", "優先級: 常規", 'light'),
+        ("user.interrupt", "優先級: 緊急!", 'dark'),
+        ("timer.trigger", "優先級: 常規", 'light'),
     ]
     for i, (evt, pri, fill) in enumerate(queue_events):
         ey = 105 + i * 85
@@ -242,16 +242,16 @@ def fig4_3():
 
     # Right: Agent processing
     ag_x = 450
-    svg.text(ag_x + 200, 65, "Agent 处理流程", size=FS_BODY, bold=True)
+    svg.text(ag_x + 200, 65, "Agent 處理流程", size=FS_BODY, bold=True)
 
     svg.arrow(q_x + q_w + 2, 280, ag_x - 2, 280, label="取出事件")
 
     steps = [
-        ("路由器", "LLM 判定紧急度", 'medium'),
-        ("追加到轨迹", "结构化事件格式", 'light'),
-        ("LLM 推理", "观察→思考→行动", 'light'),
-        ("工具执行", "异步/同步分派", 'light'),
-        ("结果处理", "通知/响应/存储", 'medium'),
+        ("路由器", "LLM 判定緊急度", 'medium'),
+        ("追加到軌跡", "結構化事件格式", 'light'),
+        ("LLM 推理", "觀察→思考→行動", 'light'),
+        ("工具執行", "異步/同步分派", 'light'),
+        ("結果處理", "通知/響應/存儲", 'medium'),
     ]
 
     step_w, step_h = 360, 50
@@ -264,7 +264,7 @@ def fig4_3():
             svg.arrow(ag_x + step_w / 2, sy + step_h + 2, ag_x + step_w / 2, sy + 78)
 
     # Feedback loop
-    svg.arrow_curved(ag_x + step_w, 450, ag_x + step_w, 130, curve=-50, label="循环", dash=True, color='dark')
+    svg.arrow_curved(ag_x + step_w, 450, ag_x + step_w, 130, curve=-50, label="循環", dash=True, color='dark')
 
     svg.save(os.path.join(OUT, 'fig4-3.svg'))
 
@@ -272,10 +272,10 @@ def fig4_3():
 # ──────────────────────── fig4-4 ────────────────────────
 
 def fig4_4():
-    """异步事件处理：三种策略时序对比"""
+    """異步事件處理：三種策略時序對比"""
     w, h = 880, 580
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "事件处理的三种策略", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "事件處理的三種策略", size=FS_TITLE, bold=True)
 
     lane_x = 130
     lane_w = 720
@@ -298,52 +298,52 @@ def fig4_4():
     y1 = 80
     svg.rect(lane_x, y1, lane_w, 140, fill='white', stroke='border', dash=True)
     svg.text(lane_x / 2, y1 + 70, "取消式", size=FS_BODY, bold=True)
-    svg.text(lane_x / 2, y1 + 95, "(紧急)", size=FS_SMALL, fill='text_light')
+    svg.text(lane_x / 2, y1 + 95, "(緊急)", size=FS_SMALL, fill='text_light')
 
     time_bar(y1 + 15, 0.0, 0.40, 'medium', 'LLM 推理中...')
     svg.line(tl_x0 + tl_w * 0.40, y1 + 10, tl_x0 + tl_w * 0.40, y1 + 130, color='border', dash=True)
     svg.text(tl_x0 + tl_w * 0.40, y1 + 10, "⚡ user.interrupt: \"停止!\"", size=FS_TINY, bold=True)
     time_bar(y1 + 15, 0.40, 0.45, 'dark', '×', h_bar=28)
 
-    time_bar(y1 + 55, 0.0, 0.35, 'light', '工具执行中...')
+    time_bar(y1 + 55, 0.0, 0.35, 'light', '工具執行中...')
     time_bar(y1 + 55, 0.40, 0.45, 'dark', '×', h_bar=28)
 
-    time_bar(y1 + 95, 0.47, 1.0, 'medium', '新 LLM 推理（含中断事件 + 清空队列）')
+    time_bar(y1 + 95, 0.47, 1.0, 'medium', '新 LLM 推理（含中斷事件 + 清空隊列）')
 
     # ── Lane 2: Queued ──
     y2 = 240
     svg.rect(lane_x, y2, lane_w, 140, fill='white', stroke='border', dash=True)
-    svg.text(lane_x / 2, y2 + 70, "队列式", size=FS_BODY, bold=True)
-    svg.text(lane_x / 2, y2 + 95, "(常规)", size=FS_SMALL, fill='text_light')
+    svg.text(lane_x / 2, y2 + 70, "隊列式", size=FS_BODY, bold=True)
+    svg.text(lane_x / 2, y2 + 95, "(常規)", size=FS_SMALL, fill='text_light')
 
     time_bar(y2 + 15, 0.0, 0.15, 'medium', 'LLM', h_bar=24)
-    time_bar(y2 + 15, 0.18, 0.60, 'light', '工具执行 (search_web)')
-    time_bar(y2 + 15, 0.63, 0.90, 'medium', 'LLM 综合处理')
+    time_bar(y2 + 15, 0.18, 0.60, 'light', '工具執行 (search_web)')
+    time_bar(y2 + 15, 0.63, 0.90, 'medium', 'LLM 綜合處理')
 
     svg.line(tl_x0 + tl_w * 0.35, y2 + 46, tl_x0 + tl_w * 0.35, y2 + 130, color='dark', dash=True)
-    svg.text(tl_x0 + tl_w * 0.35, y2 + 46, "user: \"只看最近1个月\"", size=FS_TINY, fill='text_light')
+    svg.text(tl_x0 + tl_w * 0.35, y2 + 46, "user: \"只看最近1個月\"", size=FS_TINY, fill='text_light')
 
-    _pill(svg, tl_x0 + tl_w * 0.30, y2 + 65, 150, 24, "入队等待", fill='light', font_size=FS_TINY)
+    _pill(svg, tl_x0 + tl_w * 0.30, y2 + 65, 150, 24, "入隊等待", fill='light', font_size=FS_TINY)
 
     time_bar(y2 + 100, 0.63, 0.68, 'dark', '', h_bar=20)
-    svg.text(tl_x0 + tl_w * 0.72, y2 + 110, "批量追加: tool.result + user补充", size=FS_TINY, fill='text_light')
+    svg.text(tl_x0 + tl_w * 0.72, y2 + 110, "批量追加: tool.result + user補充", size=FS_TINY, fill='text_light')
 
     # ── Lane 3: Parallel ──
     y3 = 400
     svg.rect(lane_x, y3, lane_w, 140, fill='white', stroke='border', dash=True)
-    svg.text(lane_x / 2, y3 + 70, "并行式", size=FS_BODY, bold=True)
-    svg.text(lane_x / 2, y3 + 95, "(独立)", size=FS_SMALL, fill='text_light')
+    svg.text(lane_x / 2, y3 + 70, "並行式", size=FS_BODY, bold=True)
+    svg.text(lane_x / 2, y3 + 95, "(獨立)", size=FS_SMALL, fill='text_light')
 
-    time_bar(y3 + 15, 0.0, 0.80, 'light', '主任务: 数据分析 (长时间执行)')
+    time_bar(y3 + 15, 0.0, 0.80, 'light', '主任務: 數據分析 (長時間執行)')
 
     svg.line(tl_x0 + tl_w * 0.30, y3 + 50, tl_x0 + tl_w * 0.30, y3 + 130, color='dark', dash=True)
-    svg.text(tl_x0 + tl_w * 0.30, y3 + 50, "user: \"今天天气怎样?\"", size=FS_TINY, fill='text_light')
+    svg.text(tl_x0 + tl_w * 0.30, y3 + 50, "user: \"今天天氣怎樣?\"", size=FS_TINY, fill='text_light')
 
-    time_bar(y3 + 70, 0.32, 0.50, 'medium', '并行 LLM', h_bar=24)
-    time_bar(y3 + 70, 0.52, 0.62, 'dark', '天气', h_bar=24)
+    time_bar(y3 + 70, 0.32, 0.50, 'medium', '並行 LLM', h_bar=24)
+    time_bar(y3 + 70, 0.52, 0.62, 'dark', '天氣', h_bar=24)
 
-    svg.text(tl_x0 + tl_w * 0.66, y3 + 82, "→ 立即回复用户", size=FS_TINY, fill='text_light')
-    svg.text(tl_x0 + tl_w * 0.50, y3 + 115, "标记: [与主任务并行]", size=FS_TINY, fill='text_light')
+    svg.text(tl_x0 + tl_w * 0.66, y3 + 82, "→ 立即回覆用戶", size=FS_TINY, fill='text_light')
+    svg.text(tl_x0 + tl_w * 0.50, y3 + 115, "標記: [與主任務並行]", size=FS_TINY, fill='text_light')
 
     svg.save(os.path.join(OUT, 'fig4-4.svg'))
 
@@ -351,19 +351,19 @@ def fig4_4():
 # ──────────────────────── fig4-5 ────────────────────────
 
 def fig4_5():
-    """实验 4.4：事件驱动 Agent 架构"""
+    """實驗 4.4：事件驅動 Agent 架構"""
     w, h = 880, 480
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "实验 4.4：事件驱动 Agent 架构", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "實驗 4.4：事件驅動 Agent 架構", size=FS_TITLE, bold=True)
 
     # Event sources (left column)
     src_data = [
         ("on_user_message", "Web/App"),
-        ("on_email_reply", "邮件系统"),
+        ("on_email_reply", "郵件系統"),
         ("on_github_pr_update", "GitHub"),
-        ("on_timer_expire", "定时器"),
+        ("on_timer_expire", "定時器"),
         ("on_webhook_received", "Webhook"),
-        ("on_resource_alert", "系统告警"),
+        ("on_resource_alert", "系統告警"),
     ]
     svg.text(85, 65, "外部事件源", size=FS_BODY, bold=True)
     for i, (evt, src) in enumerate(src_data):
@@ -374,27 +374,27 @@ def fig4_5():
 
     # FastAPI Server (center)
     svg.rect(200, 80, 200, 390, fill='white', stroke='border', dash=True)
-    svg.text(300, 100, "FastAPI 服务器", size=FS_BODY, bold=True)
+    svg.text(300, 100, "FastAPI 服務器", size=FS_BODY, bold=True)
 
     svg.rect(215, 120, 170, 50, fill='medium')
-    svg.text(300, 137, "HTTP 端点", size=FS_SMALL, bold=True)
+    svg.text(300, 137, "HTTP 端點", size=FS_SMALL, bold=True)
     svg.text(300, 157, "POST /events/{type}", size=FS_TINY, fill='text_light')
 
     svg.rect(215, 190, 170, 50, fill='light')
     svg.text(300, 207, "事件路由器", size=FS_SMALL, bold=True)
-    svg.text(300, 227, "LLM 判定紧急度", size=FS_TINY, fill='text_light')
+    svg.text(300, 227, "LLM 判定緊急度", size=FS_TINY, fill='text_light')
 
     svg.rect(215, 260, 170, 50, fill='light')
-    svg.text(300, 277, "事件队列", size=FS_SMALL, bold=True)
-    svg.text(300, 297, "优先级排序", size=FS_TINY, fill='text_light')
+    svg.text(300, 277, "事件隊列", size=FS_SMALL, bold=True)
+    svg.text(300, 297, "優先級排序", size=FS_TINY, fill='text_light')
 
     svg.rect(215, 330, 170, 50, fill='light')
-    svg.text(300, 347, "Agent 循环", size=FS_SMALL, bold=True)
-    svg.text(300, 367, "取出→推理→执行", size=FS_TINY, fill='text_light')
+    svg.text(300, 347, "Agent 循環", size=FS_SMALL, bold=True)
+    svg.text(300, 367, "取出→推理→執行", size=FS_TINY, fill='text_light')
 
     svg.rect(215, 400, 170, 50, fill='medium')
-    svg.text(300, 417, "会话管理", size=FS_SMALL, bold=True)
-    svg.text(300, 437, "多线程上下文", size=FS_TINY, fill='text_light')
+    svg.text(300, 417, "會話管理", size=FS_SMALL, bold=True)
+    svg.text(300, 437, "多線程上下文", size=FS_TINY, fill='text_light')
 
     for i in range(4):
         svg.arrow(300, 170 + i * 70, 300, 190 + i * 70)
@@ -403,12 +403,12 @@ def fig4_5():
         svg.arrow(160, 104 + i * 58, 213, 145)
 
     # MCP Tools (right)
-    svg.text(610, 65, "MCP 工具服务器", size=FS_BODY, bold=True)
+    svg.text(610, 65, "MCP 工具服務器", size=FS_BODY, bold=True)
 
     tools = [
         ("感知工具", "search_web, read_file\nread_webpage, parse_image"),
-        ("执行工具", "code_interpreter\nvirtual_terminal, write_file"),
-        ("协作工具", "browser_use\nrequest_human_approval"),
+        ("執行工具", "code_interpreter\nvirtual_terminal, write_file"),
+        ("協作工具", "browser_use\nrequest_human_approval"),
         ("通知工具", "send_email, send_slack\nsend_im_notification"),
     ]
     for i, (name, desc) in enumerate(tools):
@@ -423,8 +423,8 @@ def fig4_5():
 
     # Persistent store
     svg.rect(740, 82, 130, 380, fill='code_bg', stroke='dark', rx=4)
-    svg.text(805, 115, "持久层", size=FS_SMALL, bold=True)
-    items = ["对话历史", "事件日志", "定时任务", "工具状态", "审计追踪"]
+    svg.text(805, 115, "持久層", size=FS_SMALL, bold=True)
+    items = ["對話歷史", "事件日誌", "定時任務", "工具狀態", "審計追蹤"]
     for i, item in enumerate(items):
         svg.text(805, 160 + i * 55, item, size=FS_SMALL)
 
@@ -434,19 +434,19 @@ def fig4_5():
 # ──────────────────────── fig4-6 ────────────────────────
 
 def fig4_6():
-    """同步-异步模型矛盾"""
+    """同步-異步模型矛盾"""
     w, h = 880, 520
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "同步训练范式 vs 异步部署现实", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "同步訓練範式 vs 異步部署現實", size=FS_TITLE, bold=True)
 
     # Top half: training pattern
     svg.rect(20, 55, w - 40, 195, fill='white', stroke='border', dash=True)
-    svg.text(60, 78, "训练范式（严格同步序列）", size=FS_BODY, bold=True, anchor='start')
-    _pill(svg, w - 200, 64, 160, 28, "API 强制约束", fill='dark', font_size=FS_SMALL)
+    svg.text(60, 78, "訓練範式（嚴格同步序列）", size=FS_BODY, bold=True, anchor='start')
+    _pill(svg, w - 200, 64, 160, 28, "API 強制約束", fill='dark', font_size=FS_SMALL)
 
     steps_train = [
-        ("Observation", 'medium', "用户: 查北京天气"),
-        ("Thinking", 'light', "需要调天气工具"),
+        ("Observation", 'medium', "用戶: 查北京天氣"),
+        ("Thinking", 'light', "需要調天氣工具"),
         ("Action", 'medium', "get_weather(Beijing)"),
         ("Observation", 'light', "22°C, 晴"),
     ]
@@ -462,7 +462,7 @@ def fig4_6():
 
     svg.rect(sx, 170, 4 * bw + 3 * gap, 30, fill='code_bg', stroke='dark', rx=4)
     svg.mono(sx + 10, 185,
-             "tool_call → 必须下一条是 tool_result，否则 API 报错", size=FS_TINY)
+             "tool_call → 必須下一條是 tool_result，否則 API 報錯", size=FS_TINY)
 
     # Separator
     svg.line(20, 262, w - 20, 262, color='dark', dash=True)
@@ -470,16 +470,16 @@ def fig4_6():
 
     # Bottom half: async reality
     svg.rect(20, 295, w - 40, 210, fill='white', stroke='border', dash=True)
-    svg.text(60, 318, "部署现实（异步事件穿插）", size=FS_BODY, bold=True, anchor='start')
-    _pill(svg, w - 200, 304, 160, 28, "格式冲突!", fill='dark', font_size=FS_SMALL)
+    svg.text(60, 318, "部署現實（異步事件穿插）", size=FS_BODY, bold=True, anchor='start')
+    _pill(svg, w - 200, 304, 160, 28, "格式衝突!", fill='dark', font_size=FS_SMALL)
 
     # Async timeline
     items = [
         ("Assistant", 'medium', "tool_call:\nget_weather(Beijing)", 0.0, 0.20),
-        ("等待中...", 'code_bg', "工具执行 ~5s", 0.22, 0.50),
-        ("User 打断", 'dark', "\"不用了,\n查上海的\"", 0.40, 0.55),
-        ("???", 'code_bg', "tool_result 何时到？\n格式如何保证？", 0.57, 0.78),
-        ("占位符", 'light', "[工具仍在执行,\n优先处理打断]", 0.80, 1.0),
+        ("等待中...", 'code_bg', "工具執行 ~5s", 0.22, 0.50),
+        ("User 打斷", 'dark', "\"不用了,\n查上海的\"", 0.40, 0.55),
+        ("???", 'code_bg', "tool_result 何時到？\n格式如何保證？", 0.57, 0.78),
+        ("佔位符", 'light', "[工具仍在執行,\n優先處理打斷]", 0.80, 1.0),
     ]
 
     tl_x0, tl_w = 50, w - 100
@@ -494,13 +494,13 @@ def fig4_6():
 
     svg.rect(50, 410, w - 100, 40, fill='code_bg', stroke='dark', rx=4)
     svg.mono(60, 430,
-             "解决: 占位符修复格式 + 非紧急事件入队 + 只在真正紧急时打断",
+             "解決: 佔位符修復格式 + 非緊急事件入隊 + 只在真正緊急時打斷",
              size=FS_TINY)
 
     # Bottom insight
     svg.rect(140, 465, w - 280, 40, fill='dark')
     svg.text(w / 2, 485,
-             "根本解法：下一代模型需在异步环境中通过 RL 训练",
+             "根本解法：下一代模型需在異步環境中通過 RL 訓練",
              size=FS_SMALL, fill='white', bold=True)
 
     svg.save(os.path.join(OUT, 'fig4-6.svg'))
@@ -509,10 +509,10 @@ def fig4_6():
 # ──────────────────────── fig4-7 ────────────────────────
 
 def fig4_7():
-    """实验 4.5：带打断能力的异步 Agent"""
+    """實驗 4.5：帶打斷能力的異步 Agent"""
     w, h = 880, 520
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "实验 4.5：异步 Agent 打断与恢复", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "實驗 4.5：異步 Agent 打斷與恢復", size=FS_TITLE, bold=True)
 
     # Timeline
     tl_y, tl_h = 60, 440
@@ -524,7 +524,7 @@ def fig4_7():
         ("工具 A", 180),
         ("工具 B", 260),
         ("工具 C", 340),
-        ("轨迹", 420),
+        ("軌跡", 420),
     ]
     for name, y in lanes:
         svg.text(55, y, name, size=FS_SMALL, bold=True)
@@ -538,12 +538,12 @@ def fig4_7():
         svg.text((xs + xe) / 2, y, label, size=11, fill=tc)
 
     # Phase 1: Agent starts 3 tools
-    tbar(80, 0.0, 0.12, 'medium', 'LLM: 启动3个工具')
+    tbar(80, 0.0, 0.12, 'medium', 'LLM: 啟動3個工具')
 
     # Tools running
-    tbar(180, 0.13, 0.45, 'light', '脚本A: 每秒3% → 33s完成')
-    tbar(260, 0.13, 0.70, 'light', '脚本B: 每秒2% → 50s...')
-    tbar(340, 0.13, 0.90, 'code_bg', '脚本C: 每秒1% → 100s...')
+    tbar(180, 0.13, 0.45, 'light', '腳本A: 每秒3% → 33s完成')
+    tbar(260, 0.13, 0.70, 'light', '腳本B: 每秒2% → 50s...')
+    tbar(340, 0.13, 0.90, 'code_bg', '腳本C: 每秒1% → 100s...')
 
     # Event: tool A completes
     t_done = 0.45
@@ -551,7 +551,7 @@ def fig4_7():
     svg.text(tl_x0 + tl_w * t_done, 62, "A 完成", size=FS_TINY, bold=True)
 
     # Agent checks others
-    tbar(80, 0.46, 0.58, 'medium', '查询 B,C 进度')
+    tbar(80, 0.46, 0.58, 'medium', '查詢 B,C 進度')
     tbar(420, 0.46, 0.58, 'light', 'B≈66% C≈33%')
 
     # Cancel C (< 50%)
@@ -567,13 +567,13 @@ def fig4_7():
     svg.text(tl_x0 + tl_w * t_b_done, 62, "B 完成", size=FS_TINY, bold=True)
 
     # Agent generates report
-    tbar(80, 0.72, 0.95, 'medium', 'LLM: 整合 A+B 结果生成报告')
-    tbar(420, 0.72, 0.95, 'light', 'A结果 + B结果 + C取消记录')
+    tbar(80, 0.72, 0.95, 'medium', 'LLM: 整合 A+B 結果生成報告')
+    tbar(420, 0.72, 0.95, 'light', 'A結果 + B結果 + C取消記錄')
 
     # Annotations
     svg.rect(tl_x0, 460, tl_w, 40, fill='code_bg', stroke='dark', rx=4)
     svg.mono(tl_x0 + 10, 480,
-             "关键: 占位符注入 + 异步完成事件 + cancel_tool(task_id) API",
+             "關鍵: 佔位符注入 + 異步完成事件 + cancel_tool(task_id) API",
              size=FS_TINY)
 
     svg.save(os.path.join(OUT, 'fig4-7.svg'))
@@ -582,26 +582,26 @@ def fig4_7():
 # ──────────────────────── fig4-8 ────────────────────────
 
 def fig4_8():
-    """工具发现层次结构（server→tool 匹配）"""
+    """工具發現層次結構（server→tool 匹配）"""
     w, h = 880, 540
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "层次化工具匹配", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "層次化工具匹配", size=FS_TITLE, bold=True)
 
     # Query at top
     svg.rect(250, 55, 380, 44, fill='medium')
-    svg.text(440, 77, "Agent: \"我需要查询 GitHub 仓库的贡献者统计\"", size=FS_SMALL, bold=True)
+    svg.text(440, 77, "Agent: \"我需要查詢 GitHub 倉庫的貢獻者統計\"", size=FS_SMALL, bold=True)
 
     svg.arrow(440, 99, 440, 130)
 
     # discover_tools
     svg.rect(300, 132, 280, 44, fill='dark')
-    svg.text(440, 154, "discover_tools(自然语言需求)", size=FS_SMALL, fill='white', bold=True)
+    svg.text(440, 154, "discover_tools(自然語言需求)", size=FS_SMALL, fill='white', bold=True)
 
     svg.arrow(440, 176, 440, 210)
 
     # Layer 1: Server matching
     svg.rect(20, 210, w - 40, 110, fill='white', stroke='border', dash=True)
-    svg.text(55, 233, "第一层：服务器匹配（语义相似度）", size=FS_BODY, bold=True, anchor='start')
+    svg.text(55, 233, "第一層：服務器匹配（語義相似度）", size=FS_BODY, bold=True, anchor='start')
 
     servers = [
         ("GitHub", 0.92, 'dark'),
@@ -620,18 +620,18 @@ def fig4_8():
 
     # Arrow to layer 2
     svg.arrow(123, 305, 123, 345)
-    svg.text(175, 330, "Top-1 服务器", size=FS_SMALL, fill='text_light')
+    svg.text(175, 330, "Top-1 服務器", size=FS_SMALL, fill='text_light')
 
     # Layer 2: Tool matching within server
     svg.rect(20, 345, w - 40, 160, fill='white', stroke='border', dash=True)
-    svg.text(55, 368, "第二层：工具匹配（GitHub 服务器内 26 个工具）", size=FS_BODY, bold=True, anchor='start')
+    svg.text(55, 368, "第二層：工具匹配（GitHub 服務器內 26 個工具）", size=FS_BODY, bold=True, anchor='start')
 
     tools = [
-        ("search_repositories", 0.41, "搜索仓库"),
-        ("list_contributors", 0.89, "贡献者列表"),
-        ("get_repo_stats", 0.85, "仓库统计"),
-        ("create_issue", 0.12, "创建 Issue"),
-        ("get_commit_history", 0.67, "提交历史"),
+        ("search_repositories", 0.41, "搜索倉庫"),
+        ("list_contributors", 0.89, "貢獻者列表"),
+        ("get_repo_stats", 0.85, "倉庫統計"),
+        ("create_issue", 0.12, "創建 Issue"),
+        ("get_commit_history", 0.67, "提交歷史"),
     ]
     tx = 30
     for name, score, desc in tools:
@@ -653,18 +653,18 @@ def fig4_8():
 # ──────────────────────── fig4-9 ────────────────────────
 
 def fig4_9():
-    """KV 缓存优化（系统提示词稳定性）"""
+    """KV 緩存優化（系統提示詞穩定性）"""
     w, h = 880, 560
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "工具动态加载的 KV Cache 优化", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "工具動態加載的 KV Cache 優化", size=FS_TITLE, bold=True)
 
     # Left: naive approach
     left_x = 30
-    svg.text(220, 65, "朴素方案（缓存失效）", size=FS_BODY, bold=True)
+    svg.text(220, 65, "樸素方案（緩存失效）", size=FS_BODY, bold=True)
 
     blocks_naive = [
-        ("System Prompt", 120, 'medium', "你是一个AI助手...\n+ 全部工具 schema", "~50K tokens"),
-        ("User Message", 100, 'light', "查询 NVDA 股价", ""),
+        ("System Prompt", 120, 'medium', "你是一個AI助手...\n+ 全部工具 schema", "~50K tokens"),
+        ("User Message", 100, 'light', "查詢 NVDA 股價", ""),
         ("Assistant", 80, 'light', "tool_call: ...", ""),
     ]
     ny = 85
@@ -678,29 +678,29 @@ def fig4_9():
         ny += bh + 8
 
     svg.rect(left_x, ny + 5, 380, 40, fill='dark')
-    svg.text(left_x + 190, ny + 25, "每次加载新工具 → 整个缓存失效!", size=FS_SMALL, fill='white', bold=True)
+    svg.text(left_x + 190, ny + 25, "每次加載新工具 → 整個緩存失效!", size=FS_SMALL, fill='white', bold=True)
 
     # Right: optimized approach
     right_x = 460
-    svg.text(660, 65, "优化方案（缓存稳定）", size=FS_BODY, bold=True)
+    svg.text(660, 65, "優化方案（緩存穩定）", size=FS_BODY, bold=True)
 
     blocks_opt = [
         ("System Prompt (固定)", 75, 'medium',
-         "你是一个AI助手...\n角色 + 规则 + 基础工具",
-         "~2K tokens | KV 缓存"),
-        ("Agent 状态栏 (轻量)", 45, 'code_bg',
+         "你是一個AI助手...\n角色 + 規則 + 基礎工具",
+         "~2K tokens | KV 緩存"),
+        ("Agent 狀態欄 (輕量)", 45, 'code_bg',
          "可用工具: web_search, get_weather...",
          "~200 tokens"),
         ("User: discover_tools", 40, 'light',
-         '"我需要查股票价格"',
+         '"我需要查股票價格"',
          ""),
         ("Tool Result", 55, 'light',
          "返回 get_stock_quote schema",
-         "工具定义在此"),
+         "工具定義在此"),
         ("User Message", 40, 'light',
-         "查询 NVDA 股价",
+         "查詢 NVDA 股價",
          ""),
-        ("Agent 状态栏 (更新)", 45, 'code_bg',
+        ("Agent 狀態欄 (更新)", 45, 'code_bg',
          "+get_stock_quote 已添加",
          "~220 tokens"),
     ]
@@ -715,18 +715,18 @@ def fig4_9():
         oy += bh + 5
 
     svg.rect(right_x, oy + 5, 400, 40, fill='medium')
-    svg.text(right_x + 200, oy + 25, "System Prompt 不变 → KV Cache 完全复用", size=FS_SMALL, bold=True)
+    svg.text(right_x + 200, oy + 25, "System Prompt 不變 → KV Cache 完全複用", size=FS_SMALL, bold=True)
 
     # Bottom comparison
     svg.line(30, 475, w - 30, 475, color='dark', dash=True)
     comps = [
-        ("缓存命中率", "~0%（每次工具变化失效）", "~95%（仅 hint 微变）"),
-        ("首 Token 延迟", "高（每次重算 50K tokens）", "低（增量计算 ~200 tokens）"),
+        ("緩存命中率", "~0%（每次工具變化失效）", "~95%（僅 hint 微變）"),
+        ("首 Token 延遲", "高（每次重算 50K tokens）", "低（增量計算 ~200 tokens）"),
     ]
     cy = 495
-    svg.text(250, cy, "对比维度", size=FS_SMALL, bold=True)
-    svg.text(500, cy, "朴素方案", size=FS_SMALL, bold=True)
-    svg.text(740, cy, "优化方案", size=FS_SMALL, bold=True)
+    svg.text(250, cy, "對比維度", size=FS_SMALL, bold=True)
+    svg.text(500, cy, "樸素方案", size=FS_SMALL, bold=True)
+    svg.text(740, cy, "優化方案", size=FS_SMALL, bold=True)
     for metric, naive, opt in comps:
         cy += 28
         svg.text(250, cy, metric, size=FS_TINY)
@@ -739,35 +739,35 @@ def fig4_9():
 # ──────────────────────── fig4-10 ────────────────────────
 
 def fig4_10():
-    """工具自我进化流水线（多阶段）"""
+    """工具自我進化流水線（多階段）"""
     w, h = 880, 500
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "Agent 自我进化：从需求到工具", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "Agent 自我進化：從需求到工具", size=FS_TITLE, bold=True)
 
     # Pipeline stages
     stages = [
-        ("① 需求识别", 'medium', [
-            "任务: YouTube 字幕提取",
-            "Agent: 当前工具不足",
-            "→ 启动自我进化",
+        ("① 需求識別", 'medium', [
+            "任務: YouTube 字幕提取",
+            "Agent: 當前工具不足",
+            "→ 啟動自我進化",
         ]),
         ("② Web 搜索", 'light', [
             "search: youtube transcript",
             "python library",
-            "→ 发现 3 个候选库",
+            "→ 發現 3 個候選庫",
         ]),
         ("③ GitHub 探索", 'light', [
-            "访问 jdepoix/youtube-",
-            "transcript-api 仓库",
-            "→ 阅读 README + 示例",
+            "訪問 jdepoix/youtube-",
+            "transcript-api 倉庫",
+            "→ 閱讀 README + 示例",
         ]),
-        ("④ 学习与测试", 'light', [
-            "code_interpreter 测试:",
+        ("④ 學習與測試", 'light', [
+            "code_interpreter 測試:",
             "from youtube_transcript",
             "  _api import ...",
         ]),
-        ("⑤ 工具封装", 'medium', [
-            "创建 MCP 工具:",
+        ("⑤ 工具封裝", 'medium', [
+            "創建 MCP 工具:",
             "get_youtube_transcript",
             "(video_id) → text",
         ]),
@@ -792,12 +792,12 @@ def fig4_10():
     svg.arrow(w / 2, 205, w / 2, 240)
 
     svg.rect(120, 240, w - 240, 50, fill='dark')
-    svg.text(w / 2, 265, "⑥ 注册到工具库 → 未来直接复用", size=FS_BODY, fill='white', bold=True)
+    svg.text(w / 2, 265, "⑥ 註冊到工具庫 → 未來直接複用", size=FS_BODY, fill='white', bold=True)
 
     # Reuse scenario
     svg.arrow(w / 2, 290, w / 2, 320)
     svg.rect(60, 320, w - 120, 160, fill='white', stroke='border', dash=True)
-    svg.text(w / 2, 345, "工具复用：下次遇到类似任务", size=FS_BODY, bold=True)
+    svg.text(w / 2, 345, "工具複用：下次遇到類似任務", size=FS_BODY, bold=True)
 
     svg.rect(80, 365, 340, 50, fill='code_bg', stroke='dark', rx=4)
     svg.mono(90, 382, "Agent: \"我需要提取 YouTube 字幕\"", size=FS_TINY)
@@ -807,10 +807,10 @@ def fig4_10():
 
     svg.rect(460, 365, 330, 50, fill='light')
     svg.text(625, 382, "命中! get_youtube_transcript", size=FS_SMALL, bold=True)
-    svg.text(625, 402, "跳过搜索和创建，直接调用", size=FS_TINY, fill='text_light')
+    svg.text(625, 402, "跳過搜索和創建，直接調用", size=FS_TINY, fill='text_light')
 
     svg.rect(200, 430, 480, 35, fill='medium')
-    svg.text(w / 2, 448, "工具层 + 知识层 + 策略层 → 越用越熟练", size=FS_SMALL, bold=True)
+    svg.text(w / 2, 448, "工具層 + 知識層 + 策略層 → 越用越熟練", size=FS_SMALL, bold=True)
 
     svg.save(os.path.join(OUT, 'fig4-10.svg'))
 
@@ -818,14 +818,14 @@ def fig4_10():
 # ──────────────────────── fig4-11 ────────────────────────
 
 def fig4_11():
-    """实验 4.7：Agent 从网络上寻找工具，自我进化"""
+    """實驗 4.7：Agent 從網絡上尋找工具，自我進化"""
     w, h = 880, 480
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "实验 4.7：自我进化 Agent 流水线", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "實驗 4.7：自我進化 Agent 流水線", size=FS_TITLE, bold=True)
 
     # Top: minimal base tools
     svg.rect(30, 60, w - 60, 48, fill='medium')
-    svg.text(w / 2, 76, "基础工具（最小集）", size=FS_SMALL, bold=True)
+    svg.text(w / 2, 76, "基礎工具（最小集）", size=FS_SMALL, bold=True)
     base_tools = ["web_search", "read_webpage", "code_interpreter", "create_tool", "search_tools"]
     btx = 65
     for t in base_tools:
@@ -837,10 +837,10 @@ def fig4_11():
     svg.arrow(w / 2, 108, w / 2, 135)
     svg.rect(100, 135, w - 200, 45, fill='code_bg', stroke='dark', rx=4)
     svg.mono(110, 150,
-             "任务: \"NVDA 最新股价？与一周前涨跌幅？\"  → Agent: 没有金融工具!",
+             "任務: \"NVDA 最新股價？與一週前漲跌幅？\"  → Agent: 沒有金融工具!",
              size=FS_TINY)
     svg.mono(110, 168,
-             "→ 识别能力缺口 → 启动自我进化",
+             "→ 識別能力缺口 → 啟動自我進化",
              size=FS_TINY)
 
     # Evolution pipeline
@@ -848,16 +848,16 @@ def fig4_11():
 
     pipe_y = 210
     pipe_stages = [
-        ("web_search", "搜索候选方案", 'light',
+        ("web_search", "搜索候選方案", 'light',
          ["\"python stock price API\"",
           "→ yfinance, Alpha Vantage..."]),
-        ("read_webpage", "评估方案", 'light',
-         ["yfinance: 免费, 无需API key",
-          "Alpha Vantage: 需注册..."]),
-        ("code_interpreter", "测试验证", 'light',
+        ("read_webpage", "評估方案", 'light',
+         ["yfinance: 免費, 無需API key",
+          "Alpha Vantage: 需註冊..."]),
+        ("code_interpreter", "測試驗證", 'light',
          ["import yfinance as yf",
           "yf.Ticker('NVDA').history()"]),
-        ("create_tool", "封装注册", 'medium',
+        ("create_tool", "封裝註冊", 'medium',
          ["name: get_stock_data",
           "schema: {ticker, period}"]),
     ]
@@ -879,16 +879,16 @@ def fig4_11():
     # Tool registry
     svg.arrow(w / 2, 330, w / 2, 360)
     svg.rect(200, 360, w - 400, 44, fill='dark')
-    svg.text(w / 2, 382, "工具库: get_stock_data 已注册", size=FS_BODY, fill='white', bold=True)
+    svg.text(w / 2, 382, "工具庫: get_stock_data 已註冊", size=FS_BODY, fill='white', bold=True)
 
     # Reuse
     svg.arrow(w / 2, 404, w / 2, 430)
     svg.rect(100, 430, w - 200, 40, fill='code_bg', stroke='dark', rx=4)
     svg.mono(110, 442,
-             "复用验证: \"查询TSLA股价\" → search_tools命中 → 直接调用get_stock_data",
+             "複用驗證: \"查詢TSLA股價\" → search_tools命中 → 直接調用get_stock_data",
              size=FS_TINY)
     svg.mono(110, 458,
-             "跳过搜索/评估/测试阶段 → 成本降低 90%+",
+             "跳過搜索/評估/測試階段 → 成本降低 90%+",
              size=FS_TINY)
 
     svg.save(os.path.join(OUT, 'fig4-11.svg'))
@@ -897,56 +897,56 @@ def fig4_11():
 # ──────────────────────── fig4-12 (Voyager, was fig4_voyager) ────────
 
 def fig4_12():
-    """Voyager 学习循环（课程+技能库+迭代提示）"""
+    """Voyager 學習循環（課程+技能庫+迭代提示）"""
     w, h = 880, 520
     svg = SVG(w, h)
-    svg.text(w / 2, 30, "Voyager：持续学习的 Agent 架构", size=FS_TITLE, bold=True)
+    svg.text(w / 2, 30, "Voyager：持續學習的 Agent 架構", size=FS_TITLE, bold=True)
 
     svg.rect(20, 65, 260, 180, fill='white', stroke='border', dash=True)
-    svg.text(150, 88, "自动课程生成器", size=FS_BODY, bold=True)
+    svg.text(150, 88, "自動課程生成器", size=FS_BODY, bold=True)
     curriculum = [
-        "输入: 当前状态 + 已有技能",
-        "输出: 下一个探索目标",
+        "輸入: 當前狀態 + 已有技能",
+        "輸出: 下一個探索目標",
         "",
-        "示例目标序列:",
-        "  砍树 → 制作木板",
-        "  → 制作木镐 → 挖石头",
-        "  → 制作熔炉 → 冶炼铁锭",
+        "示例目標序列:",
+        "  砍樹 → 製作木板",
+        "  → 製作木鎬 → 挖石頭",
+        "  → 製作熔爐 → 冶煉鐵錠",
     ]
     for i, line in enumerate(curriculum):
         svg.mono(32, 112 + i * 20, line, size=12)
 
     svg.rect(600, 65, 260, 180, fill='white', stroke='border', dash=True)
-    svg.text(730, 88, "迭代提示机制", size=FS_BODY, bold=True)
+    svg.text(730, 88, "迭代提示機制", size=FS_BODY, bold=True)
     iterative = [
-        "失败时收集反馈:",
-        "  - 环境观察 (错误信息)",
-        "  - 自我验证结果",
+        "失敗時收集反饋:",
+        "  - 環境觀察 (錯誤信息)",
+        "  - 自我驗證結果",
         "",
         "整合到 LLM Prompt",
-        "→ 引导改进代码",
+        "→ 引導改進代碼",
         "→ 多次迭代直到成功",
     ]
     for i, line in enumerate(iterative):
         svg.mono(612, 112 + i * 20, line, size=12)
 
-    svg.arrow(280, 155, 370, 155, label="目标")
-    svg.arrow(560, 155, 600, 155, label="反馈")
+    svg.arrow(280, 155, 370, 155, label="目標")
+    svg.arrow(560, 155, 600, 155, label="反饋")
 
     svg.rect(370, 110, 190, 80, fill='medium')
-    svg.text(465, 140, "Agent 执行", size=FS_BODY, bold=True)
-    svg.text(465, 165, "GPT-4 代码生成", size=FS_SMALL, fill='text_light')
+    svg.text(465, 140, "Agent 執行", size=FS_BODY, bold=True)
+    svg.text(465, 165, "GPT-4 代碼生成", size=FS_SMALL, fill='text_light')
 
     svg.arrow(465, 190, 465, 260)
-    svg.text(510, 230, "成功 → 提炼", size=FS_SMALL, fill='text_light')
+    svg.text(510, 230, "成功 → 提煉", size=FS_SMALL, fill='text_light')
 
     svg.rect(120, 260, 640, 240, fill='white', stroke='border', dash=True)
-    svg.text(440, 283, "技能库（Skill Library）—— 外部化学习的核心", size=FS_BODY, bold=True)
+    svg.text(440, 283, "技能庫（Skill Library）—— 外部化學習的核心", size=FS_BODY, bold=True)
 
     skills = [
-        ("chopTree()", "砍树\n基础技能", "function chopTree() {\n  bot.dig(nearest('log'));\n}"),
-        ("craftPlanks()", "制作木板\n调用 chopTree", "function craftPlanks() {\n  chopTree(); craft('planks');\n}"),
-        ("craftPickaxe()", "制作木镐\n组合多技能", "function craftPickaxe() {\n  craftPlanks(); craft('stick');\n  craft('wooden_pickaxe');\n}"),
+        ("chopTree()", "砍樹\n基礎技能", "function chopTree() {\n  bot.dig(nearest('log'));\n}"),
+        ("craftPlanks()", "製作木板\n調用 chopTree", "function craftPlanks() {\n  chopTree(); craft('planks');\n}"),
+        ("craftPickaxe()", "製作木鎬\n組合多技能", "function craftPickaxe() {\n  craftPlanks(); craft('stick');\n  craft('wooden_pickaxe');\n}"),
     ]
     skx = 140
     for name, desc, code in skills:
