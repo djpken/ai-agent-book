@@ -22,7 +22,7 @@ class Config:
     PROVIDER = os.getenv("PROVIDER", "anthropic").lower()
     
     # Default model
-    DEFAULT_MODEL = os.getenv("DEFAULT_MODEL", "claude-sonnet-4-20250514")
+    DEFAULT_MODEL = os.getenv("DEFAULT_MODEL", "claude-sonnet-5")
     
     # OpenRouter configuration
     OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"

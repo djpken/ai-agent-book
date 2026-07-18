@@ -154,7 +154,7 @@ class CodingAgentCLI:
             print(self.color("Example:", Colors.DIM))
             print(self.color("  PROVIDER=anthropic", Colors.DIM))
             print(self.color("  ANTHROPIC_API_KEY=sk-ant-api03-...", Colors.DIM))
-            print(self.color("  DEFAULT_MODEL=claude-sonnet-4-20250514", Colors.DIM))
+            print(self.color("  DEFAULT_MODEL=claude-sonnet-5", Colors.DIM))
             print()
             print(self.color("Supported providers: anthropic, openai, openrouter", Colors.DIM))
             print()
@@ -435,7 +435,7 @@ def build_parser() -> "argparse.ArgumentParser":
     parser.add_argument(
         "--model",
         metavar="模型名",
-        help="临时覆盖 .env 中的 DEFAULT_MODEL（例如 claude-sonnet-4-20250514）。",
+        help="临时覆盖 .env 中的 DEFAULT_MODEL（例如 claude-sonnet-5）。",
     )
     parser.add_argument(
         "--base-url",

@@ -141,7 +141,11 @@ def solve(client, model, question, use_code, max_turns=8, verbose=False):
     codes = []
 
     for _ in range(max_turns):
-        kwargs = dict(model=model, messages=messages, temperature=0)
+        # 推理模型（kimi-k3 / gpt-5 / *thinking 等）不接受 temperature=0，且需更大 max_tokens 容纳思考
+        _rs = ({"temperature": 1, "max_tokens": 4096}
+               if any(k in (model or "").lower() for k in ("kimi-k3", "kimi-k2.", "gpt-5", "o1", "o3", "o4", "thinking", "reasoner"))
+               else {"temperature": 0})
+        kwargs = dict(model=model, messages=messages, **_rs)
         if tools:
             kwargs["tools"] = tools
         resp = client.chat.completions.create(**kwargs)
@@ -194,8 +198,11 @@ def solve(client, model, question, use_code, max_turns=8, verbose=False):
     messages.append(
         {"role": "user", "content": "请立刻给出：FINAL ANSWER: <整数>"}
     )
+    _rs = ({"temperature": 1, "max_tokens": 4096}
+           if any(k in (model or "").lower() for k in ("kimi-k3", "kimi-k2.", "gpt-5", "o1", "o3", "o4", "thinking", "reasoner"))
+           else {"temperature": 0})
     resp = client.chat.completions.create(
-        model=model, messages=messages, temperature=0
+        model=model, messages=messages, **_rs
     )
     content = resp.choices[0].message.content or ""
     return extract_answer(content), codes, content

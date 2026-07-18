@@ -18,7 +18,7 @@ from tool_registry import ToolRegistry
 class CodingAgent:
     """Main coding agent with streaming support and modular tool system"""
     
-    def __init__(self, api_key: str, model: str = "claude-sonnet-4-20250514", base_url: Optional[str] = None, provider: str = "anthropic"):
+    def __init__(self, api_key: str, model: str = "claude-sonnet-5", base_url: Optional[str] = None, provider: str = "anthropic"):
         """
         Initialize coding agent
         

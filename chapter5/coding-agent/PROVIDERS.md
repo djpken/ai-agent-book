@@ -10,11 +10,11 @@ The Coding Agent supports three providers: Anthropic, OpenAI, and OpenRouter. Ea
 # .env
 PROVIDER=anthropic
 ANTHROPIC_API_KEY=sk-ant-api03-...
-DEFAULT_MODEL=claude-sonnet-4-20250514
+DEFAULT_MODEL=claude-sonnet-5
 ```
 
 **Available Models:**
-- `claude-sonnet-4-20250514` (Latest Sonnet 4, recommended)
+- `claude-sonnet-5` (Latest Sonnet 4, recommended)
 - `claude-3-5-sonnet-20241022` (Sonnet 3.5)
 - `claude-3-opus-20240229` (Opus 3)
 - `claude-3-haiku-20240307` (Haiku 3, faster/cheaper)
@@ -134,7 +134,7 @@ from agent import CodingAgent
 # Test Anthropic
 agent1 = CodingAgent(
     api_key="sk-ant-...",
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-5",
     provider="anthropic"
 )
 
@@ -174,7 +174,7 @@ Different models may support different parameters:
 
 ```python
 # Anthropic: Use thinking mode
-DEFAULT_MODEL=claude-sonnet-4-20250514
+DEFAULT_MODEL=claude-sonnet-5
 
 # OpenAI: Use newer models
 DEFAULT_MODEL=gpt-4-turbo-2024-04-09

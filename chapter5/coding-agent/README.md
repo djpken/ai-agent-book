@@ -137,7 +137,7 @@ OPENROUTER_API_KEY=sk-or-v1-...
 OPENAI_API_KEY=sk-...
 
 # Select model appropriate for your provider
-DEFAULT_MODEL=claude-sonnet-4-20250514
+DEFAULT_MODEL=claude-sonnet-5
 ```
 
 **See [PROVIDERS.md](PROVIDERS.md) for detailed provider configuration guide.**
@@ -434,7 +434,7 @@ Python: Python 3.11.5
 ANTHROPIC_API_KEY=your_key_here
 
 # Optional
-DEFAULT_MODEL=claude-sonnet-4-20250514
+DEFAULT_MODEL=claude-sonnet-5
 MAX_ITERATIONS=50
 MAX_TOKENS=8192
 ```
