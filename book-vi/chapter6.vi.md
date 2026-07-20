@@ -145,6 +145,7 @@ Sự gia tăng cốt lõi của phiên bản cải tiến **τ²-bench** không 
 >
 > Đặc biệt chú ý đến các tác vụ trong miền viễn thông mới được bổ sung của τ2-bench và hiểu thiết kế môi trường điều khiển kép của nó (như đã đề cập ở trên, người dùng và Agent cùng nhau vận hành cùng một môi trường chia sẻ).
 >
+
 Khác với đánh giá gọi công cụ tập trung vào “liệu các thay đổi trạng thái có thể quan sát được đã được hoàn thành hay chưa”, đánh giá tương tác giữa con người và máy tính tập trung vào “liệu người dùng có được hướng dẫn để hoàn thành các thay đổi về nhận thức hay ra quyết định hay không”. Cái trước kiểm tra tính đúng đắn trong các hành động của Agent, trong khi cái sau kiểm tra tính hợp lý của chiến lược truyền thông của nó.
 
 Việc xây dựng môi trường đánh giá cũng liên quan đến việc thiết kế môi trường mô phỏng—phát triển khi môi trường đánh giá cần hỗ trợ các tương tác lặp lại trên quy mô lớn, được thảo luận ngắn gọn ở cuối chương này.
@@ -358,6 +359,7 @@ Gửi câu trả lời thực tế của Rubric và Agent đến mô hình đán
 >
 > **Chấp nhận**: Ghi lại tỷ lệ thành công, số bước trung bình, số lần gọi công cụ, độ trễ và chi phí ở ba mức độ phức tạp (thu hồi cơ bản / phân biệt nhiều phiên / liên kết ẩn giữa các phiên) và làm rõ ranh giới lỗi của từng giải pháp - điều gì bị mất trong cấu trúc, điều gì bị bỏ sót khi truy xuất và liệu có sự phối hợp thực sự trong quá trình trộn hay không. Xem kho lưu trữ hỗ trợ để biết chi tiết cấu hình và trường hợp thử nghiệm.
 >
+
 **Các vấn đề về mô hình tương đồng và đánh giá đa nguồn.**
 
 Khi Agent thuộc cùng dòng với mô hình đánh giá, Agent có thể học cách khai thác các sở thích và điểm mù của mô hình đánh giá.
@@ -387,6 +389,7 @@ Policy giảm nhẹ là **đánh giá không đồng nhất nhiều nguồn** - 
 >
 > Xây dựng kho ngữ liệu kiểm tra đa dạng: độ dài khác nhau (câu đơn → đoạn văn dài), phong cách (tin tức/câu chuyện/đàm thoại), cảm xúc (trung tính/vui mừng/buồn), thử thách đặc biệt (con số/danh từ riêng/đa âm/từ vựng phương ngữ). Triển khai quy trình đánh giá: Mô-đun tạo TTS được kết nối với các dịch vụ chính thống (OpenAI, ElevenLabs, Fish Audio, Minimax, Beanbao) và mô-đun đánh giá đa phương thức sử dụng Gemini 3.5 Flash để nhập giọng nói tổng hợp, văn bản gốc, lời nói tham chiếu và Rubric cùng nhau, chấm điểm chúng theo thứ nguyên và đưa ra lý do chi tiết. Phân tích sự phân bổ kết quả đánh giá và xác định ưu điểm, nhược điểm của các mô hình TTS khác nhau theo từng chiều - một số mô hình có thể có độ chính xác tuyệt vời nhưng không đủ độ tự nhiên, trong khi một số mô hình khác có thể có độ tự nhiên cao nhưng dễ mắc lỗi về từ vựng đặc biệt.
 >
+
 Ngoài việc xác định Rubric theo cách thủ công, một **mô hình phần thưởng tổng hợp** chuyên biệt cũng có thể được đào tạo để tự động hóa phán đoán - điều này liên quan đến phương pháp đào tạo của mô hình phần thưởng, sẽ được thảo luận chi tiết trong Chương 7.
 
 Trong việc lựa chọn mô hình thực tế, câu hỏi chúng ta thường gặp là: "Cái nào tốt hơn, A hay B?" So sánh từng cặp cung cấp một cách đánh giá không dựa vào điểm số tuyệt đối.

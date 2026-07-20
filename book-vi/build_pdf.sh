@@ -11,7 +11,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
 
 # Homebrew and MacTeX often are not visible inside non-login shells.
-export PATH="/Library/TeX/texbin:/opt/homebrew/bin:/usr/local/bin:$PATH"
+export PATH="/opt/homebrew/bin:/usr/local/bin:/Library/TeX/texbin:$PATH"
 
 for cmd in pandoc xelatex rsvg-convert python3; do
     if ! command -v "$cmd" >/dev/null 2>&1; then
@@ -28,7 +28,7 @@ for cmd in pandoc xelatex rsvg-convert python3; do
     fi
 done
 
-OUT="AI-Agents-in-Depth-Bojie-Li-v1.1-vi.pdf"
+OUT="AI-Agents-in-Depth-Bojie-Li-v1.2-vi.pdf"
 CHAPTERS=(
     introduction.vi.md
     glossary.vi.md
@@ -84,7 +84,7 @@ pandoc "${CHAPTERS[@]}" \
     --metadata author-meta="Lý Bác Kiệt" \
     -H preamble.tex \
     --include-before-body=cover.tex \
-    --syntax-highlighting=kate \
+    --highlight-style=kate \
     --columns=80 \
     > "$LOG" 2>&1 &
 

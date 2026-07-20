@@ -333,6 +333,7 @@ Người quản lý gọi Agent đặc biệt theo trình tự. Sau khi hoàn th
 > ![Hình 10-6 Kiến trúc tác nhân dịch sách ](images/fig10-6.svg)
 >
 >
+
 **Hình thức phối hợp song song.**
 
 
