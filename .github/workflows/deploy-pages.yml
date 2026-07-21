@@ -17,6 +17,12 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Silence the MkDocs 2.0 banner. We pin to mkdocs-material 9.x in
+      # requirements-docs.txt, so the upcoming breaking change doesn't
+      # affect us until we explicitly upgrade. The variable name is read
+      # by material/templates/__init__.py and stable across 9.x releases.
+      NO_MKDOCS_2_WARNING: "1"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -25,7 +31,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install MkDocs Material
-        run: pip install mkdocs-material
+        run: pip install -r requirements-docs.txt
       - name: Assemble docs
         run: bash scripts/build_site.sh
       - name: Build site
