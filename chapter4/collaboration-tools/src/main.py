@@ -73,6 +73,12 @@ from intelligence_tools import (
     complex_problem_reasoning,
     guard_reasoning_process
 )
+from subagent_tools import (
+    spawn_subagent,
+    send_message_to_subagent,
+    cancel_subagent,
+    get_subagent_status
+)
 from config import load_config
 
 # Configure logging
@@ -477,8 +483,73 @@ async def mcp_intelligence_guard(
 
 
 # ============================================================================
+# SUB-AGENT MANAGEMENT TOOLS
+# ============================================================================
+
+@mcp.tool(description="Spawn a sub-agent to handle a delegated task. Supports sync (waits and returns result) and async (returns a task_id immediately) modes, and two context-passing strategies: 'minimal' or 'llm_generated'.")
+async def mcp_spawn_subagent(
+    task: str = Field(description="The sub-task to delegate to the sub-agent"),
+    context_strategy: str = Field(default="minimal", description="Context-passing strategy: 'minimal' (task + hand-picked slice only) or 'llm_generated' (extra LLM call synthesizes privacy-filtered context)"),
+    mode: str = Field(default="sync", description="'sync' waits and returns the result; 'async' starts in background and returns a task_id"),
+    parent_context: Optional[Dict[str, Any]] = Field(default=None, description="Parent agent trajectory/state to prepare per the chosen strategy"),
+    role: Optional[str] = Field(default=None, description="Optional explicit role for the sub-agent's system prompt"),
+    minimal_slice: Optional[Any] = Field(default=None, description="For 'minimal' strategy: hand-picked slice (string, dict, or list of keys into parent_context)"),
+    business_rules: Optional[str] = Field(default=None, description="For 'llm_generated' strategy: privacy/compression rules")
+) -> str:
+    """Spawn a sub-agent (sync or async) with a chosen context-passing strategy."""
+    result = await spawn_subagent(
+        task, context_strategy, mode, parent_context, role, minimal_slice, business_rules
+    )
+    return str(result)
+
+
+@mcp.tool(description="Send a follow-up message to an existing sub-agent and get its reply")
+async def mcp_send_message_to_subagent(
+    subagent_id: str = Field(description="ID of the sub-agent to message"),
+    message: str = Field(description="Message to send (labeled [FROM_MAIN_AGENT] to the sub-agent)")
+) -> str:
+    """Send a message to a sub-agent."""
+    result = await send_message_to_subagent(subagent_id, message)
+    return str(result)
+
+
+@mcp.tool(description="Cancel a sub-agent (cancels the background task for async sub-agents)")
+async def mcp_cancel_subagent(
+    subagent_id: str = Field(description="ID of the sub-agent to cancel")
+) -> str:
+    """Cancel a sub-agent."""
+    result = await cancel_subagent(subagent_id)
+    return str(result)
+
+
+@mcp.tool(description="Get the status and result of a sub-agent (useful for async sub-agents)")
+async def mcp_get_subagent_status(
+    subagent_id: str = Field(description="ID of the sub-agent to inspect")
+) -> str:
+    """Get sub-agent status."""
+    result = await get_subagent_status(subagent_id)
+    return str(result)
+
+
+# ============================================================================
 # SERVER LIFECYCLE
 # ============================================================================
+
+async def _serve() -> None:
+    """Restore saved timers and serve requests on the SAME event loop.
+
+    `asyncio.run(_load_timers())` used to run in a throwaway loop: closing it
+    cancelled every `_run_timer` task that had just been restored, and the
+    CancelledError handler then marked those timers "cancelled" and re-saved,
+    which drops them from storage. Restored timers therefore never fired and
+    were lost from memory *and* disk.
+
+    `FastMCP.run(transport="stdio")` is itself just `anyio.run(run_stdio_async)`,
+    so awaiting `run_stdio_async()` here is the same server entry point.
+    """
+    await _load_timers()
+    await mcp.run_stdio_async()
+
 
 # Run the server
 if __name__ == "__main__":
@@ -488,12 +559,9 @@ if __name__ == "__main__":
     config = load_config()
     logger.info(f"Configuration loaded: log_level={config.log_level}")
     
-    # Load saved timers
-    asyncio.run(_load_timers())
-    
     try:
-        # Run the MCP server
-        mcp.run(transport="stdio")
+        # Restore saved timers, then run the MCP server (one shared loop)
+        asyncio.run(_serve())
     finally:
         # Cleanup on exit
         logger.info("Shutting down Collaboration Tools MCP Server...")

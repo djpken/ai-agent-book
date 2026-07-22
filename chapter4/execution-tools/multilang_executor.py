@@ -23,17 +23,16 @@ def try_decode(s: bytes) -> str:
         return f'[DecodeError] {e}'
 
 
-async def get_output_non_blocking(stream) -> str:
-    """Read output non-blocking to avoid hanging."""
-    result = b''
+async def get_all_output(stream) -> str:
+    """Read stream until EOF. Call after the process has exited or been killed."""
+    if stream is None:
+        return ""
     try:
-        # Read up to 1MB with very short timeout to avoid blocking
-        result = await asyncio.wait_for(stream.read(1024 * 1024), timeout=0.001)
-    except asyncio.TimeoutError:
-        pass
+        result = await stream.read()
+        return try_decode(result)
     except Exception as e:
         logger.debug(f"Error reading output: {e}")
-    return try_decode(result)
+        return ""
 
 
 def kill_process_tree(pid: int):
@@ -99,6 +98,8 @@ class LanguageExecutor:
         Returns:
             Execution result dictionary
         """
+        if language is None:
+            language = "python"
         language = language.lower()
         
         # Map language to executor
@@ -170,16 +171,23 @@ class LanguageExecutor:
                     logger.warning(f"Failed to write stdin: {e}")
             
             start_time = time.time()
-            
+
+            # Drain both pipes concurrently with the wait. Reading only *after*
+            # process.wait() deadlocks as soon as the child fills the OS pipe
+            # buffer (~256 KB here): the child blocks in write(), so it never
+            # exits and wait() never returns, turning a fast program with large
+            # stdout into a bogus TIMEOUT.
+            stdout_task = asyncio.ensure_future(get_all_output(process.stdout))
+            stderr_task = asyncio.ensure_future(get_all_output(process.stderr))
+
             try:
                 # Wait for process with timeout
                 await asyncio.wait_for(process.wait(), timeout=timeout)
                 execution_time = time.time() - start_time
-                
-                # Read output non-blocking
-                stdout = await get_output_non_blocking(process.stdout)
-                stderr = await get_output_non_blocking(process.stderr)
-                
+
+                stdout = await stdout_task
+                stderr = await stderr_task
+
                 logger.debug(f'Command completed in {execution_time:.2f}s')
                 
                 return {
@@ -192,15 +200,14 @@ class LanguageExecutor:
                 
             except asyncio.TimeoutError:
                 execution_time = time.time() - start_time
-                
-                # Try to read partial output
-                stdout = await get_output_non_blocking(process.stdout)
-                stderr = await get_output_non_blocking(process.stderr)
-                
-                # Kill process tree
+
+                # Kill first so pipes close, then drain remaining output
                 if psutil.pid_exists(process.pid):
                     kill_process_tree(process.pid)
                     logger.info(f'Process {process.pid} killed due to timeout')
+
+                stdout = await stdout_task
+                stderr = await stderr_task
                 
                 return {
                     "status": ExecutionStatus.TIMEOUT,
@@ -251,7 +258,7 @@ class LanguageExecutor:
                 return False
             base64.b64decode(s, validate=True)
             return True
-        except:
+        except Exception:
             return False
     
     async def _run_python(

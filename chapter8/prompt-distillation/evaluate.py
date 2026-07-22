@@ -42,6 +42,11 @@ def load_model(model_path: str, base_model: str = "Qwen/Qwen3-30B-A3B-Instruct-2
     return model, tokenizer
 
 
+def format_pred_label(pred_label: Optional[str]) -> str:
+    """Display token for progress lines when the model reply is unparseable."""
+    return pred_label or "??"
+
+
 def parse_language_label(response: str) -> Optional[str]:
     """Extract the language label from model response."""
     # Try to match common patterns
@@ -54,7 +59,10 @@ def parse_language_label(response: str) -> Optional[str]:
     
     response = response.strip().lower()
     for pattern in patterns:
-        match = re.search(pattern, response)
+        # response is lower-cased above, so the mixed-case "Final Answer:" /
+        # "Language:" patterns only match case-insensitively — without this
+        # they are unreachable and such answers score as unparseable.
+        match = re.search(pattern, response, re.IGNORECASE)
         if match:
             return match.group(1)
     
@@ -134,14 +142,14 @@ def evaluate_model(
             display_sentence = sentence if len(sentence) <= 60 else sentence[:57] + "..."
             
             print(f"{status_color} [{idx+1:4d}/{len(test_sentences)}] "
-                  f"Pred: {pred_label:>2s} | GT: {gt_label:>2s} | "
+                  f"Pred: {format_pred_label(pred_label):>2s} | GT: {gt_label:>2s} | "
                   f"Acc: {correct}/{total} ({correct/total*100:5.1f}%) | "
                   f"{display_sentence}")
         else:
             # No ground truth - just show prediction
             display_sentence = sentence if len(sentence) <= 60 else sentence[:57] + "..."
             print(f"  [{idx+1:4d}/{len(test_sentences)}] "
-                  f"Pred: {pred_label:>2s} | "
+                  f"Pred: {format_pred_label(pred_label):>2s} | "
                   f"{display_sentence}")
     
     print("="*80)
@@ -313,49 +321,50 @@ def print_confusion_matrix(confusion_data: Dict):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Evaluate the distilled prompt model"
+        description="评估蒸馏后的学生模型（无提示、直接作答）在语言分类上的表现",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument(
         "--model_path",
         type=str,
         default="./models/prompt_distillation_trl",
-        help="Path to the trained LoRA adapters (default: ./models/prompt_distillation_trl)",
+        help="训练得到的 LoRA adapter 路径",
     )
     parser.add_argument(
         "--base_model",
         type=str,
         default="Qwen/Qwen3-30B-A3B-Instruct-2507",
-        help="Base student model name (non-thinking variant)",
+        help="学生基座模型名称（非思考型）",
     )
     parser.add_argument(
         "--test_file",
         type=str,
         default="./example-data/multilingual.txt",
-        help="Test sentences file (one per line)",
+        help="测试文本文件（每行一句）",
     )
     parser.add_argument(
         "--ground_truth_file",
         type=str,
         default=None,
-        help="Ground truth labels file (optional, one per line). If not provided, will try to load from training data.",
+        help="标准答案标签文件（可选，每行一个）。未提供时会尝试从训练数据中读取",
     )
     parser.add_argument(
         "--train_data_file",
         type=str,
         default="./data/prompt_distillation_lang.jsonl",
-        help="Training data file to extract ground truth from (if ground_truth_file not provided)",
+        help="训练数据文件，未提供 ground_truth_file 时从中提取教师标签作为基准",
     )
     parser.add_argument(
         "--output_file",
         type=str,
         default="./evaluation_results.json",
-        help="Where to save evaluation results",
+        help="评估结果的保存路径",
     )
     parser.add_argument(
         "--max_samples",
         type=int,
         default=None,
-        help="Maximum number of samples to evaluate (for quick testing)",
+        help="最多评估的样本数（用于快速测试）",
     )
     
     args = parser.parse_args()

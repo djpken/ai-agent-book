@@ -60,7 +60,7 @@ class GraphRAGIndexer:
     
     def __init__(self, config: GraphRAGConfig):
         self.config = config
-        self.client = OpenAI(api_key=config.llm_api_key)
+        self.client = OpenAI(api_key=config.llm_api_key, base_url=config.base_url)
         self.embedding_model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
         
         # Knowledge graph components
@@ -89,10 +89,20 @@ class GraphRAGIndexer:
             if current_size + len(words) > self.config.chunk_size:
                 if current_chunk:
                     chunks.append(" ".join(current_chunk))
-                # Start new chunk with overlap
-                overlap_size = min(self.config.chunk_overlap, len(current_chunk))
-                current_chunk = current_chunk[-overlap_size:] if overlap_size > 0 else []
-                current_size = sum(len(s.split()) for s in current_chunk)
+                # Start new chunk with overlap. chunk_overlap is a WORD budget
+                # (the same unit as chunk_size, which current_size is measured
+                # in); len(current_chunk) is a SENTENCE count, so using it here
+                # kept the whole previous chunk and the window never advanced.
+                overlap: List[str] = []
+                overlap_size = 0
+                for prev in reversed(current_chunk):
+                    prev_size = len(prev.split())
+                    if overlap_size + prev_size > self.config.chunk_overlap:
+                        break
+                    overlap.insert(0, prev)
+                    overlap_size += prev_size
+                current_chunk = overlap
+                current_size = overlap_size
             
             current_chunk.append(sentence)
             current_size += len(words)
@@ -305,8 +315,13 @@ class GraphRAGIndexer:
         
         logger.info("Creating hierarchical community summaries...")
         
-        # Group communities by similarity
-        community_embeddings = np.array([c.embedding for c in self.communities.values()])
+        # Group communities by similarity. Snapshot the ids up front: the loop
+        # below inserts the merged communities into self.communities, and
+        # iterating the live dict raised "RuntimeError: dictionary changed size
+        # during iteration". The snapshot also keeps i/j aligned with
+        # similarity_matrix, which is built once from these same communities.
+        community_ids = list(self.communities.keys())
+        community_embeddings = np.array([self.communities[cid].embedding for cid in community_ids])
         similarity_matrix = cosine_similarity(community_embeddings)
         
         # Simple hierarchical clustering
@@ -314,13 +329,13 @@ class GraphRAGIndexer:
         merged_communities = []
         processed = set()
         
-        for i, comm_id in enumerate(self.communities.keys()):
+        for i, comm_id in enumerate(community_ids):
             if comm_id in processed:
                 continue
             
             # Find similar communities
             similar = []
-            for j, other_id in enumerate(self.communities.keys()):
+            for j, other_id in enumerate(community_ids):
                 if i != j and similarity_matrix[i][j] > threshold:
                     similar.append(other_id)
                     processed.add(other_id)
@@ -445,7 +460,63 @@ class GraphRAGIndexer:
         # Sort all results by score
         results.sort(key=lambda x: x["score"], reverse=True)
         return results[:top_k]
-    
+
+    def multi_hop_search(self, start_entity: str, max_hops: int = 2,
+                         relation_filter: Optional[str] = None,
+                         top_k: int = 10) -> List[Dict[str, Any]]:
+        """
+        多跳关系检索：沿知识图谱的关系边遍历，回答「A 通过什么与 B 相连」这类
+        扁平向量检索无法表达的关系性问题（对应书中「多跳关系推理」）。
+
+        与 search() 的区别：search() 只按嵌入相似度召回孤立的实体/社区，
+        而本方法真正利用图结构，返回从起始实体出发的**关系路径**。
+
+        Args:
+            start_entity: 起始实体名（不区分大小写，按子串匹配）。
+            max_hops: 最大跳数。
+            relation_filter: 若指定，只保留终点边为该关系类型的路径。
+            top_k: 返回的路径数上限。
+
+        Returns:
+            每条路径形如 {"target", "target_type", "hops", "path"}，
+            path 是若干 {"source", "relation", "target"} 步骤。
+        """
+        # 按名字子串匹配定位起始节点
+        start_id = None
+        needle = start_entity.lower()
+        for entity_id, entity in self.entities.items():
+            if needle in entity.name.lower():
+                start_id = entity_id
+                break
+        if start_id is None or start_id not in self.graph:
+            logger.warning(f"multi_hop_search: 未找到起始实体 '{start_entity}'")
+            return []
+
+        # BFS 沿边遍历，收集 <= max_hops 跳的路径
+        results: List[Dict[str, Any]] = []
+        queue = [(start_id, [])]
+        while queue and len(results) < top_k * 4:
+            node_id, path = queue.pop(0)
+            if len(path) >= max_hops:
+                continue
+            for neighbor in self.graph.neighbors(node_id):
+                rel_type = self.graph[node_id][neighbor].get("type", "related")
+                src_name = self.entities[node_id].name if node_id in self.entities else node_id
+                dst_name = self.entities[neighbor].name if neighbor in self.entities else neighbor
+                step = {"source": src_name, "relation": rel_type, "target": dst_name}
+                new_path = path + [step]
+                if relation_filter is None or rel_type == relation_filter:
+                    results.append({
+                        "target": dst_name,
+                        "target_type": self.entities[neighbor].type if neighbor in self.entities else "unknown",
+                        "hops": len(new_path),
+                        "path": new_path,
+                    })
+                queue.append((neighbor, new_path))
+
+        results.sort(key=lambda r: r["hops"])
+        return results[:top_k]
+
     def save_index(self, path: Optional[Path] = None):
         """Save the knowledge graph index to disk."""
         save_path = path or self.config.index_dir / "graphrag_index.pkl"
