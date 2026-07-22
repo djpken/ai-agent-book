@@ -66,22 +66,19 @@ if [ "$found" -eq 0 ]; then
     exit 1
 fi
 
-# Verify CoreText now resolves PingFang SC to a real, non-reserved font file
-# (the reserved UI copy under FontServices.framework does not count: Pango
-# refuses to use it).
-swift - <<'EOF'
-import CoreText
-import Foundation
-let attrs = [kCTFontFamilyNameAttribute: "PingFang SC"] as CFDictionary
-let font = CTFontCreateWithFontDescriptor(CTFontDescriptorCreateWithAttributes(attrs), 12, nil)
-let family = CTFontCopyFamilyName(font) as String
-let path = (CTFontCopyAttribute(font, kCTFontURLAttribute) as? URL)?.path ?? ""
-print("PingFang SC -> \(family) @ \(path)")
-guard family == "PingFang SC", !path.isEmpty,
-      !path.contains("/Resources/Reserved/"),
-      FileManager.default.fileExists(atPath: path) else {
-    print("ERROR: PingFang SC still not usable after install")
-    exit(1)
-}
-EOF
-echo "PingFang installed and usable."
+# The PDF build renders SVGs with PANGOCAIRO_BACKEND=fontconfig, so verify the
+# installed font through fontconfig (CoreText's view is irrelevant here, and
+# whether fontd notices a new user font in time varies between runners).
+if command -v fc-match >/dev/null 2>&1; then
+    fc-cache -f >/dev/null 2>&1 || true
+    match=$(fc-match "PingFang SC" 2>/dev/null || true)
+    echo "fc-match PingFang SC -> $match"
+    case "$match" in
+        PingFang*) ;;
+        *) echo "ERROR: fontconfig does not resolve PingFang SC after install" >&2
+           exit 1;;
+    esac
+else
+    echo "fc-match not available yet; the build's verify step will check the PDFs"
+fi
+echo "PingFang installed."

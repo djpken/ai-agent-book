@@ -18,6 +18,7 @@ on:
       - 'epub.css'
       - 'flatten_epub_toc.py'
       - '.github/workflows/build-latest.yml'
+      - '.github/scripts/**'
   workflow_dispatch:
 
 permissions:
