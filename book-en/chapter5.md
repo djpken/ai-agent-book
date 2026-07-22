@@ -497,6 +497,7 @@ The three-tier safeguard is thus complete: (1) natural language rules in the sys
 >
 > **Expected results**: The experimental group significantly outperforms the control group. More importantly, it is observed that the model autonomously identifies violations when preparing parameters and directly proposes alternatives to the user, verifying the effectiveness of "parameters as a checklist"; at the same time, the proportion of inconsistencies between `expected_*` self-reported values and database ground truth is counted, verifying the necessity of "server-side ground-truth validation" in intercepting erroneous cognition.
 >
+
 ### Code-Driven Multimedia Generation
 
 The creation of many complex documents is essentially the organization and presentation of structured data. Whether it's a presentation, a technical report, or an interactive application, the underlying structure is defined by code — HTML describes the structure, CSS controls the style, and JavaScript implements interactivity. Traditional document creation relies on WYSIWYG editing through GUI interfaces, but this is neither intuitive nor efficient for Agents, as GUI operations require visual understanding and precise coordinate positioning. Through code generation, Agents bypass the challenge of visual positioning and gain precise control over documents — the position, style, and content of each element are clearly defined and can be modified and optimized programmatically.
@@ -560,6 +561,7 @@ Reframing video editing as API calls and code generation cuts the complexity dra
 >
 > **Acceptance criteria**: The Agent can accurately identify different scenes in the video and correctly generate editing scripts based on natural language instructions. The start and end points are accurate (error within 3 seconds). If the instructions include special effects requirements (slow motion, transitions, subtitles), the generated video correctly applies the effects. The Reviewer Agent can detect obvious errors (missing key content, including irrelevant segments) and trigger corrections. The final output video file has the correct format and meets expected quality.
 >
+
 ### Code as a System Adapter
 
 The code in the previous sections mostly produces "human-facing" things — reports, slides, interfaces. The code in this section points in another direction: **connecting machine to machine**. In real systems, the external services an Agent must talk to often have no ready-made SDK, and their interfaces are rarely tidy — documentation missing, return formats non-standard, fields drifting from version to version. The Agent does not need to wait for someone to write an adaptation layer in advance. It can read the interface documentation on the spot, or simply observe one or two real responses, and generate the adapter then and there: construct an HTTP client, assemble authentication headers, parse the non-standard return structure, and translate the upstream data model into a shape the downstream can consume. Code here is "universal glue" for connecting arbitrary systems — wherever there is a gap, a piece of glue is generated on the spot to fill it. This is the heart of the meta-capability's "system interface" direction. The adaptive log parsing developed below is this capability made concrete in the observability setting: facing log formats that never stop evolving, the Agent likewise adapts by generating parsing code on the fly.
@@ -601,6 +603,7 @@ Code generation provides an automated path for diagnosis. The Agent can read pro
 > ![Figure 5-7: Intelligent Production Log Diagnostic Pipeline](images/fig5-7.svg)
 >
 >
+
 ### Code as Generative UI
 
 Traditional Agent systems interact with users mainly through plain-text dialogue. But text is a linear, one-dimensional medium, and in many scenarios an inefficient one. Collecting structured information turns into a long back-and-forth of questions; complex data relationships strain what plain text can express; and when the user must choose among options, a text list is far less intuitive than a visual interface.
@@ -680,6 +683,7 @@ Fully dynamic generation, however, is costly and slow—better suited to demonst
 >
 > **Technical Approach**: Build a basic chatbot application (React frontend + FastAPI backend), with both frontend and backend running in development mode supporting hot reload (React's HMR, FastAPI's reload). Users propose UI customization requirements (colors, fonts, layout, component positions, etc.) during the conversation. The Agent autonomously modifies the code. The hot-reload mechanism automatically detects file changes, the frontend recompiles and refreshes, and the user sees the interface changes in real-time. Supports multiple rounds of iterative customization.
 >
+
 ### Code Creating Code: Agent Bootstrapping
 
 The previous sections have followed code generation across one domain after another—from mathematical reasoning to document creation to interface customization. Push these capabilities to their limit and a natural question arises: can an Agent use code generation to create another Agent?

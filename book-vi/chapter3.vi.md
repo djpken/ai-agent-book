@@ -691,6 +691,7 @@ Quá trình này được chia thành hai giai đoạn:
 > Cuối cùng, “Mô hình phân cấp tầm quan trọng của yếu tố” này đã trở thành động lực cốt lõi của Agent **Thu thập thông tin hội thoại**. Khi người dùng mô tả trường hợp, Agent sử dụng mô hình này để đặt các câu hỏi hướng dẫn cho người dùng một cách thông minh theo thứ tự tầm quan trọng để hoàn thành tất cả các yếu tố quyết định quan trọng. Sau khi thông tin được thu thập, Agent tìm kiếm cơ sở kiến thức cho nguyên mẫu trường hợp tương tự nhất và cung cấp phân tích và giải thích dựa trên dữ liệu, theo trường hợp cụ thể dựa trên số liệu thống kê của nguyên mẫu đó (chẳng hạn như các phạm vi câu điển hình).
 >
 > Thử nghiệm này minh họa một điều: Agent không nhất thiết coi cơ sở tri thức là một kho lưu trữ tĩnh chỉ có thể được truy xuất - nó có thể "đọc" dữ liệu trước, trích xuất logic ra quyết định có cấu trúc và sau đó trả lời các câu hỏi dựa trên logic này.
+
 ## Tóm tắt chương này
 
 Chương này xây dựng một cách có hệ thống hệ thống bộ nhớ liên tục của AI Agent từ hai thang đo: bộ nhớ người dùng cho người dùng cá nhân và cơ sở kiến thức dùng chung cho tất cả người dùng.

@@ -396,6 +396,7 @@ The rest of this chapter will explore each layer of this structure: how to lever
 >
 > You may have noticed during the experiment that the model's first response slows down after modifying the system prompt—this is exactly the KV Cache mechanism to be explained in the next section: changing the prefix invalidates the cache, forcing the model to recalculate.
 >
+
 ## KV Cache-Friendly Context Design
 
 This section opens with a story, but first, the intuition behind **KV Cache**. Every time the model generates a token, it must look back at the intermediate computation results of every preceding token. Recalculating all of this from scratch each round would make the overhead explode as the context grows. KV Cache instead caches those intermediate results, so each round only computes the newly added tokens. **The prerequisite is that the prefix stays completely unchanged**—alter a single character in it, and the entire cache is invalidated; the model must recompute everything from the beginning. A note on terminology: when this section speaks of "cache hits" across requests, API providers call this Prompt Cache—a cross-request cache built on top of the inference engine's KV Cache; the two levels are fully distinguished at the end of this section.
@@ -665,6 +666,7 @@ The mechanism's other constraint is model capability: the model must have been t
 >
 > The conclusion of the ablation study is not surprising: chaotic information organization led to a success rate drop of over 30%. What is more valuable is the methodology itself—when an Agent performs poorly, instead of rewriting the entire prompt, it's better to first conduct an ablation study: turn off each component one by one and observe which component has the greatest impact. This is much more reliable than guessing based on intuition.
 >
+
 ### Prompt Injection: The Core Threat to Context Security
 
 Having discussed the design methods for system prompts and tool definitions, this section finally needs to consider a security dimension: how to prevent a carefully designed context from being hijacked by external input? This is the prompt injection problem.
@@ -699,6 +701,7 @@ It is crucial to recognize that context-level defenses (source tagging, instruct
 >
 > **Acceptance Criteria**: Record the success rate of each attack under different defense configurations and analyze which defense strategies are most effective against which types of attacks.
 >
+
 ## Dynamic Prompts and Agent Skills
 
 ![Figure 2-11: Skills Progressive Disclosure Mechanism](images/fig2-11.svg)
@@ -773,6 +776,7 @@ From a context management perspective, the Skills mechanism is extremely KV Cach
 >
 > **Acceptance Criteria**: The generated PowerPoint covers the paper's main content (title page, problem background, method overview, key results, conclusion), includes at least 3 figures extracted from the paper that are consistent with the text descriptions, and has correct formatting that opens properly in PowerPoint or compatible software.
 >
+
 ## Agent Status Bar: Enhancing Agent Trajectory Management with Meta-Information
 
 ![Figure 2-14: Agent Status Bar Architecture](images/fig2-14.svg)
@@ -1028,6 +1032,7 @@ The key is understanding the **timing and location** of compression. Compression
 > ![Figure 2-17: Processing Flow of Six Compression Strategies](images/fig2-17.svg)
 >
 >
+
 ### Production-Grade Hierarchical Compression Mechanism
 
 The experiment above demonstrates the performance differences between various compression strategies. In a production environment, mature Agent systems typically do not rely on a single strategy but combine multiple strategies into a hierarchical compression mechanism—different types of information have different shelf lives, and the compression strategy should match the expected lifecycle of the information. Using Claude Code's approach as a reference, a mature context management system usually includes five layers:

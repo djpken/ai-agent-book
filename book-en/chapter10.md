@@ -144,6 +144,7 @@ In complex tasks, an Agent's role and responsibilities may change significantly 
 > 5. Handle rollback scenarios—when code review finds issues, return to the implementation stage
 > 6. Log execution logs for each stage, demonstrating how different prompts produce different behavior patterns
 >
+
 ### Cross-Domain Role Switching
 
 Multi-stage role switching demonstrated staged execution within a single task type (software development). Cross-domain role switching goes further: the Agent moves among multiple task types on its own—no longer a pre-planned linear process, but the Agent deciding for itself, as the user's needs change, which professional role to switch into.
@@ -187,6 +188,7 @@ Multi-stage role switching demonstrated staged execution within a single task ty
 > 4. Handle circular switching issues—prevent the Agent from switching back and forth between roles
 > 5. Design complex task flows spanning multiple domains to demonstrate the value of role switching
 >
+
 ## Multi-Agent Collaboration Without Shared Context
 
 Not sharing context represents true multi-agent collaboration. In this architecture, each Agent is an independent entity with its own context, trajectory, and state. Agents cannot directly access each other's "internal thoughts"; collaboration relies entirely on explicit, structured data transfer mechanisms—the three communication mechanisms introduced at the beginning of this chapter (tool call parameters, shared file system, message bus).
@@ -430,6 +432,7 @@ When multiple sub-tasks can be executed in parallel, the sequential pattern beco
 > ![Figure 10-9: Parallel Web Scraping Architecture](images/fig10-9.svg)
 >
 >
+
 ### Decentralized Pattern: Peer-to-Peer Handoff
 
 
@@ -591,6 +594,7 @@ Beyond information diffusion, the paper also reported two other measurable emerg
 > - How information spreads among Agents without central control
 > - How Agents' long-term memory and reflection affect the coherence of their personalities
 >
+
 ### Moltbook: When Agents Have Their Own Social Network
 
 Moltbook is a social network built specifically for AI Agents. After its launch in January 2026, its user count reportedly exploded within days from tens of thousands to roughly 1.5 million. Each of these Agents has persistent memory, the ability to act on its own initiative, and a stable personality.
@@ -655,6 +659,7 @@ Werewolf anchors the third dimension of this section, **strategic gameplay**: un
 > ![Figure 10-13: Voice Werewolf Agent System](images/fig10-13.svg)
 >
 >
+
 ## Chapter Summary
 
 Multi-agent systems have two orthogonal core design dimensions: whether context is shared, and how the collaboration topology is organized. Shared context is inheritance-style collaboration—each Agent inherits its predecessor's complete context, losing no information but growing the context fast. Non-shared context is fully independent collaboration, exchanging information through distilled handoff packages, the file system, or message passing. As for topology: the peer collaboration pattern suits iterative refinement among a few Agents, the manager pattern suits complex tasks that need dynamic scheduling, and the decentralized pattern suits scenarios where responsibilities are equal and control must flow among the Agents themselves. All of it rests on two topology-independent infrastructures. The data plane is the **shared file system**—in essence a virtual directory tree mounting four kinds of areas (agent-specific workspaces, multi-agent shared spaces, external resources, and built-in system resources), across which Agents exchange artifacts by passing file paths. The control plane is the **communication and control mechanism**, supporting message passing, status queries, and execution termination; a message bus is its common implementation, suited to real-time, asynchronous, multi-party coordination—and once collaboration crosses organizational boundaries, a standardized interoperability protocol like A2A is needed.

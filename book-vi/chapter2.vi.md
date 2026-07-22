@@ -396,6 +396,7 @@ Phần còn lại của chương này sẽ tập trung vào từng lớp của c
 >
 > Trong thử nghiệm, bạn có thể nhận thấy rằng phản hồi đầu tiên của mô hình sẽ chậm hơn sau khi sửa đổi system prompt - đây chính xác là cơ chế KV Cache sẽ được giải thích trong phần tiếp theo: việc thay đổi tiền tố sẽ khiến bộ nhớ đệm trở nên không hợp lệ và mô hình cần phải được tính toán lại.
 >
+
 ## KV Cache Thiết kế theo ngữ cảnh thân thiện
 
 Trước khi bắt đầu câu chuyện, hãy xây dựng trực giác của bạn trước. Mỗi khi mô hình tạo mã thông báo, mô hình phải nhìn lại kết quả tính toán trung gian của tất cả các mã thông báo trước đó. Nếu việc tính toán được thực hiện từ đầu mỗi vòng, chi phí sẽ tăng theo độ dài ngữ cảnh. Việc KV Cache làm là lưu vào bộ đệm các kết quả tính toán trung gian trước đó và chỉ cần tính phần mã thông báo mới được thêm vào ở vòng tiếp theo. **Tiền đề là tiền tố hoàn toàn không thay đổi** - Chỉ cần một ký tự trong tiền tố được viết lại, tất cả bộ đệm sẽ bị vô hiệu và mô hình sẽ phải được tính toán lại từ đầu. Ngẫu nhiên: Khi phần này nói về "lần truy cập bộ đệm" yêu cầu chéo, nó được gọi là Bộ đệm nhắc nhở trong ngữ cảnh của nhà cung cấp dịch vụ API - đó là bộ đệm yêu cầu chéo được xây dựng trên công cụ suy luận KV Cache. Xem phần cuối của phần này để có phân tích đầy đủ về hai cấp độ.
@@ -665,6 +666,7 @@ Một ràng buộc khác của cơ chế này là năng lực của mô hình: m
 >
 > Bản thân kết luận của thí nghiệm cắt bỏ không có gì đáng ngạc nhiên: thông tin thiếu tổ chức dẫn đến tỷ lệ thành công giảm hơn 30%. Điều có giá trị hơn là bản thân phương pháp luận - khi Agent hoạt động kém, thay vì viết lại hoàn toàn từ gợi ý, tốt hơn là bạn nên thực hiện thử nghiệm cắt bỏ trước: tắt từng thành phần một và quan sát thành phần nào có tác động lớn nhất. Điều này đáng tin cậy hơn nhiều so với việc đoán dựa trên trực giác của bạn.
 >
+
 ### Prompt injection nhở: Mối đe dọa cốt lõi đối với bảo mật theo ngữ cảnh
 
 Sau khi thảo luận về các phương pháp thiết kế các system prompt và định nghĩa công cụ, có một khía cạnh bảo mật khác cần được xem xét ở cuối phần này: Làm cách nào để ngăn chặn các ngữ cảnh được thiết kế cẩn thận khỏi bị tấn công bởi đầu vào bên ngoài? Đây là vấn đề prompt injection.
@@ -699,6 +701,7 @@ Việc tiêm mẹo trong hệ thống Agent nguy hiểm hơn so với các chatb
 >
 > **Tiêu chí chấp nhận**: Ghi lại tỷ lệ thành công của mỗi cuộc tấn công theo các cấu hình phòng thủ khác nhau và phân tích chiến lược phòng thủ nào hiệu quả nhất trước các loại tấn công.
 >
+
 ## Lời nhắc động và Kỹ năng Agent
 
 ![Hình 2-11 Cơ chế tiết lộ tiến bộ kỹ năng ](images/fig2-11.svg)
@@ -773,6 +776,7 @@ Từ góc độ quản lý ngữ cảnh, cơ chế Kỹ năng cực kỳ thân t
 >
 > **Tiêu chí chấp nhận**: PowerPoint được tạo bao gồm nội dung chính của bài báo (trang tiêu đề, ngữ cảnh vấn đề, tổng quan về phương pháp, kết quả chính, kết luận), chứa ít nhất 3 hình ảnh được trích từ bài báo và phù hợp với mô tả văn bản, được định dạng chính xác và có thể mở bình thường trong PowerPoint hoặc phần mềm tương thích.
 >
+
 ## Thanh trạng thái Agent: quản lý trajectory Agent nâng cao với thông tin meta
 
 ![Hình 2-14 Cấu trúc thanh trạng thái tác nhân ](images/fig2-14.svg)
@@ -1029,6 +1033,7 @@ Trước khi thảo luận về chiến lược nén cụ thể, cần phải gi
 > ![Hình 2-17 Luồng xử lý của sáu chiến lược nén ](images/fig2-17.svg)
 >
 >
+
 ### Cơ chế nén phân lớp cấp sản xuất
 
 Các thí nghiệm trên cho thấy sự khác biệt về hiệu quả của các chiến lược nén khác nhau. Trong môi trường sản xuất, các hệ thống Agent trưởng thành thường không áp dụng một chiến lược duy nhất mà kết hợp nhiều chiến lược thành cơ chế nén nhiều lớp - các loại thông tin khác nhau có thời hạn sử dụng khác nhau và chiến lược nén phải phù hợp với vòng đời dự kiến của thông tin. Lấy cách tiếp cận của Claude Code làm tài liệu tham khảo, một hệ thống quản lý ngữ cảnh trưởng thành thường chứa năm cấp độ:
